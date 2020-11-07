@@ -93,7 +93,7 @@ You can create a `git root` alias to easily locate the Git top-level directory:
 
 For setting up the proper command-line runtime environment, refer to section [**Environment setup**](#environment-setup).
 
-** **WARN:** All `git` commands **must be invoked** inside the top `lae/` directory or from any other sub-directory of the repository !
+** **WARN:** All `git` commands **must be invoked** inside the top `fphd/` directory or from any other sub-directory of the repository !
 
 
 # Create your personal development branch
@@ -140,7 +140,7 @@ runtime environment.
 [**[Contents]**](#contents)
 
 A small VHDL simulation example is provided to **test your environment setup** and **tools installation**.<br/>
-Step-by-step instruction explaining how to run this test flow can be found [**here**](fpga/test/README.md).
+Step-by-step instruction explaining how to run this test flow can be found [**here**](test/README.md).
 
 
 # Basic git commands
