@@ -22,7 +22,7 @@ rem #######################
 set PATH=C:\where\you\installed\Notepad++;%PATH%
 
 :: create a shorter alias for notepad++.exe for faster typing
-doskey npp=notepad++.exe $*
+doskey n++=notepad++.exe $*
 
 
 rem ###########################

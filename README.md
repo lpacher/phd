@@ -5,13 +5,17 @@
 Git repository for the _Introduction to FPGA Programming Using Xilinx Vivado and VHDL_
 PhD course at University of Torino, Physics Department.
 
+Lecture slides and additional course material are available at :
+
+<http://personalpages.to.infn.it/~pacher/didattica/dottorato/FPGA/>
+
 
 # Contents
 
 * [**Git configuration**](#git-configuration)
 * [**Repository download**](#repository-download)
 * [**Create your personal development branch**](#create-your-personal-development-branch)
-* [**UNIX environment setup**](#environment-setup)
+* [**Environment setup**](#environment-setup)
 * [**Sample Xilinx Vivado simulation flow**](#sample-xilinx-vivado-simulation-flow)
 * [**Basic git commands**](#basic-git-commands)
 * [**Webex lectures**](#webex-lectures)
@@ -132,9 +136,28 @@ Please, be sure that the asterisk now points to your own development branch `stu
 # Environment setup
 [**[Contents]**](#contents)
 
+In this introductory course we will adopt a **script-based** and **command-line based** approach
+to FPGA programming using Xilinx Vivado assuming a **Linux-like development environment**.
+
+Both Linux and Windows operating systems are supported. 
+Familiarity with **Linux basic shell commands** to work with files and directories (`cd`, `pwd`, `mv`, `mkdir`, `rm` etc.)
+with the **GNU Makefile** (`make`) and **with a text editor** is therefore assumed. 
+
 Sample scripts `sample/bashrc` and `sample/cshrc` for Linux, as well `sample/login.bat` for Windows are provided to support 
 both `csh/tcsh` and `sh/bash/zsh` Linux shells and the Windows Command Prompt and to help students to setup the proper UNIX/Windows
 runtime environment.
+
+Detailed **step-by-step instructions** are provided in form of a _"lab zero"_ to help students
+to setup a suitable development environment for both Linux and Windows operating systems.
+
+<hr>
+
+**IMPORTANT !**
+
+All students are requested to **complete the preparatory work** before attending practical lectures !<br/>
+Please go through detailed step-by-step instructions presented in [**labs/lab0/README.md**](labs/lab0/README.md)
+<hr>
+
 
 # Sample Xilinx Vivado simulation flow
 [**[Contents]**](#contents)
@@ -154,6 +177,12 @@ A more complete guide to the basic `git` commands can be found [**here**](http:/
 # Webex lectures
 [**[Contents]**](#contents)
 
+Due to the COVID-19 emergency all lectures will be held **remotely** using the **Webex UniTO** platform.
+All lectures will be also **video-recorded**.
+
+The virtual room to attend the lectures is accessible at the following link :
+
+<https://unito.webex.com/meet/luca.pacher>
 
 * Lecture 1<br/>
 
