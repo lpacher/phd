@@ -91,8 +91,8 @@ The VHDL code for the `tb_Inverter.vhd` testbench code is the following :
 -- Simple testbench for the Inverter module
 --
 
-library IEEE ;
-use IEEE.std_logic_1164.all ;   -- include extended logic values (by default VHDL only provides 0/1 with the 'bit' data type)
+library ieee ;
+use ieee.std_logic_1164.all ;   -- include extended logic values (by default VHDL only provides 0/1 with the 'bit' data type)
 
 library std ;
 use std.env.all ;   -- the VHDL2008 revision provides stop/finish functions similar to Verilog to stop simulations

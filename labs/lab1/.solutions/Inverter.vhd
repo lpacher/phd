@@ -30,3 +30,4 @@ begin
    --ZN <= '1' when X = '0' else '0' ;
 
 end architecture rtl ;
+

@@ -267,10 +267,10 @@ the complete list of supported special placeholders to set the prompt string.
 
 Without doubts another frustrating aspect of the original Windows command line is the lack of an efficient **TAB completion**
 as the Linux one (based on the C GNU Readline libraries) in order to automatically complete partially-typed commands and expressions
-using the TAB key. By default the native Windows Command Prompt in fact only supports the TAB completion on directories paths, but not
+using the TAB key. By default the native Windows _Command Prompt_ in fact only supports the TAB completion on directories paths, but not
 for command executables.
 
-As an example, if you open Command Prompt and you start writing
+As an example, if you open the _Command Prompt_ and you start writing
 
 ```
 % note <TAB>
@@ -295,7 +295,7 @@ in the **Windows Registry Editor** (`regedit.exe`) as
 
 `HKEY_CURRENT_USER > Software > Microsoft > Command Processor > AutoRun`
 
-starting the `clink` executable for you each time a Command Prompt instance is launched.
+starting the `clink` executable for you each time a _Command Prompt_ instance is launched.
 
 
 ![](./pictures/windows/regedit1.png)
@@ -311,7 +311,7 @@ the TAB completion has been added to the command interpreter :
 If you are a more experienced Windows user you can also choose to download and extract somewhere the `.zip`
 without performing any installation that requires elevated privileges. However, with this choice you will
 have to create the `AutoRun` variable in the  _Registry Editor_ by hand to "inject" clink each time a new
-Command Prompt is started.
+_Command Prompt_ is started.
 A more effective solution to collect such kind of customizations and extensions is to **use a login script**, as described later in this guide.
 
 If you later want to **suppress the annoying copyright banner** you can simply edit the
@@ -507,9 +507,6 @@ the Windows equivalent of the `source` command on Linux systems :
 ![](./pictures/windows/path2.png)
 
 
-```
-% call login.bat
-```
 
 Once the search path has been updated you can verify that the `notepad++.exe` executable
 is found on the system using the `where` command (the Windows equivalent of the `which`
@@ -649,7 +646,7 @@ Ref. also to :
 Save and reload the `login.bat` script once done :
 
 ```
-call login.bat
+% call login.bat
 ```
 
 At this point we can use basic Linux commands such as `ls`, `pwd`, `which` etc. also
@@ -679,8 +676,9 @@ at the top of the Git repository.
 
 
 
-[**[Contents]**](#contents)
 ## Install Git for Windows
+[**[Contents]**](#contents)
+
 
 Most of the material for the course will be tracked using the Git versioning tool.
 While `git` is already installed on most Linux distributions, students working on a Windows
