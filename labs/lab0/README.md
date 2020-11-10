@@ -17,7 +17,9 @@
    * [**Install Tcl/Tk for Windows**](#install-tcltk-for-windows)
 * [**Add Xilinx Vivado executables to search path**](#add-xilinx-vivado-executables-to-search-path)
 * [**Clone and update the Git repository for the course**](#clone-and-update-the-git-repository-for-the-course)
-* [**Run the sample VHDL simulation flow**](#run-the-sample-VHDL-simulation-flow)
+* [**Run the test flow**](#run-the-test-flow)
+   * [**Run a digital simulation using XSim**](#run-a-digital-simulation-using-xsim)
+   * [**Implement the design on a target FPGA**](#implement-the-design-on-a-target-fpga)
 
 <!--------------------------------------------------------------------->
 # Introduction
@@ -1005,13 +1007,13 @@ Each time you will need to **update you local copy of the repository**, simply p
 
 
 
-# Run the sample VHDL simulation flow
+# Run the test flow
 [**[Contents]**](#contents)
 
 A small VHDL simulation example is provided to **test your environment setup** and all required **tools installations**.<br/>
-A simple `Makefile` is also used to automate the flow.
+A simple `Makefile` is also used to **automate the flows**.
 
-To run the test flow, **open a terminal** and move inside the `test/` directory at the top of the Git repository :
+To run the test flows, **open a terminal** and move inside the `test/` directory at the top of the Git repository :
 
 
 ```
@@ -1037,6 +1039,9 @@ Create a new fresh working area with :
 % make area
 ```
 
+## Run a digital simulation using XSim
+[**[Contents]**](#contents)
+
 
 Compile and elaborate the example RTL design and run the simulation with :
 
@@ -1052,7 +1057,7 @@ For less typing, this is equivalent to :
 % make sim
 ```
 
-![](./pictures/vivado/test.png)
+![](./pictures/vivado/test1.png)
 
 
 Explore simulation results in the **Xilinx XSim simulator** graphical interface. Once happy, close the window.
@@ -1069,5 +1074,27 @@ Explore the content of provided files using basic Linux commands, e.g. `cat`, `l
 % cat  rtl/counter.vhd
 % cat  Makefile
 % more scripts/sim/compile.tcl etc.
+```
+
+
+## Implement the design on a target FPGA
+[**[Contents]**](#contents)
+
+Synthesize and map the example RTL code
+targeting a [**Digilent Arty A7 development board**](https://store.digilentinc.com/arty-a7-artix-7-fpga-development-board-for-makers-and-hobbyists/) with :
+
+```
+% make bit   (same as make bit mode=gui)
+```
+
+
+![](./pictures/vivado/test2.png)
+
+
+By default the flow runs in graphics mode. You can also run the flow in interactive (Tcl) or batch modes by specifying the
+`mode` variable when invoking `make` :
+
+```
+% make bit [mode=gui|tcl|batch]
 ```
 

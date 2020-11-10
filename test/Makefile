@@ -2,7 +2,7 @@
 # Sample Makefile to test tools installation and setup.
 #
 # Luca Pacher - pacher@to.infn.it
-# Nov 7, 2020
+# Fall 2020
 #
 
 #######################################
@@ -41,6 +41,8 @@ SHELL := bash
 #
 dut := Counter
 
+## export the name of the top-level module as an environment variable to be used from tclsh
+export RTL_TOP_MODULE=$(dut)
 
 
 ############################
@@ -56,6 +58,9 @@ RTL_DIR := rtl
 SIM_DIR := bench
 TCL_DIR := scripts
 LOG_DIR := logs
+
+## put non-Tcl scripts and programs into a ./bin directory (e.g. Python scripts)
+BIN_DIR := bin
 
 ## flows-specific directories
 IPS_DIR := cores
@@ -76,6 +81,13 @@ RMDIR := rm -rf -v
 MKDIR := mkdir -p -v
 
 
+################################
+##   Xilinx Vivado settings   ##
+################################
+
+## by default, run Vivado/XSim in GUI mode
+mode ?= gui
+
 
 ################################
 ##   targets implementation   ##
@@ -83,6 +95,7 @@ MKDIR := mkdir -p -v
 
 
 ## default target
+.PHONY : default
 default : help
 
 
@@ -92,13 +105,18 @@ area :
 
 	@$(MKDIR) $(RTL_DIR)
 	@$(MKDIR) $(SIM_DIR)
+
+	@$(MKDIR) $(TCL_DIR)/common
 	@$(MKDIR) $(TCL_DIR)/sim
 	@$(MKDIR) $(TCL_DIR)/impl
+	@$(MKDIR) $(BIN_DIR)
+
 	@$(MKDIR) $(LOG_DIR)
 	@$(MKDIR) $(IPS_DIR)
 	@$(MKDIR) $(XDC_DIR)
 	@$(MKDIR) $(SDF_DIR)
 	@$(MKDIR) $(RPT_DIR)
+
 	@$(MKDIR) $(WORK_DIR)/sim
 	@$(MKDIR) $(WORK_DIR)/impl
 
@@ -106,6 +124,7 @@ area :
 	@$(MKDIR) $(TEST_DIR)
 
 	@$(ECHO) "\n   -- Working area setup completed !\n\n"
+##_______________________________________________________________________________________
 
 
 ## parse and compile all RTL and simulation sources
@@ -113,25 +132,88 @@ area :
 compile : $(WORK_DIR)/sim
 
 	@cd work/sim ; tclsh ../../scripts/sim/$@.tcl
+##_______________________________________________________________________________________
 
 
 ## elaborate the design
 .PHONY : elaborate
 elaborate :
 
-	@cd work/sim ; export RTL_TOP_MODULE=$(dut) ; tclsh ../../scripts/sim/$@.tcl
+	@cd work/sim ; tclsh ../../scripts/sim/$@.tcl
+##_______________________________________________________________________________________
 
 
 ## run simulation executable
 .PHONY : simulate
 simulate :
 
-	@cd work/sim ; export RTL_TOP_MODULE=$(dut) ; tclsh ../../scripts/sim/$@.tcl
-
+	@cd work/sim ; tclsh ../../scripts/sim/$@.tcl
+##_______________________________________________________________________________________
 
 ## one-step compilation, elaboration and simulation (same as make compile elaborate simulate)
 .PHONY : sim
 sim : compile elaborate simulate
+##_______________________________________________________________________________________
+
+
+## create fresh Vivado project attached to Arty7 device
+.PHONY : project
+project : $(TCL_DIR)/common/init.tcl $(TCL_DIR)/common/project.tcl
+
+	@vivado -mode $(mode) -source $(TCL_DIR)/common/init.tcl -source $(TCL_DIR)/common/$@.tcl -log $(LOG_DIR)/$@.log -nojournal -verbose -notrace -tclargs $(dut)
+##_______________________________________________________________________________________
+
+
+## restore Vivado project from XML project file (.xpr) or design checkpoint (.dcp)
+restore :
+
+	@vivado -mode $(mode) -source $(TCL_DIR)/common/init.tcl -log $(LOG_DIR)/$@.log -nojournal -verbose -notrace $(db)
+##_______________________________________________________________________________________
+
+
+## launch IP flow in GUI mode
+.PHONY : ip
+ip : cores $(TCL_DIR)/common/init.tcl $(TCL_DIR)/common/ip.tcl
+
+	@vivado -mode gui -source $(TCL_DIR)/common/init.tcl -source $(TCL_DIR)/common/$@.tcl -notrace -log $(LOG_DIR)/$@.log -nojournal
+##_______________________________________________________________________________________
+
+
+## run Vivado FPGA implementation flow in non-project mode
+.PHONY : xflow
+xflow : $(WORK_DIR)/impl $(TCL_DIR)/common/init.tcl $(TCL_DIR)/impl/xflow.tcl
+
+	@vivado -mode $(mode) -source $(TCL_DIR)/common/init.tcl -source $(TCL_DIR)/impl/$@.tcl -log $(LOG_DIR)/$@.log -nojournal -verbose -notrace -tclargs $(dut)
+##_______________________________________________________________________________________
+
+
+## alias, same as 'make xflow'
+.PHONY : bit
+bit : xflow
+##_______________________________________________________________________________________
+
+
+## launch Vivado GUI and open the Hardware Manager
+.PHONY :
+hm : $(TCL_DIR)/common/init.tcl $(TCL_DIR)/common/hm.tcl
+
+	@vivado -mode gui -source $(TCL_DIR)/common/init.tcl -source $(TCL_DIR)/common/$@.tcl -notrace -log $(LOG_DIR)/$@.log -nojournal
+##_______________________________________________________________________________________
+
+
+## upload bitstream to target FPGA using Hardware Manager
+.PHONY : upload
+upload : $(TCL_DIR)/common/init.tcl $(TCL_DIR)/impl/upload.tcl
+
+	@vivado -mode $(mode) -source $(TCL_DIR)/common/init.tcl -source $(TCL_DIR)/impl/$@.tcl -notrace -log $(LOG_DIR)/$@.log -nojournal -tclargs $(dut)
+##_______________________________________________________________________________________
+
+## program external Quad Flash memory
+.PHONY : flash
+flash : $(TCL_DIR)/common/init.tcl $(TCL_DIR)/impl/flash.tcl
+
+	@vivado -mode $(mode) -source $(TCL_DIR)/common/init.tcl -source $(TCL_DIR)/impl/$@.tcl -notrace -log $(LOG_DIR)/$@.log -nojournal -tclargs $(dut)
+##_______________________________________________________________________________________
 
 
 ## delete all log files and temporary files
@@ -142,22 +224,32 @@ clean :
 	@$(RMDIR) xsim.dir .Xil
 	@$(RMDIR) work/sim/*
 	@$(RMDIR) work/impl/*
+##_______________________________________________________________________________________
 
 
-## command line help 
+## command line help
 .PHONY : help
 help :
 
 	@$(ECHO) ""
-	@$(ECHO) "\nUsage: make <target> [dut=ModuleName]"
+	@$(ECHO) "\nUsage: make <target> [dut=ModuleName] [mode=gui|tcl|batch] [db=/path/to/project.xpr | db=/path/to/project.dcp]"
 	@$(ECHO) ""
 	@$(ECHO) "Available targets:"
 	@$(ECHO) ""
 	@$(ECHO) " - make help        Command-line help"
 	@$(ECHO) " - make area        Creates new fresh working area"
 	@$(ECHO) " - make compile     Parse and compile Verilog sources"
-	@$(ECHO) " - make elaborate   Elaborate design" 
+	@$(ECHO) " - make elaborate   Elaborate design"
 	@$(ECHO) " - make simulate    Run simulation executable"
 	@$(ECHO) " - make sim         Alias, one step compilation, elaboration and simulation"
+	@$(ECHO) " - make project     Creates new fresh project attached to Arty7 device"
+	@$(ECHO) " - make restore     Restore Vivado project from XML project file (.xpr) or design checkpoint (.dcp)"
+	@$(ECHO) " - make ip          Customize and compile IP cores for your design"
+	@$(ECHO) " - make xflow       Run Vivado FPGA implementation flow in non-project mode"
+	@$(ECHO) " - make bit         Alias, same as make xflow"
+	@$(ECHO) " - make hm          Launch Vivado in GUI mode and open the Hardware Manager"
+	@$(ECHO) " - make upload      Upload bitsream to target FPGA using Hardware Manager"
+	@$(ECHO) " - make flash       Program external Quad Flash memory"
 	@$(ECHO) " - make clean       Delete all log files and temporary files\n"
+##_______________________________________________________________________________________
 
