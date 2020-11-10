@@ -177,7 +177,7 @@ A more complete guide to the basic `git` commands can be found [**here**](http:/
 # Webex lectures
 [**[Contents]**](#contents)
 
-Due to the COVID-19 emergency all lectures will be held **remotely** using the **Webex UniTO** platform.
+Due to the COVID-19 emergency all lectures will be held **remotely** using the **Webex UniTO** platform.<br/>
 All lectures will be also **video-recorded**.
 
 The virtual room to attend the lectures is accessible at the following link :
@@ -187,7 +187,7 @@ The virtual room to attend the lectures is accessible at the following link :
 * Lecture 1<br/>
 <https://unito.webex.com/recordingservice/sites/unito/recording/play/efa1c2b298a84011859cc0b997c29cff>
 
-* Lecture 2<br/>
+* Lecture 2 TODO
 
-TODO
+
 

@@ -23,7 +23,7 @@ architecture rtl of Inverter is
 begin
 
    -- signal assignment
-   ZN <= not X ; 
+   ZN <= not X after 3 ns ; 
 
 
    -- conditional assignment (MUX-style)

@@ -108,7 +108,7 @@ area :
 	@$(ECHO) "\n   -- Working area setup completed !\n\n"
 
 
-## parse and compile all Verilog sources
+## parse and compile all RTL and simulation sources
 .PHONY : compile
 compile : $(WORK_DIR)/sim
 

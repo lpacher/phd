@@ -697,9 +697,7 @@ command is found in the search path :
 ```
 
 Further instructions regarding how to configure Git for the first time and to download
-the repository are given later in this guide.
-
-
+the repository are given [**later in this guide**](#clone-and-update-the-git-repository-for-the-course).
 
 
 

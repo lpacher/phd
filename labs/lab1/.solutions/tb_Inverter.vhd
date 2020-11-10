@@ -7,7 +7,7 @@ library ieee ;
 use ieee.std_logic_1164.all ;   -- include extended logic values (by default VHDL only provides 0/1 with the 'bit' data type)
 
 library std ;
-use std.env.all ;   -- the VHDL2008 revision provides stop/finish functions similar to Verilog to stop simulations
+use std.env.all ;               -- the VHDL2008 revision provides stop/finish functions similar to Verilog to stop simulations
 
 
 entity tb_Inverter is   -- empty entity declaration for a testbench

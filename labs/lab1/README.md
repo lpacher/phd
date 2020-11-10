@@ -110,7 +110,7 @@ architecture testbench of tb_Inverter is
 
    component Inverter
       port (
-         X  : in std_logic ;
+         X  : in  std_logic ;
          ZN : out std_logic
       ) ;
    end component ;
