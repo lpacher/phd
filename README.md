@@ -185,6 +185,9 @@ The virtual room to attend the lectures is accessible at the following link :
 <https://unito.webex.com/meet/luca.pacher>
 
 * Lecture 1<br/>
+<https://unito.webex.com/recordingservice/sites/unito/recording/play/efa1c2b298a84011859cc0b997c29cff>
+
+* Lecture 2<br/>
 
 TODO
 
