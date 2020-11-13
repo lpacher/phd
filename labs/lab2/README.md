@@ -6,10 +6,10 @@ such as AND, NAND, OR, NOR, XOR and XNOR.
 <span>&#8226;</span> As a first step, **open a terminal** and go inside the `lab2/` directory :
 
 ```
-% cd Desktop/lae/fpga/labs/lab2
+% cd Desktop/fphd/labs/lab2
 ```
 
-All simulation scripts and the testbench module can be copied from the `.solutions/` directory using `cp` :
+All simulation scripts and the testbench module can be copied from the `.solutions/` directory :
 
 ```
 % cp .solutions/run.tcl .
@@ -241,13 +241,13 @@ Do not call `xelab` or `xsim` targeting a `.vhd` file and **always pay attention
 <br/>
 
 
-<span>&#8226;</span> To add all testbench waveforms in the XSim **Wave Window** type in the **Tcl console** :
+<span>&#8226;</span> Add all testbench waveforms to the XSim **Wave window** by typing in the **Tcl console** :
 
 ```
 add_wave /*
 ```
 
-Finally, run the simulation with :
+Finally, **run the simulation** with :
 
 ```
 run all
@@ -255,9 +255,10 @@ run all
 
 Debug your simulation results.
 <br/>
+<br/>
 
 
-<span>&#8226;</span> All previous **Tcl simulation commands** can also be collected into a **Tcl script** e.g. `run.tcl` and loaded from the Tcl console :
+<span>&#8226;</span> All previous **Tcl simulation commands** can be collected into a **Tcl script** e.g. `run.tcl` and loaded from the Tcl console :
 
 ```
 restart
@@ -271,8 +272,8 @@ argument to the `xsim` executable when invoked :
 % xsim -gui -tclbatch run.tcl tb_Gates
 ```
 
-With this syntax **all top-level waveforms** will be automatically added to the XSim Wave window and the simulation
-will automatically run until the `std.env.finish` directive is encountered. 
+With this syntax **all top-level waveforms** will be automatically added to the XSim Wave window and the simulation will automatically<br/>
+run until the `std.env.finish` (or a failing assertion) directive is encountered.
 <br/><br/>
 
 
@@ -335,6 +336,13 @@ This target is equivalent to :
 % make compile
 % make elaborate
 % make simulate
+```
+
+To delete all log files and temporary files use :
+
+
+```
+% make clean
 ```
 
 
@@ -420,6 +428,7 @@ SOURCES := GatesWhenElse.vhd tb_Gates.vhd
 Save your changes and re-run the simulation with :
 
 ```
+% make clean
 % make sim
 ```
 

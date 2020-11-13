@@ -14,7 +14,7 @@ to **automate the simulation flow**.
 % cd Desktop/fphd/labs/lab1
 ```
 
-Simulation scripts and the testbench module can be copied from the `.solutions/` directory using `cp` :
+Simulation scripts and the testbench module can be copied from the `.solutions/` directory :
 
 ```
 % cp .solutions/run.tcl .
@@ -32,7 +32,8 @@ Linux users can use the default `gedit` text editor :
 % gedit Inverter.vhd &
 ```
 
-Windows users will use Notepad++ instead :
+Windows users will use [**Notepad++ from the command line**](/labs/lab0/README.md#add-notepad-executable-to-search-path)
+instead :
 
 ```
 % n++ Inverter.vhd
@@ -233,18 +234,21 @@ Do not call `xelab` or `xsim` targeting a `.vhd` file and **always pay attention
 <hr>
 
 
+Before running the simulation, **probe all top-level signals** in the XSim **Wave window** using the `add_wave` command<br/>
+in the **Tcl console** as follows :
 
-To add waveforms in the XSim **Wave Window** type in the **Tcl console** :
 
 ```
-add_wave /tb_Inverter/*
+add_wave /*
 ```
 
-Finally, run the simulation with :
+Finally, **run the simulation** with the Tcl command
 
 ```
 run all
 ```
+
+or navigate through **Run > Run All**.
 
 All these commands can also be collected into a **Tcl script** e.g. `run.tcl` and loaded from the Tcl console.
 
@@ -255,7 +259,7 @@ restart
 source run.tcl
 ``` 
 
-Explore the graphical interface of the XSim simulator. Close the simulator graphical interface when you are happy.
+Explore the graphical interface of the XSim simulator. Close the simulator graphical interface when you are happy.<br/>
 You can also type
 
 ```
@@ -263,6 +267,9 @@ exit
 ```
 
 in the XSim Tcl console.
+<br/>
+<br/>
+
 
 <span>&#8226;</span> Explore all command-line switches and options for the `xsim` simulator :
 
@@ -273,23 +280,25 @@ in the XSim Tcl console.
 
 
 
-<span>&#8226;</span> The simulation flow automatically creates a lot of garbage files :
+<span>&#8226;</span> The simulation flow automatically created a lot of **garbage files** :
 
 ```
 % ls -la
 ```
 
-You can cleanup the working area using either
+It is always a good practice to have some **shell script** to
+easily **cleanup the working area**.
+
+You can delete all log files, temporary files etc. using :
+
 
 ```
 % source cleanup.sh   (for Linux users)
-```
-
-or
-
-```
 % call cleanup.bat    (for Windows users)
 ```
+
+We will later use a `Makefile` target for this purpose.
+<br/>
 
 
 ## Exercise
@@ -305,7 +314,7 @@ Re-compile and re-simulate the code.
 
 ## Exercise
 
-Modify the implementation of the inverter functionality. Use a `when/else` **conditional signal assignment**
+Modify the implementation of the inverter functionality. Use a VHDL `when/else` **conditional signal assignment**
 in place of the predefined `not` logic operator :
 
 ```vhdl
@@ -399,17 +408,7 @@ target :
 <hr>
 
 
-## Further readings
-
-If you are interested in more in-depth details about the overall simulation flow in Xilinx XSim, please
-ref. to the following **Xilinx official documentation** :
-
-* [*Vivado Design Suite User Guide: Logic Simulation*](https://www.xilinx.com/support/documentation/sw_manuals/xilinx2019_2/ug900-vivado-logic-simulation.pdf)
-
-* [*Vivado Design Suite Tutorial: Logic Simulation*](https://www.xilinx.com/support/documentation/sw_manuals/xilinx2019_2/ug937-vivado-design-suite-simulation-tutorial.pdf)
-
-
-# Extra: comparison with Verilog code
+## Extra: comparison with Verilog code
 
 Compare the VHDL syntax with its Verilog equivalent :
 
@@ -442,4 +441,13 @@ Interested students can also try to simulate a **mixed-languge** design by compi
 % xelab -debug all tb_Inverter
 % xsim -gui tb_Inverter
 ```
+
+## Further readings
+
+If you are interested in more in-depth details about the overall simulation flow in Xilinx XSim, please
+ref. to the following **Xilinx official documentation** :
+
+* [*Vivado Design Suite User Guide: Logic Simulation*](https://www.xilinx.com/support/documentation/sw_manuals/xilinx2019_2/ug900-vivado-logic-simulation.pdf)
+* [*Vivado Design Suite Tutorial: Logic Simulation*](https://www.xilinx.com/support/documentation/sw_manuals/xilinx2019_2/ug937-vivado-design-suite-simulation-tutorial.pdf)
+
 

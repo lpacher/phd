@@ -1,6 +1,7 @@
-# Run the test flow
 
-A small VHDL example is provided to **test your environment setup** and **tools installation**.<br/>
+# Sample Xilinx Vivado simulation and implementation flows
+
+A small VHDL design example is provided to **test your environment setup** and **tools installation**.<br/>
 A simple GNU `Makefile` is also used to **automate the flows**.
 
 To run the test flows, **open a terminal** and go inside the `test/` directory :

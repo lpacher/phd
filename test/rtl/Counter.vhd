@@ -85,5 +85,6 @@ begin
 
    count <= count_int ;
 
+
 end architecture rtl ;
 

@@ -2,12 +2,27 @@
 
 ## PhD Degree in Physics, University of Torino
 
-Git repository for the _Introduction to FPGA Programming Using Xilinx Vivado and VHDL_
+Git repository for the _Introduction to FPGA Programming Using Xilinx Vivado and VHDL_<br/>
 PhD course at University of Torino, Physics Department.
 
-Lecture slides and additional course material are available at :
+<br/>
+Lecture slides are available at :
 
-<http://personalpages.to.infn.it/~pacher/didattica/dottorato/FPGA/>
+**<http://personalpages.to.infn.it/~pacher/didattica/dottorato/FPGA/slides>**
+
+<br/>
+Additional software components for Windows can be downloaded from :
+
+**<http://personalpages.to.infn.it/~pacher/didattica/dottorato/FPGA/software>**
+
+
+<hr>
+
+**IMPORTANT !**
+
+All students are requested to **complete the preparatory work** before attending practical lectures !<br/>
+Please go through detailed step-by-step instructions presented in [**labs/lab0/README.md**](labs/lab0/README.md)
+<hr>
 
 
 # Contents
@@ -16,10 +31,9 @@ Lecture slides and additional course material are available at :
 * [**Repository download**](#repository-download)
 * [**Create your personal development branch**](#create-your-personal-development-branch)
 * [**Environment setup**](#environment-setup)
-* [**Sample Xilinx Vivado simulation flow**](#sample-xilinx-vivado-simulation-flow)
+* [**Sample simulation and implementation flows**](#sample-simulation-and-implementation-flows)
 * [**Basic git commands**](#basic-git-commands)
 * [**Webex lectures**](#webex-lectures)
-
 
 # Git configuration
 [**[Contents]**](#contents)
@@ -141,28 +155,19 @@ to FPGA programming using Xilinx Vivado assuming a **Linux-like development envi
 
 Both Linux and Windows operating systems are supported. 
 Familiarity with **Linux basic shell commands** to work with files and directories (`cd`, `pwd`, `mv`, `mkdir`, `rm` etc.)
-with the **GNU Makefile** (`make`) and **with a text editor** is therefore assumed. 
+with the **GNU Makefile** (`make`) and with a **text editor** is therefore assumed. 
 
-Sample scripts `sample/bashrc` and `sample/cshrc` for Linux, as well `sample/login.bat` for Windows are provided to support 
-both `csh/tcsh` and `sh/bash/zsh` Linux shells and the Windows Command Prompt and to help students to setup the proper UNIX/Windows
-runtime environment.
+Sample scripts `sample/bashrc` and `sample/cshrc` for Linux, as well as `sample/login.bat` for Windows are provided to
+support both `csh/tcsh` and `sh/bash/zsh` Linux shells and the Windows _Command Prompt_.
 
-Detailed **step-by-step instructions** are provided in form of a _"lab zero"_ to help students
-to setup a suitable development environment for both Linux and Windows operating systems.
-
-<hr>
-
-**IMPORTANT !**
-
-All students are requested to **complete the preparatory work** before attending practical lectures !<br/>
-Please go through detailed step-by-step instructions presented in [**labs/lab0/README.md**](labs/lab0/README.md)
-<hr>
+Detailed **step-by-step instructions** are provided in form of a [_"lab zero"_](labs/lab0/README.md)
+to help students to setup a suitable development environment for both Linux and Windows operating systems.
 
 
-# Sample Xilinx Vivado simulation flow
+# Sample simulation and implementation flows
 [**[Contents]**](#contents)
 
-A small VHDL simulation example is provided to **test your environment setup** and **tools installation**.<br/>
+A small VHDL design example is provided to **test your environment setup** and **tools installation**.<br/>
 Step-by-step instruction explaining how to run this test flow can be found [**here**](test/README.md).
 
 
@@ -182,7 +187,7 @@ All lectures will be also **video-recorded**.
 
 The virtual room to attend the lectures is accessible at the following link :
 
-<https://unito.webex.com/meet/luca.pacher>
+**<https://unito.webex.com/meet/luca.pacher>**
 
 * Lecture 1<br/>
 <https://unito.webex.com/recordingservice/sites/unito/recording/play/efa1c2b298a84011859cc0b997c29cff>

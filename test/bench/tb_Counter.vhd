@@ -2,7 +2,7 @@
 -- Testbench for Counter module.
 --
 -- Luca Pacher - pacher@to.infn,it
--- May 8, 2020
+-- Fall 2020
 --
 
 
