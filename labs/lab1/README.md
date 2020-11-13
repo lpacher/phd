@@ -324,11 +324,20 @@ ZN <= '1' when X = '0' else '0' ;
 
 Re-compile and re-simulate the code.
 
+<br/>
+
+>
+> **QUESTION**
+>
+> Is the above `when/else` VHDL inverter implementation completely exhaustive ? Are we missing the definition
+> of the output logic value for any "special" input values ?
+>
+
 
 ## Exercise
 
 Up to now we learned how to **compile**, **elaborate** and **run a simulation** in Xilinx XSim
-by invoking `xvlog`, `xelab` and `xsim` standalone executables at the command-line each time.
+by invoking `xvlog`, `xelab` and `xsim` **standalone executables** at the command-line each time.
 
 A more efficient solution is to **automate the simulation flow** by collecting these commands inside
 a [**GNU Makefile**](https://www.gnu.org/software/make/manual/make.html) parsed by the `make` utility.

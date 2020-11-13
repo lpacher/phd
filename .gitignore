@@ -21,7 +21,6 @@ temp/*
 test/*
 
 ## all students stuffs (use git add -f to add .solutions/ instead)
-test/*
 labs/*
 projects/*
 

@@ -1,3 +1,4 @@
+
 # Setting up the Xilinx Vivado development environment </br> for Linux/Windows operating systems
 
 # Contents
@@ -44,10 +45,10 @@ are provided to support Windows users.
 
 **IMPORTANT !**
 
-Most of screenshots included in this guide are mainly from a _Windows 7 Ultimate_ operating system. 
-Small differences can arise from Windows 7 and Windows 10.
-Additionally, screenshots referring Xilinx Vivado installation steps are from a **2019.2 installer**. The content of the wizard for
-the latest version **2020.1** available for download on the Xilinx website can be slighty different.
+> Most of screenshots included in this guide are mainly from a _Windows 7 Ultimate_ operating system. 
+> Small differences can arise from Windows 7 and Windows 10.
+> Additionally, screenshots referring Xilinx Vivado installation steps are from a **2019.2 installer**. The content of the wizard for
+> the latest version **2020.1** available for download on the Xilinx website can be slighty different.
 
 <hr>
 
@@ -203,7 +204,7 @@ programming it is recommended to use :
 * **Gedit** for Linux
 * **Notepad++** for Windows
 
-**Gedit** is the default text editor on may Linux distributions. You can check if it is already installed
+**Gedit** is the default text editor on many Linux distributions. You can check if it is already installed
 on your system by opening a terminal and typing :
 
 ```
@@ -238,7 +239,7 @@ Later in the text we will see how to use it effectively **also from the Windows 
 
 This section contains detailed instructions for **Windows users** to improve the _Command Prompt_
 environment for an effective usage. Students working with a Linux system can skip these details and move to
-[**Add Xilinx Vivado executables to search path**](#add-xilinx-vivado-executables-to-search-path) instead.<br/>
+[**Install Git*](#install-git) instead.<br/>
 
 
 ## Improve the Windows Command Prompt appearance
@@ -601,12 +602,12 @@ The main reason for this is that the proposed `.zip` file contains fully verifie
 Windows 7 and Windows 10 systems. Some commands from other installations showed in the past different behaviours
 from version 7 to version 10.
 
-Download and extract the `.zip` file in some meaningful place on you machine.
+Download and extract the `.zip` file in some meaningful place on your machine.
 Once the extraction process is completed you will
-find all Linux executables in the `GnuWin/bin` directory.
+find all Linux executables in the `GnuWin\bin` directory.
 
 In order to invoke these executables from the Windows _Command Prompt_ we have to update
-the search path to include in the `PATH` environment variable also the `GnuWin/bin` directory.
+the search path to include in the `PATH` environment variable also the `GnuWin\bin` directory.
 
 Please **add and customize** the following code to the `login.bat` :
 
@@ -623,8 +624,8 @@ set PATH=D:\local\GnuWin\bin;%PATH%
 ```
 
 Additionally we must prevent **name clashes** between native Windows executables and Linux executables.
-As an example, `mkdir` is a Windows built-in command, but we want to be sure that `GnuWin/bin/mkdir.exe`
-is used instead. To force the _Command Prompt_ to search built-in executables in the `PATH`
+As an example, `mkdir` is a Windows built-in command, but we want to be sure that `GnuWin\bin\mkdir.exe`
+is used instead. To force the _Command Prompt_ to search built-in executables in `PATH`
 we have to create doskeys for those Linux commands that also exists in Windows with the same name.
 
 Please **add the following statements** to your `login.bat` script :
@@ -681,18 +682,18 @@ at the top of the Git repository.
 # Install Git
 [**[Contents]**](#contents)
 
-Most of the material for the course will be tracked using the Git versioning tool.
-All students are requested to have a working Git installation to clone the
+Most of the material for the course will be **tracked using the Git versioning tool**.
+All students are therefore **requested to have a working Git installation** to clone the
 repository and get updates.
 
 Usually `git` is already installed by default on most Linux distributions.
-Verify that `git` is found in your search path :
+Verify that `git` is found in your search path with :
 
 ```
 % which git
 ```
 
-In case the Git package is not installed on your system, use
+In case the Git package is not installed on your Linux system, use
 
 ```
 % sudo yum install git
@@ -703,7 +704,7 @@ or
 ```
 % sudo apt-get install git
 ```
-
+<br/>
 
 Students working on a Windows system instead can download and install **Git for Windows**
 from the project official page :
@@ -718,7 +719,7 @@ open a _Command Prompt_ and check if the `git` command is found in the search pa
 % which git
 ```
 
-If during installation you choose to skip to automatically modify the `PATH` environment variable
+If you choose in the installation wizard to skip to automatically modify the `PATH` environment variable
 you can later update the search path in the `login.bat` as follows :
 
 ```
@@ -739,7 +740,7 @@ prepared for you and is available at :
 
 <http://personalpages.to.infn.it/~pacher/didattica/dottorato/FPGA/software/git4windows.zip>
 
-Download and extract the file in some meaningful place on you machine and then
+Download and extract the file in some meaningful place on your machine and then
 update the search path in the `login.bat` script to include the `git4windows/cmd`
 directory in the `PATH` environment variable :
 
@@ -759,7 +760,7 @@ the repository are given [**later in this guide**](#clone-and-update-the-git-rep
 
 The **Tool Command Language (Tcl)** is the scripting language officially
 supported by Xilinx Vivado. We will also use Tcl to make all flows **platform-independent**
-and portable between Linux and Windows operating systems. For this purpose, the Tcl shell
+and **portable between Linux and Windows operating systems**. For this purpose, the Tcl shell
 executable `tclsh` must be available at the command line.
 
 Usually `tclsh` is already installed by default on most Linux distributions. Verify that `tclsh`
@@ -769,7 +770,7 @@ is found in your search path :
 % which tclsh
 ```
 
-In case the Tcl package is not installed on your system, use
+In case the Tcl package is not installed on your Linux system, use
 
 ```
 % sudo yum install tcl
@@ -778,22 +779,21 @@ In case the Tcl package is not installed on your system, use
 or
 
 ```
-% sudo apt-get update
 % sudo apt-get install tcl
 ```
+<br/>
 
-
-Also students working on a Windows system are requested to install this additional software.
+Students working on a Windows system are requested to install this additional software too.
 
 You can download and install **Tcl for Windows** from different online sources. We recommend
 to use the [**WinTclTk package**](http://wintcltk.sourceforge.net) from _sourceforge.net_.
 
-As already done for the GNU Win package, a `.zip` file has been prepared for you
-and is available at :
+As already done for the GNU Win package, if you prefer a non-administrator installation
+a `.zip` file has been prepared for you and is available at :
 
 <http://personalpages.to.infn.it/~pacher/didattica/dottorato/FPGA/software/WinTclTk.zip>
 
-Download and extract the file in some meaningful place on you machine and then
+Download and extract the file in some meaningful place on your machine and then
 update the search path in the `login.bat` script to include the `WinTclTk/bin`
 directory in the `PATH` environment variable :
 
@@ -947,7 +947,7 @@ call %XILINX_DIR%\Vivado\2019.2\settings64.bat    (Windows)
 At this point each time you will open a new terminal `settings64.sh` (Linux) or `settings64.bat` (Windows)
 will be automatically executed and Vivado executables will be available from the command line.
 
-To test your installation, please try to observe the output of the following commands :
+In order to **test your Xilinx Vivado installation**, please try to observe the output of the following commands :
 
 
 ```
@@ -1036,7 +1036,7 @@ or
 % sudo apt-get install git
 ```
 
-Windows users have to download and install **Git for Windows** instead, as already described [**here**](#install-git-for-windows).
+Windows users have to download and install **Git for Windows** instead, as already described [**here**](#install-git).
 
 Check that the `git` executable is available from the command line :
 
@@ -1071,7 +1071,9 @@ where you invoked the above git command, unless you specify a different target d
 Feel free to use a different target directory. As an example :
 
 ```
-% cd Desktop/phd
+% cd Desktop
+% mkdir phd
+% cd phd
 % git clone https://github.com/lpacher/fphd.git fpga_course
 ```
 
@@ -1107,7 +1109,7 @@ You can now list all branches on your local machine with :
 Please, be sure that the asterisk now points to your own development branch `student`
 and not to the `master` branch.
 
-Each time you will need to **update you local copy of the repository**, simply perform a **pull** using :
+Each time you will need to **update you local copy of the repository**, simply perform a **pull from the remote repository** using :
 
 ```
 % git pull origin master
@@ -1200,7 +1202,7 @@ targeting a [**Digilent Arty A7 development board**](https://store.digilentinc.c
 ![](./pictures/vivado/test2.png)
 
 
-By default the flow runs in graphics mode. You can also run the flow in interactive (Tcl) or batch modes by specifying the
+By default the flow runs in **graphic mode**. You can also run the flow in **interactive (Tcl)** or **batch modes** by specifying the
 `mode` variable when invoking `make` :
 
 ```

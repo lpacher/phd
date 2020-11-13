@@ -2,7 +2,7 @@
 
 ## PhD Degree in Physics, University of Torino
 
-Git repository for the _Introduction to FPGA Programming Using Xilinx Vivado and VHDL_<br/>
+Git repository for the [_Introduction to FPGA Programming Using Xilinx Vivado and VHDL_](http://dottorato.ph.unito.it/courses.html) (3 CFU)<br/>
 PhD course at University of Torino, Physics Department.
 
 <br/>
@@ -14,26 +14,46 @@ Lecture slides are available at :
 Additional software components for Windows can be downloaded from :
 
 **<http://personalpages.to.infn.it/~pacher/didattica/dottorato/FPGA/software>**
+<br/>
+<br/>
 
+Links to **recorded video lectures** are listed in the [**Webex lectures**](#webex-lectures) section.<br/><br/>
 
-<hr>
-
-**IMPORTANT !**
-
-All students are requested to **complete the preparatory work** before attending practical lectures !<br/>
-Please go through detailed step-by-step instructions presented in [**labs/lab0/README.md**](labs/lab0/README.md)
-<hr>
+>
+> **IMPORTANT !**
+>
+> All students are requested to **complete the preparatory work** before attending practical lectures !<br/>
+> Please go through detailed step-by-step instructions presented in [**labs/lab0/README.md**](labs/lab0/README.md)
+>
 
 
 # Contents
 
+* [**Environment setup**](#environment-setup)
 * [**Git configuration**](#git-configuration)
 * [**Repository download**](#repository-download)
 * [**Create your personal development branch**](#create-your-personal-development-branch)
-* [**Environment setup**](#environment-setup)
 * [**Sample simulation and implementation flows**](#sample-simulation-and-implementation-flows)
 * [**Basic git commands**](#basic-git-commands)
 * [**Webex lectures**](#webex-lectures)
+
+
+# Environment setup
+[**[Contents]**](#contents)
+
+In this introductory course we will adopt a **script-based** and **command-line based** approach
+to FPGA programming using Xilinx Vivado assuming a **Linux-like development environment**.
+
+Both Linux and Windows operating systems are supported. 
+Familiarity with **Linux basic shell commands** to work with files and directories (`cd`, `pwd`, `mv`, `mkdir`, `rm` etc.)
+with the **GNU Makefile** (`make`) and with a **text editor** is therefore assumed. 
+
+Sample scripts `sample/bashrc` and `sample/cshrc` for Linux, as well as `sample/login.bat` for Windows are provided to
+support both `csh/tcsh` and `sh/bash/zsh` Linux shells and the Windows _Command Prompt_.
+
+Detailed **step-by-step instructions** are provided in form of a [_"lab zero"_](labs/lab0/README.md)
+to help students to setup a suitable development environment for both Linux and Windows operating systems.
+
 
 # Git configuration
 [**[Contents]**](#contents)
@@ -145,23 +165,6 @@ master
 ```
 
 Please, be sure that the asterisk now points to your own development branch `student` and not to the `master` branch.
-
-
-# Environment setup
-[**[Contents]**](#contents)
-
-In this introductory course we will adopt a **script-based** and **command-line based** approach
-to FPGA programming using Xilinx Vivado assuming a **Linux-like development environment**.
-
-Both Linux and Windows operating systems are supported. 
-Familiarity with **Linux basic shell commands** to work with files and directories (`cd`, `pwd`, `mv`, `mkdir`, `rm` etc.)
-with the **GNU Makefile** (`make`) and with a **text editor** is therefore assumed. 
-
-Sample scripts `sample/bashrc` and `sample/cshrc` for Linux, as well as `sample/login.bat` for Windows are provided to
-support both `csh/tcsh` and `sh/bash/zsh` Linux shells and the Windows _Command Prompt_.
-
-Detailed **step-by-step instructions** are provided in form of a [_"lab zero"_](labs/lab0/README.md)
-to help students to setup a suitable development environment for both Linux and Windows operating systems.
 
 
 # Sample simulation and implementation flows

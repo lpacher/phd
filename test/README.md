@@ -73,7 +73,7 @@ targeting a [**Digilent Arty A7 development board**](https://store.digilentinc.c
 ```
 
 
-By default the flow runs in graphics mode. You can also run the flow in interactive (Tcl) or batch modes by specifying the
+By default the flow runs in **graphic mode**. You can also run the flow in **interactive (Tcl)** or **batch modes** by specifying the
 `mode` variable when invoking `make` :
 
 ```

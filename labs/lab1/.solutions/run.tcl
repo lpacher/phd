@@ -9,7 +9,7 @@
 set tclStart [clock seconds]
 
 ## add all top-level signals to the Wave window
-add_wave /tb_Inverter/*
+add_wave /*
 
 ## run the simulation
 run all
@@ -19,7 +19,7 @@ puts "\nSimulation finished at [current_time]\n"
 
 ## report CPU time
 set tclStop [clock seconds]
-set seconds [expr $tclStop - $tclStart]
+set seconds [expr ${tclStop} - ${tclStart} ]
 
-puts "\nTotal elapsed-time for [info script]: [format "%.2f" [expr $seconds/60.]] minutes\n"
+puts "\nTotal elapsed-time for [info script]: [format "%.2f" [expr ${seconds}/60.]] minutes\n"
 
