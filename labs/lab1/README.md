@@ -2,7 +2,11 @@
 # Lab 1 Instructions
 
 In this first lab we will implement **a simple inverter** using VHDL and simulate the code using the **XSim simulator**<br/>
-that comes with Xilinx Vivado.
+that comes with Xilinx Vivado.<br/>
+
+We will also learn how to write a [**GNU Makefile**](https://www.gnu.org/software/make/manual/make.html)
+to **automate the simulation flow**.
+<br/>
 
 <span>&#8226;</span> As a first step, **open a terminal** and go inside the `lab1/` directory :
 
@@ -17,6 +21,8 @@ Simulation scripts and the testbench module can be copied from the `.solutions/`
 % cp .solutions/cleanup* .
 % cp .solutions/tb_Inverter.vhd .
 ```
+<br/>
+
 
 <span>&#8226;</span> With a **text editor** program create a new file named `Inverter.vhd`.
 
@@ -31,6 +37,8 @@ Windows users will use Notepad++ instead :
 ```
 % n++ Inverter.vhd
 ```
+<br/>
+
 
 <span>&#8226;</span> Write the following **VHDL code** in the newly created source file `Inverter.vhd` :
 
@@ -66,6 +74,7 @@ begin
 
 end architecture rtl ;
 ```
+<br/>
 
 
 <span>&#8226;</span> Once ready, try to **parse and compile** the above code using the `xvhdl` VHDL compiler :
@@ -76,12 +85,17 @@ end architecture rtl ;
 
 In case of **syntax errors**, fix the errors issued in the terminal and re-compile the source file
 after saving your changes.
+<br/>
+<br/>
+
 
 <span>&#8226;</span> Explore all command-line switches and options for the `xvhdl` compiler :
 
 ```
 % xvhdl -help
 ```
+<br/>
+
 
 <span>&#8226;</span> In order to **simulate** the block we also need a **testbench module** to create a
 **test pattern** for our **Device Under Test (DUT)**.
@@ -98,7 +112,7 @@ library ieee ;
 use ieee.std_logic_1164.all ;   -- include extended logic values (by default VHDL only provides 0/1 with the 'bit' data type)
 
 library std ;
-use std.env.all ;   -- the VHDL2008 revision provides stop/finish functions similar to Verilog to stop simulations
+use std.env.all ;   -- the VHDL2008 revision provides stop/finish functions similar to Verilog to end the simulation
 
 
 entity tb_Inverter is   -- empty entity declaration for a testbench
@@ -157,6 +171,7 @@ begin
 
 end architecture testbench ;
 ```
+<br/>
 
 
 
@@ -165,6 +180,8 @@ end architecture testbench ;
 ```
 % xvhdl tb_Inverter.vhd
 ```
+<br/>
+
 
 <span>&#8226;</span> Before **simulating the testbench** we have at first to **merge toghether** the compiled code
 of our inverter with the compiled code of the testbench.
@@ -181,12 +198,17 @@ the name of the **testbench module** :
 The `-debug all` option is **REQUIRED** to make all signals **accessible** from the simulator
 graphical interface in form of **digital waveforms**. If you elaborate compiled sources without this option
 **you will NOT BE ABLE to probe signals** in the XSim graphical interface !
+<br/>
+<br/>
+
 
 <span>&#8226;</span> Explore all command-line switches and options for the `xelab` elaborator :
 
 ```
 % xelab -help
 ```
+<br/>
+
 
 <span>&#8226;</span> After elaboration a **simulation executable** is created and can be run using the `xsim
 simulator as follows :
@@ -247,6 +269,7 @@ in the XSim Tcl console.
 ```
 % xsim -help
 ```
+<br/>
 
 
 
@@ -364,16 +387,15 @@ Save and exit. Try to run the flow with :
 
 **IMPORTANT**
 
-Remind to use **TAB characters** to indent statements within a target implementation !<br/>
-
-Example :
+According to `Makefile` syntax, instructions inside each target **MUST BE IDENTED USING A TAB CHARACTER !**
 
 ```
-compile :
+target :
 
-<TAB>  @xvhdl $(SOURCES)
-
+<TAB> @write here some cool stuff to be executed
 ```
+
+**DO NOT USE SPACES TO IDENT TARGET DIRECTIVES !**
 <hr>
 
 
@@ -385,6 +407,4 @@ ref. to the following **Xilinx official documentation** :
 * [*Vivado Design Suite User Guide: Logic Simulation*](https://www.xilinx.com/support/documentation/sw_manuals/xilinx2019_2/ug900-vivado-logic-simulation.pdf)
 
 * [*Vivado Design Suite Tutorial: Logic Simulation*](https://www.xilinx.com/support/documentation/sw_manuals/xilinx2019_2/ug937-vivado-design-suite-simulation-tutorial.pdf)
-
-
 
