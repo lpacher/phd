@@ -26,7 +26,7 @@ begin
    ZN <= not X after 3 ns ; 
 
 
-   -- conditional assignment (MUX-style)
+   -- conditional signal assignment (MUX-style)
    --ZN <= '1' when X = '0' else '0' ;
 
 end architecture rtl ;

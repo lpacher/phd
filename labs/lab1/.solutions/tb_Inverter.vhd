@@ -58,6 +58,10 @@ begin
       wait for 750 ns ; X <= '0' ;
 
       wait for 500 ns ; finish ;     -- stop the simulation (this is a VHDL2008-only feature)
+
+      -- **IMPORTANT: the original VHDL93 standard does not provide a routine to easily stop the simulation ! You must use a failing "assertion" for this purpose
+      --wait for 500 ns ; assert FALSE report "Simulation Finished" severity FAILURE ;
+
    end process ;
 
 end architecture testbench ;
