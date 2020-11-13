@@ -13,11 +13,11 @@
    * [**Add a login script for the Command Prompt**](#add-a-login-script-for-the-command-prompt)
    * [**Add Notepad++ executable to search path**](#add-notepad-executable-to-search-path)
    * [**Add Linux executables to search path**](#add-linux-executables-to-search-path)
-   * [**Install Git for Windows**](#install-git-for-windows)
-   * [**Install Tcl/Tk for Windows**](#install-tcltk-for-windows)
+* [**Install Git**](#install-git)
+* [**Install Tcl**](#install-tcl)
 * [**Add Xilinx Vivado executables to search path**](#add-xilinx-vivado-executables-to-search-path)
 * [**Clone and update the Git repository for the course**](#clone-and-update-the-git-repository-for-the-course)
-* [**Run the test flow**](#run-the-test-flow)
+* [**Sample Xilinx Vivado simulation and implementation flows**](#sample-xilinx-vivado-simulation-and-implementation-flows)
    * [**Run a digital simulation using XSim**](#run-a-digital-simulation-using-xsim)
    * [**Implement the design on a target FPGA**](#implement-the-design-on-a-target-fpga)
 
@@ -678,24 +678,74 @@ at the top of the Git repository.
 
 
 
-## Install Git for Windows
+# Install Git
 [**[Contents]**](#contents)
 
-
 Most of the material for the course will be tracked using the Git versioning tool.
-While `git` is already installed on most Linux distributions, students working on a Windows
-system are requested to install this additional software.
+All students are requested to have a working Git installation to clone the
+repository and get updates.
 
-For this purpose simply download and install **Git for Windows**
+Usually `git` is already installed by default on most Linux distributions.
+Verify that `git` is found in your search path :
+
+```
+% which git
+```
+
+In case the Git package is not installed on your system, use
+
+```
+% sudo yum install git
+```
+
+or
+
+```
+% sudo apt-get install git
+```
+
+
+Students working on a Windows system instead can download and install **Git for Windows**
 from the project official page :
 
 <https://gitforwindows.org>
 
-At the end of the installation open a _Command Prompt_ and check if the `git`
-command is found in the search path :
+By default the automated installer already updates the `PATH` environment variable and adds
+the `git` executables to the search path for you. At the end of the installation
+open a _Command Prompt_ and check if the `git` command is found in the search path :
 
 ```
 % which git
+```
+
+If during installation you choose to skip to automatically modify the `PATH` environment variable
+you can later update the search path in the `login.bat` as follows :
+
+```
+:: add git executable to search path
+set PATH=\path\to\Git\cmd;%PATH%
+```
+
+Once done, save and reload the `login.bat` script and check if the `git` executable is available
+from the command line :
+
+```
+% call login.bat
+% which git
+```
+
+Indeed, if you prefer a non-administrator installation a `.zip` file (approx. 280 MB) has been already
+prepared for you and is available at :
+
+<http://personalpages.to.infn.it/~pacher/didattica/dottorato/FPGA/software/git4windows.zip>
+
+Download and extract the file in some meaningful place on you machine and then
+update the search path in the `login.bat` script to include the `git4windows/cmd`
+directory in the `PATH` environment variable :
+
+```
+:: add git executable to search path
+set PATH=\path\to\git4windows\cmd;%PATH%
 ```
 
 Further instructions regarding how to configure Git for the first time and to download
@@ -703,23 +753,45 @@ the repository are given [**later in this guide**](#clone-and-update-the-git-rep
 
 
 
-## Install Tcl/Tk for Windows
+# Install Tcl
 [**[Contents]**](#contents)
 
 
 The **Tool Command Language (Tcl)** is the scripting language officially
 supported by Xilinx Vivado. We will also use Tcl to make all flows **platform-independent**
-and portable between Linux and Windows operating systems.
+and portable between Linux and Windows operating systems. For this purpose, the Tcl shell
+executable `tclsh` must be available at the command line.
 
-For this purpose, the Tcl shell executable `tclsh` must be available
-at the command line. While this shell is already installed on most Linux distributions,
-students working on a Windows system are requested to install also this additional software.
+Usually `tclsh` is already installed by default on most Linux distributions. Verify that `tclsh`
+is found in your search path :
+
+```
+% which tclsh
+```
+
+In case the Tcl package is not installed on your system, use
+
+```
+% sudo yum install tcl
+```
+
+or
+
+```
+% sudo apt-get update
+% sudo apt-get install tcl
+```
+
+
+Also students working on a Windows system are requested to install this additional software.
+
+You can download and install **Tcl for Windows** from different online sources. We recommend
+to use the [**WinTclTk package**](http://wintcltk.sourceforge.net) from _sourceforge.net_.
 
 As already done for the GNU Win package, a `.zip` file has been prepared for you
 and is available at :
 
 <http://personalpages.to.infn.it/~pacher/didattica/dottorato/FPGA/software/WinTclTk.zip>
-
 
 Download and extract the file in some meaningful place on you machine and then
 update the search path in the `login.bat` script to include the `WinTclTk/bin`
@@ -742,6 +814,44 @@ from the command line :
 ```
 % call login.bat
 % which tclsh
+```
+
+Additionally, if a `tclshrc.tcl` (`.tclshrc` on Linux) init script is found in the user home directory `%USERPROFILE%`
+(`$HOME` on Linux) it will be executed each time you invoke the `tclsh` executable.
+
+A sample init file `sample/tclshrc.tcl` (`sample/.tclshrc` for Linux) is part of this repository
+and can be used as a starting point to collect user's customizations.
+
+Copy this file in your home directory `%USERPROFILE%` (or `$HOME` for Linux)
+
+
+```
+% cp ../../sample/.tclshrc     $HOME               (for Linux users)
+% cp ../../sample/tclshrc.tcl  %USERPROFILE%       (for Windows users)
+```
+
+and try to launch a `tclsh` session :
+
+```
+% tclsh
+```
+
+If everything is properly configured the console prompt will change as follows :
+
+
+```
+% tclsh
+Tcl version 8.5
+
+Loading C:\Users\username\tclshrc.tcl
+
+tclsh$
+```
+
+Type `exit` to quit the `tclsh` session :
+
+```
+tclsh$ exit
 ```
 
 
@@ -1006,12 +1116,11 @@ Each time you will need to **update you local copy of the repository**, simply p
 
 
 
-
-# Run the test flow
+# Sample Xilinx Vivado simulation and implementation flows
 [**[Contents]**](#contents)
 
-A small VHDL simulation example is provided to **test your environment setup** and all required **tools installations**.<br/>
-A simple `Makefile` is also used to **automate the flows**.
+A small VHDL design example is provided to **test your environment setup** and **tools installation**.<br/>
+A simple GNU `Makefile` is also used to **automate the flows**.
 
 To run the test flows, **open a terminal** and move inside the `test/` directory at the top of the Git repository :
 
