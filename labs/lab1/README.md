@@ -45,6 +45,7 @@ library ieee ;
 use ieee.std_logic_1164.all ;   -- include extended logic values (by default VHDL only provides 0/1 with the 'bit' data type)
 
 
+-- entity declaration
 entity Inverter is
 
    port (
@@ -55,6 +56,7 @@ entity Inverter is
 end entity Inverter ;
 
 
+-- architecture implementation
 architecture rtl of Inverter is
 
 begin
@@ -100,7 +102,7 @@ use std.env.all ;   -- the VHDL2008 revision provides stop/finish functions simi
 
 
 entity tb_Inverter is   -- empty entity declaration for a testbench
-end entity ;
+end entity tb_Inverter ;
 
 
 architecture testbench of tb_Inverter is
@@ -293,24 +295,53 @@ Re-compile and re-simulate the code.
 
 ## Exercise
 
-Write a simple [**GNU Makefile**](https://www.gnu.org/software/make/manual/make.html) to automate
-the flow using the `make` utility. With a text editor create a new source file `Makefile` and enter the following source code :
+Up to now we learned how to **compile**, **elaborate** and **run a simulation** in Xilinx XSim
+by invoking `xvlog`, `xelab` and `xsim` standalone executables at the command-line each time.
+
+A more efficient solution is to **automate the simulation flow** by collecting these commands inside
+a [**GNU Makefile**](https://www.gnu.org/software/make/manual/make.html) parsed by the `make` utility.
+
+As a first step, create a new text file named `Makefile` (without extension) :
+
+```
+% gedit Makefile &   (for Linux users)
+% n++ Makefile       (for Windows users)
+```
+
+Then enter the following source code :
+
 
 ```make
+#
+# A first simple Makefile example to automate the Xilinx XSim simulation flow
+#
+
+## list of VHDL sources to be compiled
+SOURCES := Inverter.vhd tb_Inverter.vhd
+
+
+## top-level module (testbench)
+TOP := tb_Inverter
+
+
+## some useful Linux aliases
+RM := rm -f -v
+RMDIR := rm -rf -v
+
 
 ## compile VHDL sources (xvhdl)
 compile :
-	@xvhdl Inverter.vhd tb_Inverter.vhd
+	@xvhdl $(SOURCES)
 
 
 ## elaborate the design (xelab)
 elaborate :
-	@xelab -debug all tb_Inverter
+	@xelab -debug all $(TOP)
 
 
 ## run the simulation (xsim)
 simulate :
-	@xsim -gui -tclbatch run.tcl tb_Inverter
+	@xsim -gui -tclbatch run.tcl $(TOP)
 
 
 ## one-step compilation/elaboration/simulation
@@ -319,7 +350,8 @@ sim : compile elaborate simulate
 
 ## delete all log files and simulation outputs
 clean :
-	@rm -rf -v rm -rf *.log *.jou *pb *.wdb xsim.dir .Xil
+	@$(RM) *.log *.jou *.pb *.wdb *.wcfg
+	@$(RMDIR) xsim.dir .Xil
 ```
 
 Save and exit. Try to run the flow with :
@@ -332,12 +364,14 @@ Save and exit. Try to run the flow with :
 
 **IMPORTANT**
 
-Remind to use **TAB characters** to indent statements within a target implementation !
+Remind to use **TAB characters** to indent statements within a target implementation !<br/>
+
+Example :
 
 ```
 compile :
 
-<TAB>  @xvhdl Inverter.vhd tb_Inverter.vhd
+<TAB>  @xvhdl $(SOURCES)
 
 ```
 <hr>

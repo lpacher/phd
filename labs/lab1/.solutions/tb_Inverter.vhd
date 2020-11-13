@@ -11,7 +11,7 @@ use std.env.all ;               -- the VHDL2008 revision provides stop/finish fu
 
 
 entity tb_Inverter is   -- empty entity declaration for a testbench
-end entity ;
+end entity tb_Inverter ;
 
 
 architecture testbench of tb_Inverter is
