@@ -408,3 +408,38 @@ ref. to the following **Xilinx official documentation** :
 
 * [*Vivado Design Suite Tutorial: Logic Simulation*](https://www.xilinx.com/support/documentation/sw_manuals/xilinx2019_2/ug937-vivado-design-suite-simulation-tutorial.pdf)
 
+
+# Extra: comparison with Verilog code
+
+Compare the VHDL syntax with its Verilog equivalent :
+
+```verilog
+//
+// A simple inverter (NOT-gate) in Verilog
+//
+
+`timescale 1ns / 1ps   // specify time-unit and time-precision, this is only for simulation purposes
+
+module Inverter (
+
+   input  wire X,
+   output wire ZN ) ;   // this is reduntant, by default I/O ports are always considered WIRES unless otherwise specified
+
+
+   // continuous assignment
+   assign ZN = !X ;                // **NOTE: you can also use ~X
+
+endmodule
+```
+
+
+Interested students can also try to simulate a **mixed-languge** design by compiling Verilog using the `xvlog` compiler instead :
+
+```
+% cp .solutions/Inverter.v
+% xvlog Inverter.v
+% xvhdl tb_Inverter.vhd
+% xelab -debug all tb_Inverter
+% xsim -gui tb_Inverter
+```
+
