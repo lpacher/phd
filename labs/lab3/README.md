@@ -353,7 +353,8 @@ the custom routine
 relaunch
 ```
 
-without the need of creating a project.
+without the need of creating a project. You can also **customize the XSim GUI** and add this custom Tcl routine
+to the toolbar through **Tools > Custom Commands > Customize Commands**.
 
 Finally, using the Tcl command `exec` to invoke `xsim` allows to **fork the process in background** with `&`
 also on Windows, thus leaving the terminal available for typing new commands.
@@ -369,9 +370,8 @@ The clock-generator has a parameterized clock period using a `generic` specifica
 period of 10 ns and re-simulate the code without closing the XSim graphical interface :
 
 ```vhdl
-ClockGen_inst : ClockGen
-   generic map(PERIOD => 100 ns) ;
-   port map(clk => clk) ;
+--ClockGen_inst : ClockGen port map(clk => clk) ;
+ClockGen_inst : ClockGen generic map(PERIOD => 100 ns) port map(clk => clk) ;
 ```
 
 ```

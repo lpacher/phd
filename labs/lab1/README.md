@@ -1,5 +1,6 @@
 
 # Lab 1 Instructions
+[[**Home**](https://github.com/lpacher/fphd)] [[**Back**](https://github.com/lpacher/fphd/tree/master/labs)]
 
 In this first lab we will implement **a simple inverter** using VHDL and simulate the code using the **XSim simulator**<br/>
 that comes with Xilinx Vivado.<br/>

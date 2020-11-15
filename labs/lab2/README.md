@@ -1,4 +1,5 @@
 # Lab 2 Instructions
+[[**Home**](https://github.com/lpacher/fphd)] [[**Back**](https://github.com/lpacher/fphd/tree/master/labs)]
 
 In this second lab we will introduce basic **VHDL logic operators** to implement fundamental **logic gates**
 such as AND, NAND, OR, NOR, XOR and XNOR.

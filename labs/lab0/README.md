@@ -1,5 +1,6 @@
 
 # Setting up the Xilinx Vivado development environment </br> for Linux/Windows operating systems
+[[**Home**](https://github.com/lpacher/fphd)] [[**Back**](https://github.com/lpacher/fphd/tree/master/labs)]
 
 # Contents
 
