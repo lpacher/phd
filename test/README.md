@@ -1,5 +1,6 @@
 
 # Sample Xilinx Vivado simulation and implementation flows
+[[**Home**](https://github.com/lpacher/fphd)]
 
 A small VHDL design example is provided to **test your environment setup** and **tools installation**.<br/>
 A simple GNU `Makefile` is also used to **automate the flows**.

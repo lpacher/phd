@@ -1,7 +1,40 @@
+
 # Short git command-line usage summary
+[[**Home**](https://github.com/lpacher/fphd)]
 
-A small collection of most frequentely used `git` commands for your day-to-day work and common tasks. 
+A small collection of most frequently used `git` commands for your day-to-day work and common tasks. 
 
+
+### Contents
+
+* [**Jargon terms**](#jargon-terms)
+* [**General usage**](#general-usage)
+* [**Command help**](#command-help)
+* [**Git configuration**](#git-configuration)
+* [**Repository download**](#repository-download)
+* [**List all available branches on remote server**](#list-all-available-branches-on-remote-server)
+* [**Checkout an existing branch**](#checkout-an-existing-branch)
+* [**Display a list of all checked-out branches**](#display-a-list-of-all-checked-out-branches)
+* [**Changing working branch**](#changing-working-branch)
+* [**Display commits history (log file)**](#display-commits-history-log-file)
+* [**Display working branch status**](#display-working-branch-status)
+* [**Fetching**](#fetching)
+* [**Stage and commit**](#stage-and-commit)
+* [**Undo a git add (remove files staged for a git commit)**](#undo-a-git-add-remove-files-staged-for-a-git-commit)
+* [**Discard changes to a file in working directory**](#discard-changes-to-a-file-in-working-directory)
+* [**Edit the commit message**](#edit-the-commit-message)
+* [**Adding more changes to your last commit**](#adding-more-changes-to-your-last-commit)
+* [**Pushing an amended commit**](#pushing-an-amended-commit)
+* [**Renaming files and directories**](#renaming-files-and-directories)
+* [**Deleting files and directories**](#deleting-files-and-directories)
+* [**Merging from other branches**](#merging-from-other-branches)
+* [**Resolve merge conflicts**](#resolve-merge-conflicts)
+* [**Upload changes to the remote server**](#upload-changes-to-the-remote-server)
+* [**Rename a branch**](#rename-a-branch)
+* [**Delete feature branches (both local and remote)**](#delete-feature-branches-both-local-and-remote)
+* [**Tag master releases**](#Tag-master-releases)
+
+<br/>
 
 ### Jargon terms
 
@@ -179,7 +212,7 @@ and tags **without merging those changes** into your own branches.
 same file for different changes. All commits will be pushed into remote repository after a `git push`.
 
 
-### Undo a git add (i.e. remove files staged for a git commit)
+### Undo a git add (remove files staged for a git commit)
 
 ```tcsh
 % git reset /path/to/filename
@@ -201,7 +234,7 @@ without the dot.
 ```
 
 
-### Edit the commit messagge
+### Edit the commit message
 
 In case your last-commit message contains typos/missing information and thus requires
 changes you can **amend** it :
@@ -210,7 +243,7 @@ changes you can **amend** it :
 % git commit --amend
 ```
 
-Then enter the new commit messagge.
+Then enter the new commit message.
 
 
 ### Adding more changes to your last commit
@@ -297,7 +330,7 @@ After having fixed all conflicting lines, save the file and perform a `git commi
 ```
 
 
-### Uploading changes to the remote server
+### Upload changes to the remote server
 
 ```
 % git push origin <branch name>

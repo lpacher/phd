@@ -1,3 +1,4 @@
+
 # Introduction to FPGA Programming <br/> _Using Xilinx Vivado and VHDL_
 
 ## PhD Degree in Physics, University of Torino
@@ -33,8 +34,9 @@ Links to **recorded video lectures** are listed in the [**Webex lectures**](#web
 * [**Git configuration**](#git-configuration)
 * [**Repository download**](#repository-download)
 * [**Create your personal development branch**](#create-your-personal-development-branch)
-* [**Sample simulation and implementation flows**](#sample-simulation-and-implementation-flows)
 * [**Basic git commands**](#basic-git-commands)
+* [**Sample simulation and implementation flows**](#sample-simulation-and-implementation-flows)
+* [**References**](#references)
 * [**Webex lectures**](#webex-lectures)
 
 
@@ -167,6 +169,13 @@ master
 Please, be sure that the asterisk now points to your own development branch `student` and not to the `master` branch.
 
 
+# Basic git commands
+[**[Contents]**](#contents)
+
+A small collection of most frequently used `git` **command-line syntax** for your day-to-day work and common tasks can be found [**here**](doc/git/README.md).
+A more complete guide to the basic `git` commands can be found [**here**](http://doc.gitlab.com/ee/gitlab-basics/start-using-git.html).
+
+
 # Sample simulation and implementation flows
 [**[Contents]**](#contents)
 
@@ -174,12 +183,30 @@ A small VHDL design example is provided to **test your environment setup** and *
 Step-by-step instruction explaining how to run this test flow can be found [**here**](test/README.md).
 
 
-# Basic git commands
-[**[Contents]**](#contents)
+# References
 
-A small collection of most frequently used `git` **command-line syntax** for your day-to-day work and common tasks can be found [**here**](doc/git/README.md).
-A more complete guide to the basic `git` commands can be found [**here**](http://doc.gitlab.com/ee/gitlab-basics/start-using-git.html).
+VHDL programming :<br/>
 
+* B. Mealy and F. Tappero, [_Free Range VHDL_](http://freerangefactory.org/pdf/df344hdh4h8kjfh3500ft2/free_range_vhdl.pdf) (open source)
+* C.H. Roth Jr, _Digital Systems Design Using VHDL_
+* V.A. Pedroni, _Circuit Design with VHDL_
+* R.E. Haskell and D.M. Hanna, _Introduction to Digital Design Using Digilent FPGA Boards - Block Diagram/VHDL Examples_
+* P.P. Chu, _FPGA Prototyping By VHDL Examples_
+
+FPGA programming using Xilinx Vivado :<br/>
+
+* Xilinx official documentation (open)
+* S. Churiwala (Editor), _Designing with Xilinx FPGAs Using Vivado_
+
+Design constraints :<br/>
+
+* S. Gangadaran and S. Churiwala, _Constraining Designs for Synthesis and Timing Analysis: A Practical Guide to Synopsys Design Constraints (SDC)_
+
+
+<br/>
+
+A list of of common acronyms and abbreviations relevant to electronics engineering and FPGA programming<br/>
+can be found [**here**](doc/loa.md).
 
 
 # Webex lectures
