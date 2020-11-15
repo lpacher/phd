@@ -345,6 +345,20 @@ To delete all log files and temporary files use :
 % make clean
 ```
 
+>
+>**IMPORTANT !**
+>
+> The proposed Makefile-based automated flow **suffers from two drawbacks** :
+>
+> * once `xsim` is invoked **we cannot type shell commands in the terminal anymore** (on Linux we can launch the `xsim` executable
+>   in background with `&`, but there is no `&` equivalent on Windows)
+> * the simulation **cannot be easily re-invoked** from the XSim GUI after RTL or testbench changes, thus requiring to exit from
+>   the GUI and re-build the simulation from scratch; this happens because XSim doesn't keep track of `xvlog/xvhdl` and `xelab` flows.
+>
+> In the next lab we will see how to solve these issues by moving all calls to standalone executables into **Tcl scripts**
+> executed by `tclsh`.
+>
+
 
 ## Exercise
 

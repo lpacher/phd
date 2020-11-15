@@ -248,11 +248,18 @@ Finally, **run the simulation** with the Tcl command
 run all
 ```
 
-or navigate through **Run > Run All**.
+or navigate through **Run > Run All**. You can also **reset the simulation at time 0** using
 
-All these commands can also be collected into a **Tcl script** e.g. `run.tcl` and loaded from the Tcl console.
+```
+restart
+```
 
-Type in the XSim console :
+or through **Run > Restart**.
+
+<br/>
+<br/>
+
+<span>&#8226;</span> Simulation commands can be collected into a **Tcl script** e.g. `run.tcl` and loaded from the Tcl console. Type in the XSim console :
 
 ```
 restart
