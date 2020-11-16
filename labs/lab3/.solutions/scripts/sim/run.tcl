@@ -13,10 +13,10 @@ set tclStart [clock seconds]
 set TOP [regsub (/) [current_scope] ""]
 
 
-if { [file exists ${TOP}.wcfg] } {
+if { [file exists [pwd]/../../scripts/sim/${TOP}.wcfg] } {
 
    ## open WCFG file if exists...
-   open_wave_config ${TOP}.wcfg
+   open_wave_config [pwd]/../../scripts/sim/${TOP}.wcfg
 
 } else {
 
@@ -149,10 +149,19 @@ proc relaunch {} {
    ## reload the simulation snapshot
    xsim tb_${::env(RTL_TOP_MODULE)}
 
-   ## optionally, restore previous waveforms setup
-   #open_wave_config /path/to/file.wcfg
+   set TOP [regsub (/) [current_scope] ""]
 
-   create_wave_config "Untitled 1" ; add_wave /*
+   if { [file exists [pwd]/../../scripts/sim/${TOP}.wcfg] } {
+
+      ## open WCFG file if exists...
+      open_wave_config [pwd]/../../scripts/sim/${TOP}.wcfg
+
+   } else {
+
+      ## or create new Wave window (default name is "Untitled 1") and add all top-level signals to the Wave window otherwise
+      create_wave_config "Untitled 1"
+      add_wave /*
+   }
 
    ## re-run the simulation
    run all
