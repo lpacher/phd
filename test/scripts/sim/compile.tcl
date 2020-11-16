@@ -2,7 +2,7 @@
 # Example custom Tcl-based simulation flow to run XSim simulation flows interactively [COMPILATION step]
 #
 # Luca Pacher - pacher@to.infn.it
-# Nov 7, 2020
+# Fall 2020
 #
 
 ###################################################################################################
@@ -34,7 +34,7 @@
 
 ## variables
 set TCL_DIR  [pwd]/../../scripts ;   ## **IMPORTANT: assume to run the flow inside work/sim !
-set LOG_DIR  [pwd]/../../logs
+set LOG_DIR  [pwd]/../../log
 set RTL_DIR  [pwd]/../../rtl
 set SIM_DIR  [pwd]/../../bench
 set IPS_DIR  [pwd]/../../cores
@@ -99,5 +99,7 @@ if { [catch {exec grep --color ERROR ${LOG_DIR}/compile.log >@stdout 2>@stdout }
    puts "\n"
 
    puts "Please, fix all syntax errors and recompile sources.\n"
+
+   exit 1 
 }
 

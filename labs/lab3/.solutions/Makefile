@@ -119,7 +119,7 @@ area :
 compile : 
 
 ifeq ($(wildcard $(WORK_DIR)/sim/.*),)
-	@$(error **ERROR: Missing simulation working area ! Run make area before running the flows.)
+	@$(error ERROR: Missing simulation working area ! Run 'make area' before running the flows.)
 else
 	@cd work/sim ; tclsh ../../scripts/sim/$@.tcl
 endif

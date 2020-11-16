@@ -57,7 +57,8 @@ WORK_DIR := work
 RTL_DIR := rtl
 SIM_DIR := bench
 TCL_DIR := scripts
-LOG_DIR := logs
+LOG_DIR := log
+DOC_DIR := doc
 
 ## put non-Tcl scripts and programs into a ./bin directory (e.g. Python scripts)
 BIN_DIR := bin
@@ -110,6 +111,7 @@ area :
 	@$(MKDIR) $(TCL_DIR)/sim
 	@$(MKDIR) $(TCL_DIR)/impl
 	@$(MKDIR) $(BIN_DIR)
+	@$(MKDIR) $(DOC_DIR)
 
 	@$(MKDIR) $(LOG_DIR)
 	@$(MKDIR) $(IPS_DIR)
@@ -129,9 +131,13 @@ area :
 
 ## parse and compile all RTL and simulation sources
 .PHONY : compile
-compile : $(WORK_DIR)/sim
+compile :
 
+ifeq ($(wildcard $(WORK_DIR)/sim/.*),)
+	@$(error ERROR: Missing simulation working area ! Run 'make area' before running the flows.)
+else
 	@cd work/sim ; tclsh ../../scripts/sim/$@.tcl
+endif
 ##_______________________________________________________________________________________
 
 

@@ -2,7 +2,7 @@
 # Example custom Tcl-based simulation flow to run XSim simulation flows interactively [SIMULATION step]
 #
 # Luca Pacher - pacher@to.infn.it
-# Nov 7, 2020
+# Fall 2020
 #
 
 ###################################################################################################
@@ -34,7 +34,7 @@
 
 ## variables
 set TCL_DIR  [pwd]/../../scripts ;   ## **IMPORTANT: assume to run the flow inside work/sim !
-set LOG_DIR  [pwd]/../../logs
+set LOG_DIR  [pwd]/../../log
 
 ## top-level RTL module (then tb_${RTL_TOP_MODULE}.(s)v is the testbench)
 set RTL_TOP_MODULE $::env(RTL_TOP_MODULE)

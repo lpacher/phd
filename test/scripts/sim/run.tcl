@@ -2,20 +2,29 @@
 # Example Tcl simulation script for Xilinx XSim simulator
 #
 # Luca Pacher - pacher@to.infn.it
-# Nov 7, 2020
+# Fall, 2020
 #
 
 ## profiling
 set tclStart [clock seconds]
 
-## create new Wave window (default name is "Untitled 1")
-create_wave_config "Untitled 1"
 
-## add all top-level signals to the Wave window
-add_wave /*
+## automatically get the name of the testbench ( [current_scope] returns /testbenchName, then remove the trailing "/" using regex)
+set TOP [regsub (/) [current_scope] ""]
 
-## set unsigned-decimal radix for the count
-set_property radix unsigned [get_waves count*] 
+
+if { [file exists [pwd]/../../scripts/sim/${TOP}.wcfg] } {
+
+   ## open WCFG file if exists...
+   open_wave_config [pwd]/../../scripts/sim/${TOP}.wcfg
+
+} else {
+
+   ## or create new Wave window (default name is "Untitled 1") and add all top-level signals to the Wave window otherwise
+   create_wave_config "Untitled 1"
+   add_wave /*
+}
+
 
 ## run the simulation
 run all
@@ -25,9 +34,9 @@ puts "Simulation finished at [current_time]"
 
 ## report CPU time
 set tclStop [clock seconds]
-set seconds [expr $tclStop - $tclStart]
+set seconds [expr ${tclStop} - ${tclStart} ]
 
-puts "\nTotal elapsed-time for [info script]: [format "%.2f" [expr $seconds/60.]] minutes\n"
+puts "\nTotal elapsed-time for [info script]: [format "%.2f" [expr ${seconds}/60.]] minutes\n"
 
 
 ########################################################
@@ -140,10 +149,19 @@ proc relaunch {} {
    ## reload the simulation snapshot
    xsim tb_${::env(RTL_TOP_MODULE)}
 
-   ## optionally, restore previous waveforms setup
-   #open_wave_config /path/to/file.wcfg
+   set TOP [regsub (/) [current_scope] ""]
 
-   create_wave_config "Untitled 1" ; add_wave /*
+   if { [file exists [pwd]/../../scripts/sim/${TOP}.wcfg] } {
+
+      ## open WCFG file if exists...
+      open_wave_config [pwd]/../../scripts/sim/${TOP}.wcfg
+
+   } else {
+
+      ## or create new Wave window (default name is "Untitled 1") and add all top-level signals to the Wave window otherwise
+      create_wave_config "Untitled 1"
+      add_wave /*
+   }
 
    ## re-run the simulation
    run all
