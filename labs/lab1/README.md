@@ -150,7 +150,8 @@ begin
    --   device under test (DUT)   --
    ---------------------------------
    
-   DUT : Inverter port map (X => X, ZN => ZN) ;
+   --DUT : Inverter port map (X, ZN) ;            -- ORDERED (positional) port mapping
+   DUT : Inverter port map (X => X, ZN => ZN) ;   -- BY-NAME port mapping
 
 
    -----------------------
