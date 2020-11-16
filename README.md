@@ -206,7 +206,7 @@ Design constraints :<br/>
 <br/>
 
 A list of of common acronyms and abbreviations relevant to electronics engineering and FPGA programming<br/>
-can be found [**here**](doc/loa.md).
+can be found [**here**](doc/LOA.md).
 
 
 # Webex lectures
