@@ -31,6 +31,7 @@ Links to **recorded video lectures** are listed in the [**Webex lectures**](#web
 # Contents
 
 * [**Environment setup**](#environment-setup)
+* [**Hands-on laboratories**](#hands-on-laboratories)
 * [**Git configuration**](#git-configuration)
 * [**Repository download**](#repository-download)
 * [**Create your personal development branch**](#create-your-personal-development-branch)
@@ -55,6 +56,19 @@ support both `csh/tcsh` and `sh/bash/zsh` Linux shells and the Windows _Command 
 
 Detailed **step-by-step instructions** are provided in form of a [_"lab zero"_](labs/lab0/README.md)
 to help students to setup a suitable development environment for both Linux and Windows operating systems.
+
+
+# Hands-on laboratories
+[**[Contents]**](#contents)
+
+The course is organized in form of _"virtual laboratories"_ to introduce
+fundamental concepts in digital design and simulation using VHDL and
+FPGA programming.
+
+Each "lab" consists of step-by-step instructions to guide the student
+in running the flows using Xilinx Vivado tools. 
+
+The complete list of proposed labs can be found [**here**](https://github.com/lpacher/fphd/tree/master/labs). 
 
 
 # Git configuration
@@ -133,8 +147,11 @@ You can create a `git root` alias to easily locate the Git top-level directory:
 
 For setting up the proper command-line runtime environment, refer to section [**Environment setup**](#environment-setup).
 
-** **WARN:** All `git` commands **must be invoked** inside the top `fphd/` directory or from any other sub-directory of the repository !
-
+>
+> **WARNING**
+>
+> All `git` commands **must be invoked** inside the top `fphd/` directory or from any other sub-directory of the repository !
+>
 
 # Create your personal development branch
 [**[Contents]**](#contents)
@@ -184,6 +201,7 @@ Step-by-step instruction explaining how to run this test flow can be found [**he
 
 
 # References
+[**[Contents]**](#contents)
 
 VHDL programming :<br/>
 
