@@ -246,6 +246,10 @@ The virtual room to attend the lectures is accessible at the following link :
 * Lecture 3<br/>
 <https://unito.webex.com/recordingservice/sites/unito/recording/play/1a95fbd370154021adcee05da36bf38e>
 
-* Lecture 4 - **TODO**
+* Lecture 4<br/>
+<https://unito.webex.com/recordingservice/sites/unito/recording/play/2cc39b0c515a4eeba597eacb46e41b4e>
+
+* Lecture 5 - TODO
+
 
 
