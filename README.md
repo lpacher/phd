@@ -38,7 +38,7 @@ Links to **recorded video lectures** are listed in the [**Webex lectures**](#web
 * [**Create your personal development branch**](#create-your-personal-development-branch)
 * [**Basic git commands**](#basic-git-commands)
 * [**Sample simulation and implementation flows**](#sample-simulation-and-implementation-flows)
-* [**References**](#references)
+* [**Reference documentation**](#reference-documentation)
 * [**Webex lectures**](#webex-lectures)
 
 
@@ -212,7 +212,7 @@ A small VHDL design example is provided to **test your environment setup** and *
 Step-by-step instruction explaining how to run this test flow can be found [**here**](test/README.md).
 
 
-# References
+# Reference documentation
 [**[Contents]**](#contents)
 
 VHDL programming :<br/>
@@ -220,17 +220,36 @@ VHDL programming :<br/>
 * B. Mealy and F. Tappero, [_Free Range VHDL_](http://freerangefactory.org/pdf/df344hdh4h8kjfh3500ft2/free_range_vhdl.pdf) (open source)
 * C.H. Roth Jr, _Digital Systems Design Using VHDL_
 * V.A. Pedroni, _Circuit Design with VHDL_
-* R.E. Haskell and D.M. Hanna, _Introduction to Digital Design Using Digilent FPGA Boards - Block Diagram/VHDL Examples_
+* R.E. Haskell and D.M. Hanna, _Introduction to Digital Design Using Digilent FPGA Boards_
 * P.P. Chu, _FPGA Prototyping By VHDL Examples_
+* M. Field, [_Introducing the Spartan 3E FPGA and VHDL_](https://github.com/hamsternz/IntroToSpartanFPGABook/blob/master/IntroToSpartanFPGABook.pdf) (open source)
 
 FPGA programming using Xilinx Vivado :<br/>
 
-* Xilinx official documentation (open)
 * S. Churiwala (Editor), _Designing with Xilinx FPGAs Using Vivado_
+
+
+Xilinx 7-series FPGAs official documentation (open) :<br/>
+
+* [_7 Series FPGAs Data Sheet: Overview (DS180)_](https://www.xilinx.com/support/documentation/data_sheets/ds180_7Series_Overview.pdf)
+* [_7 Series Product Selection Guide_](https://www.xilinx.com/support/documentation/selection-guides/7-series-product-selection-guide.pdf)
+* [_7 Series FPGAs Configuration User Guide (UG470)_](https://www.xilinx.com/support/documentation/user_guides/ug470_7Series_Config.pdf)
+* [_7 Series FPGAs SelectIO Resources User Guide (UG471)_](https://www.xilinx.com/support/documentation/user_guides/ug471_7Series_SelectIO.pdf)
+* [_7 Series FPGAs Clocking Resources User Guide (UG472)_](https://www.xilinx.com/support/documentation/user_guides/ug472_7Series_Clocking.pdf)
+* [_7 Series FPGAs Memory Resources User Guide (UG473)_](https://www.xilinx.com/support/documentation/user_guides/ug473_7Series_Memory_Resources.pdf)
+* [_7 Series FPGAs Configurable Logic Block User Guide (UG474)_](https://www.xilinx.com/support/documentation/user_guides/ug474_7Series_CLB.pdf)
+* [_7 Series FPGAs Packaging and Pinout User Guide (UG475)_](https://www.xilinx.com/support/documentation/user_guides/ug475_7Series_Pkg_Pinout.pdf)
+* [_7 Series FPGAs GTX/GTH Transceivers User Guide (UG476)_](https://www.xilinx.com/support/documentation/user_guides/ug476_7Series_Transceivers.pdf)
+* [_7 Series FPGAs DSP48E1 Slice User Guide (UG479)_](https://www.xilinx.com/support/documentation/user_guides/ug479_7Series_DSP48E1.pdf)
+* [_7 Series FPGAs and Zynq-7000 SoC XADC Dual 12-Bit 1 MSPS Analog-to-Digital Converter<br/>User Guide (UG480)_](https://www.xilinx.com/support/documentation/user_guides/ug480_7Series_XADC.pdf)
+* [_7 Series FPGAs PCB Design Guide (UG483)_](https://www.xilinx.com/support/documentation/user_guides/ug483_7Series_PCB.pdf)
+
 
 Design constraints :<br/>
 
-* S. Gangadaran and S. Churiwala, _Constraining Designs for Synthesis and Timing Analysis: A Practical Guide to Synopsys Design Constraints (SDC)_
+* S. Gangadaran and S. Churiwala, _Constraining Designs for Synthesis and Timing<br/>Analysis: A Practical Guide to Synopsys Design Constraints (SDC)_
+* [_Vivado Design Suite User Guide: Using Constraints (UG903)_](https://www.xilinx.com/support/documentation/sw_manuals/xilinx2019_2/ug903-vivado-using-constraints.pdf)
+* [_Vivado Design Suite Tutorial: Using Constraints (UG945)_](https://www.xilinx.com/support/documentation/sw_manuals/xilinx2019_2/ug903-vivado-using-constraints.pdf)
 
 Tcl programming :
 
@@ -254,6 +273,10 @@ All lectures will be also **video-recorded**.
 The virtual room to attend the lectures is accessible at the following link :
 
 **<https://unito.webex.com/meet/luca.pacher>**
+
+<br/>
+
+Links to **video-recorded lectures** (in Italian) : 
 
 * Lecture 1<br/>
 <https://unito.webex.com/recordingservice/sites/unito/recording/play/efa1c2b298a84011859cc0b997c29cff>
