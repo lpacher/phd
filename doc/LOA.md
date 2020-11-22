@@ -70,7 +70,11 @@
 
 **CML** - Current-Mode Logic
 
+**CMT** - Clock Management Tile
+
 **CMOS** - Complementary Metal Oxide Semiconductor
+
+**CP** - Charge Pump
 
 **CSV** - Comma-Separated Values (file extension)
 
@@ -90,6 +94,8 @@
 **DC** - Direct Current
 
 **DCE** - Data Communication Equipment
+
+**DCI** - Digital Controlled Impedance
 
 **DCM** - Digital Clock Manager
 
@@ -154,7 +160,7 @@
 
 **FF** - Flip-Flop
 
-**FFT** - Fast Fourier Transform (_DFT algorithm) _)
+**FFT** - Fast Fourier Transform (_DFT algorithm_)
 
 **FIFO** - First In First Out
 
@@ -173,7 +179,7 @@
 
 **GBT** - GigaBit Transceiver
 
-**GBW** - Gain-Banwidth product
+**GBW** - Gain-Bandwidth product
 
 **GUI** - Graphical User Interface
 
@@ -183,6 +189,10 @@
 **HDL** - Hardware Description Language
 
 **HLS** - High-Level Synthesis
+
+**HR** - High-Range (FPGA I/O pads)
+
+**HS** - High-Speed (FPGA I/O pads)
 
 **HV** - High Voltage
 
@@ -207,7 +217,9 @@
 
 **IO** - Input/Output
 
-**IP** - Intellectual PropertyISP - In-System Programming
+**IP** - Intellectual Property
+
+**ISP** - In-System Programming
 
 
 
@@ -254,6 +266,8 @@
 ## M
 
 **MAC** - Media Access Controller (_Ethernet controller_)
+
+**MMCM** - Mixed-Mode Clock Manager
 
 **MOS** - Metal-Oxide-Semiconductor
 
@@ -445,8 +459,9 @@
 
 **VCO** - Voltage-Controlled Oscillator
 
-**VGA** - Video Graphics Array
+**Verilog** - <b>Veri</b>fication language for <b>log</b>ic circuits
 
+**VGA** - Video Graphics Array
 
 **VHDL** - VHSIC (Very High-Speed Integrated Circuits) Hardware Description Language
 

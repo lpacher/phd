@@ -30,6 +30,7 @@ Links to **recorded video lectures** are listed in the [**Webex lectures**](#web
 
 # Contents
 
+* [**Contacts**](#contacts)
 * [**Environment setup**](#environment-setup)
 * [**Hands-on laboratories**](#hands-on-laboratories)
 * [**Git configuration**](#git-configuration)
@@ -39,6 +40,18 @@ Links to **recorded video lectures** are listed in the [**Webex lectures**](#web
 * [**Sample simulation and implementation flows**](#sample-simulation-and-implementation-flows)
 * [**References**](#references)
 * [**Webex lectures**](#webex-lectures)
+
+
+# Contacts
+[**[Contents]**](#contents)
+
+**Dott. Luca Pacher**
+
+University of Torino, Physics Department<br/>
+via Pietro Giuria 1, 10125, Torino, Italy<br/>
+Email: _pacher@NOSPAMto.infn.it_<br/>
+Office: new building, 3rd floor, room C4<br/>
+Phone: +39.011.670.7477
 
 
 # Environment setup
@@ -62,8 +75,7 @@ to help students to setup a suitable development environment for both Linux and 
 [**[Contents]**](#contents)
 
 The course is organized in form of _"virtual laboratories"_ to introduce
-fundamental concepts in digital design and simulation using VHDL and
-FPGA programming.
+fundamental concepts in FPGA design and simulation using VHDL and Xilinx Vivado.
 
 Each "lab" consists of step-by-step instructions to guide the student
 in running the flows using Xilinx Vivado tools. 
@@ -219,6 +231,12 @@ FPGA programming using Xilinx Vivado :<br/>
 Design constraints :<br/>
 
 * S. Gangadaran and S. Churiwala, _Constraining Designs for Synthesis and Timing Analysis: A Practical Guide to Synopsys Design Constraints (SDC)_
+
+Tcl programming :
+
+   * B.B. Welch, _Practical Programming in Tcl and Tk_
+   * J.K. Ousterhout, _Tcl and the Tk Toolkit_
+   * A.P. Nadkarni, _The Tcl Programming Language: A Comprehensive Guide_
 
 
 <br/>
