@@ -12,7 +12,7 @@
 
 ## Tcl version and loading notification
 puts "Tcl version $tcl_version"
-puts "\nLoading [info script]\n"
+puts "\nLoading [file normalize [info script]]\n"
 
 ## change default prompt
 set tcl_prompt1  {puts -nonewline "tclsh$ "}
