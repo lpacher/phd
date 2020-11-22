@@ -30,6 +30,8 @@
 
 ## A
 
+**A** - ampere (current unit)
+
 **AC** - Alternating Current
 
 **ADC** - Analog-to-Digital Converter
@@ -52,11 +54,13 @@
 
 **BIST** - Built-In Self-Test
 
-**bit** - binary digit
+**bit** - <b>bi</b>nary digi<b>t</b>
 
-**BEL** - Basic Element (FPGA primitive)
+**BEL** - Basic Element (any Xilinx FPGA primitive)
 
 **BOM** - Bill Of Material
+
+**BRAM** - Block RAM (Read-Only Memory)
 
 **BW** - Band-Width
 
@@ -68,6 +72,18 @@
 
 **CAE** - Computer-Aided Engineering
 
+**CCCS** - Current-Controlled Current Source
+
+**CCVS** - Current-Controlled Voltage Source
+
+**CE** - Clock Enable
+
+**CISC** - Complex Instruction-Set Computer
+
+**CM** - Clock Management
+
+**CK** - Clock
+
 **CML** - Current-Mode Logic
 
 **CMT** - Clock Management Tile
@@ -75,6 +91,10 @@
 **CMOS** - Complementary Metal Oxide Semiconductor
 
 **CP** - Charge Pump
+
+**CPLD** - Complex Programmable Logic Device
+
+**CPU** - Central Processing Unit
 
 **CSV** - Comma-Separated Values (file extension)
 
@@ -89,7 +109,7 @@
 
 **DAQ** - Data Acquisition
 
-**dB** - (unit) decibel
+**dB** - decibel (unit)
 
 **DC** - Direct Current
 
@@ -135,6 +155,8 @@
 
 ## E
 
+**ECO** - Engineering Change Orders
+
 **ECL** - Emitter-coupled logic
 
 **EDA** - Electronic Design Automation
@@ -168,6 +190,8 @@
 
 **FM** - Frequency Modulation
 
+**FMC** - FPGA Mezzanine Card (Xilinx connector)
+
 **FOM** - Figure Of Merit
 
 **FPGA** - Field Programmable Gate Array
@@ -181,10 +205,14 @@
 
 **GBW** - Gain-Bandwidth product
 
+**GSR** - Global Set/Reset
+
 **GUI** - Graphical User Interface
 
 
 ## H
+
+**HDMI** - High-Definition Multimedia Interface
 
 **HDL** - Hardware Description Language
 
@@ -203,21 +231,27 @@
 
 ## I
 
+**I2C** - Inter-Integrated Circuit
+
 **IC** - Integrated Circuit
 
-**I2C** - Inter-Integrated Circuit
+**IDE** - Integrated Development Environment
 
 **IEEE** - Institute of Electrical and Electronics Engineers
 
 **IIC** - same as I2C
 
-**IIR** - (digital filter) Infinite Impulse Response
+**IIR** - Infinite Impulse Response (digital filter)
+
+**ILA** - Integrated Logic Analyzer (Xilinx FPGA debug feature)
 
 **INL** - Integrated Non-Linearity
 
-**IO** - Input/Output
+**I/O** - Input/Output
 
 **IP** - Intellectual Property
+
+**ISE** - Integrated Software Environment (legacy Xilinx FPGA programming suite)
 
 **ISP** - In-System Programming
 
@@ -296,6 +330,7 @@
 
 **NM** - Noise Margin
 
+**NRE** - Non Recurring Engineering costs
 
 
 ## O
@@ -315,9 +350,15 @@
 
 **PCB** - Printed Circuit Board
 
+**PCI** - Peripheral Component Interconnect
+
+**PCIe** - PCI Express
+
 **PD** - Phase Detector
 
 **PDP** - Power-Delay Product
+
+**PLA** - Programmable Logic Array
 
 **PLC** - Programmable Logic Controller
 
@@ -327,7 +368,7 @@
 
 **PM** - Phase Margin
 
-**PMOD** - Peripheral Module
+**PMOD** - Peripheral Module (Digilent expansion cards)
 
 **PROM** - Programmable Read Only Memory
 
@@ -349,11 +390,17 @@
 
 ## Q
 
+**QA** - Quality Assurance
+
 **QoR** - Quality of Results
+
+
 
 ## R
 
 **RAM** - Random Access Memory
+
+**RISC** - Reduced Instruction-Set Computer
 
 **ROM** - Read Only Memory
 
@@ -406,6 +453,10 @@
 
 **SPICE** - Simulation Program with Integrated Circuits Emphasis
 
+**SR** - Shift Register _or_ Set/Reset
+
+**SRL** - Shift Register implemented with LUT (Look-Up Tables, Xilinx terminology)
+
 **SRAM** - Static Random Access Memory
 
 **SW** - Software
@@ -457,7 +508,13 @@
 
 ## V
 
+**V** - volt (voltage unit)
+
+**VCCS** - Voltage-Controlled Current Source
+
 **VCO** - Voltage-Controlled Oscillator
+
+**VCVS** - Voltage-Controlled Voltage Source
 
 **Verilog** - <b>Veri</b>fication language for <b>log</b>ic circuits
 
@@ -475,6 +532,8 @@
 
 ## W
 
+**W** - watt (power unit)
+
 **WPE** - Well Proximity Effects
 
 
@@ -482,11 +541,15 @@
 
 **XDC** - Xilinx Design Constraints
 
-**XOR** - Exclusive OR (logic gate)
+**XOR** - eXclusive OR (logic gate)
 
-**XNOR** - Exclusive NOR (logic gate)
+**XNOR** - eXclusive NOR (logic gate)
+
+**XPE** - Xilinx Power Estimator (part of Vivado design suite)
 
 ## Y
 
 ## Z
+
+**Z** - symbol for "high impedance"
 
