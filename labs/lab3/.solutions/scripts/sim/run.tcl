@@ -8,23 +8,32 @@
 ## profiling
 set tclStart [clock seconds]
 
+## scripts directory
+set TCL_DIR  [pwd]/../../scripts ;   ## **IMPORTANT: assume to run the flow inside $(WORK_DIR)/sim (ref. to Makefile)
 
-## automatically get the name of the testbench ( [current_scope] returns /testbenchName, then remove the trailing "/" using regex)
-set TOP [regsub (/) [current_scope] ""]
+## WCFG directory
+set WCFG_DIR [pwd]/../../wcfg
 
+## top-level RTL module (then tb_${RTL_TOP_MODULE} is the testbench)
+set RTL_TOP_MODULE ${::env(RTL_TOP_MODULE)} ;   ## **REM: the RTL_TOP_MODULE environment variable is exported from Makefile
 
-if { [file exists [pwd]/../../scripts/sim/${TOP}.wcfg] } {
+## top-level
+set TOP tb_${::env(RTL_TOP_MODULE)}
 
-   ## open WCFG file if exists...
-   open_wave_config [pwd]/../../scripts/sim/${TOP}.wcfg
+if { [current_wave_config] eq "" } {
 
-} else {
+   if { [file exists ${WCFG_DIR}/${TOP}.wcfg] } {
 
-   ## or create new Wave window (default name is "Untitled 1") and add all top-level signals to the Wave window otherwise
-   create_wave_config "Untitled 1"
-   add_wave /*
+      ## open waveforms configuration file if exists...
+      open_wave_config ${WCFG_DIR}/${TOP}.wcfg
+
+   } else {
+
+      ## or create new Wave window (default name is "Untitled 1") otherwise and probe all top-level signals to the Wave window
+      create_wave_config "Untitled 1"
+      add_wave /*
+   }
 }
-
 
 ## run the simulation
 run all
@@ -34,9 +43,13 @@ puts "Simulation finished at [current_time]"
 
 ## report CPU time
 set tclStop [clock seconds]
-set seconds [expr ${tclStop} - ${tclStart} ]
+set tclSeconds [expr ${tclStop} - ${tclStart} ]
 
-puts "\nTotal elapsed-time for [info script]: [format "%.2f" [expr ${seconds}/60.]] minutes\n"
+puts "\nTotal elapsed-time for [file normalize [info script]]: [format "%.2f" [expr ${tclSeconds}/60.]] minutes\n"
+
+
+## **IMPORTANT: load into XSim Tcl environment the custom 'relaunch' procedure
+source -notrace -quiet [pwd]/../../scripts/sim/relaunch.tcl
 
 
 ########################################################
@@ -60,7 +73,7 @@ puts "\nTotal elapsed-time for [info script]: [format "%.2f" [expr ${seconds}/60
 #set_property radix oct       [get_waves *]
 
 ## save Waveform Configuration File (WCFG) for later restore
-# save_wave_config /path/to/filename.wcfg
+#save_wave_config /path/to/filename.wcfg
 
 ## query signal values and drivers
 #get_value /path/to/signal
@@ -81,8 +94,8 @@ puts "\nTotal elapsed-time for [info script]: [format "%.2f" [expr ${seconds}/60
 #remove_forces -all
 
 ## add/remove breakpoints to RTL sources
-#add_bp fileName.v lineNumber
-#remove_bp -file fileName -line lineNumber
+#add_bp [pwd]/../../rtl/fileName.vhd lineNumber
+#remove_bp -file fileName [pwd]/../../rtl/fileName.vhd -line lineNumber
 #remove_bp -all
 
 ## unload the simulation snapshot without exiting Vivado
@@ -99,71 +112,3 @@ puts "\nTotal elapsed-time for [info script]: [format "%.2f" [expr ${seconds}/60
 
 ## exit the simulator
 #exit
-
-
-###############################################################################
-##   custom Tcl procedure to relaunch the simulation after sources changes   ##
-###############################################################################
-
-#
-# **NOTE
-#
-# There is no "non-project mode" simulation Tcl flow in Vivado, the "non-project mode" flow
-# requires to call standalone xvlog/xvhdl, xelab and xsim executables from the command-line
-# or inside a GNU Makefile.
-# However in "non-project mode" the simulation can't be re-invoked from the GUI after RTL
-# or testbench changes, thus requiring to exit from the GUI and re-build the simulation
-# from scratch. This happens because XSim doesn't keep track of xvlog/xvhdl and xelab flows.
-#
-# In order to be able to "relaunch" a simulation from the XSim GUI you necessarily have to
-# create a project in Vivado or to use a "project mode" Tcl script to automate the simulation.
-# The overhead of creating an in-memory project is low compared to the benefits of fully automated
-# one-step compilation/elaboration/simulation and re-launch features.
-#
-# This **CUSTOM** Tcl-based simulation flow basically reproduces all compilation/elaboration/simulation
-# steps that actually Vivado performs "under the hood" for you without notice in project-mode.
-# Most important, this custom flow is **PORTABLE** across Linux/Windows systems and allows
-# to "relaunch" a simulation after RTL or testbench changes from the XSim Tcl console without
-# the need of creating a project.
-#
-# Ref. also to  https://www.edn.com/improve-fpga-project-management-test-by-eschewing-the-ide
-#
-
-proc relaunch {} {
-
-   ## optionally, save waveforms setup
-   #save_wave_config [current_wave_config]
-
-   ## unload the current simulation snapshot without exiting XSim
-   close_sim -force -quiet
-
-   ## ensure to start from scratch
-   catch {exec rm -rf xsim.dir .Xil [glob *.pb] [glob *.wdb] }
-
-   ## re-compile sources
-   source [pwd]/../../scripts/sim/compile.tcl -notrace ;   ## **IMPORTANT: assume to run the flow inside work/sim !
-
-   ## re-elaborate the design
-   source [pwd]/../../scripts/sim/elaborate.tcl -notrace
-
-   ## reload the simulation snapshot
-   xsim tb_${::env(RTL_TOP_MODULE)}
-
-   set TOP [regsub (/) [current_scope] ""]
-
-   if { [file exists [pwd]/../../scripts/sim/${TOP}.wcfg] } {
-
-      ## open WCFG file if exists...
-      open_wave_config [pwd]/../../scripts/sim/${TOP}.wcfg
-
-   } else {
-
-      ## or create new Wave window (default name is "Untitled 1") and add all top-level signals to the Wave window otherwise
-      create_wave_config "Untitled 1"
-      add_wave /*
-   }
-
-   ## re-run the simulation
-   run all
-}
-

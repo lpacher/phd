@@ -32,75 +32,92 @@
 ###################################################################################################
 
 
-## variables
-set TCL_DIR  [pwd]/../../scripts ;   ## **IMPORTANT: assume to run the flow inside work/sim !
-set LOG_DIR  [pwd]/../../log
-set RTL_DIR  [pwd]/../../rtl
-set SIM_DIR  [pwd]/../../bench
-set IPS_DIR  [pwd]/../../cores
+proc elaborate {} {
 
-## top-level RTL module (then tb_${RTL_TOP_MODULE}.(s)v is the testbench)
-set RTL_TOP_MODULE $::env(RTL_TOP_MODULE)
+   ## **IMPORTANT: assume to run the flow inside WORK_DIR/sim (the WORK_DIR environment variable is exported by Makefile)
+   cd ${::env(WORK_DIR)}/sim
+
+   ## variables
+   set TCL_DIR  [pwd]/../../scripts
+   set LOG_DIR  [pwd]/../../log
+   set RTL_DIR  [pwd]/../../rtl
+   set SIM_DIR  [pwd]/../../bench
+   set IPS_DIR  [pwd]/../../cores
+
+   ## top-level RTL module (then tb_${RTL_TOP_MODULE} is the testbench)
+   set RTL_TOP_MODULE ${::env(RTL_TOP_MODULE)}
+
+   ####################################
+   ##   design elaboration (xelab)   ##
+   ####################################
+
+   ## delete the previous log file if exists
+   if { [file exists ${LOG_DIR}/elaborate.log] } {
+
+      file delete ${LOG_DIR}/elaborate.log
+   }
+
+   #
+   # **IMPORTANT
+   #
+   # If the RTL design to be simulated already contains Xilinx primitives (e.g. IBUF, OBUF etc.)
+   # then pre-compiled simulation libraries e.g. UNISIM, SIMIPRIME, SECUREIP etc. must be referenced
+   # in the code using
+   #
+   #    library UNISIM ;
+   #    use UNISIM.vcomponents.all ;
+   #
+   # at the beginning of each VHDL source file referencing FPGA primitives.
+   #
+   # As already done for the compilation flow, by using the 'catch' Tcl command the elaboration process
+   # will continue until the end despite ELABORATION ERRORS are present inside compiled sources.
+   # All elaboration errors are then shown on the console using 'grep' on the log file.
+   #
+
+   puts "\n-- Elaborating the design ...\n"
+
+   catch {exec xelab -relax -mt 2 \
+      -L work -L xil_defaultlib -L secureip \
+      -debug all work.tb_${RTL_TOP_MODULE}  \
+      -snapshot tb_${RTL_TOP_MODULE} -nolog >@stdout 2>@stdout | tee ${LOG_DIR}/elaborate.log}
 
 
-####################################
-##   design elaboration (xelab)   ##
-####################################
 
-## delete the previous log file if exists
-if { [file exists ${LOG_DIR}/elaborate.log] } {
+   ######################################
+   ##   check for elaboration errors   ##
+   ######################################
 
-   file delete ${LOG_DIR}/elaborate.log
+   puts "\n-- Checking for elaboration errors ...\n"
+
+   if { [catch {exec grep --color ERROR ${LOG_DIR}/elaborate.log >@stdout 2>@stdout }] } {
+
+      puts "\t================================="
+      puts "\t   NO ELABORATION ERRORS FOUND   "
+      puts "\t================================="
+      puts "\n"
+
+      return 0
+
+   } else {
+
+      puts "\n"
+      puts "\t==================================="
+      puts "\t   ELABORATION ERRORS DETECTED !   "
+      puts "\t==================================="
+      puts "\n"
+
+      puts "Please, fix all elaboration errors and recompile sources.\n"
+
+      return 1
+   }
 }
 
-#
-# **IMPORTANT
-#
-# If the RTL design to be simulated already contains Xilinx primitives (e.g. IBUF, OBUF etc.)
-# then pre-compiled simulation libraries e.g. UNISIM, SIMIPRIME, SECUREIP etc. must be referenced
-# in the code using
-#
-#    library UNISIM ;
-#    use UNISIM.vcomponents.all ;
-#
-# at the beginning of each VHDL source file referencing FPGA primitives.
-#
-# As already done for the compilation flow, by using the 'catch' Tcl command the elaboration process
-# will continue until the end despite ELABORATION ERRORS are present inside compiled sources.
-# All elaboration errors are then shown on the console using 'grep' on the log file.
-#
 
-puts "\n-- Elaborating the design ...\n"
+## optionally, run the Tcl procedure when the script is executed by tclsh from Makefile
+if { ${argc} > 0 } {
+   if { [lindex ${argv} 0] == "elaborate" } {
 
-catch {exec xelab -relax -mt 2 \
-   -L work -L xil_defaultlib -L secureip \
-   -debug all work.tb_${RTL_TOP_MODULE} -snapshot tb_${RTL_TOP_MODULE} -nolog >@stdout 2>@stdout | tee ${LOG_DIR}/elaborate.log}
-
-
-
-######################################
-##   check for elaboration errors   ##
-######################################
-
-puts "\n-- Checking for elaboration errors ...\n"
-
-if { [catch {exec grep --color ERROR ${LOG_DIR}/elaborate.log >@stdout 2>@stdout }] } {
-
-   puts "\t================================="
-   puts "\t   NO ELABORATION ERRORS FOUND   "
-   puts "\t================================="
-   puts "\n"
-
-} else {
-
-   puts "\n"
-   puts "\t==================================="
-   puts "\t   ELABORATION ERRORS DETECTED !   "
-   puts "\t==================================="
-   puts "\n"
-
-   puts "Please, fix all elaboration errors and recompile sources.\n"
-
-   exit 1
+      puts "\n**INFO \[TCL\]: Running [file normalize  [info script]]\n"
+      elaborate
+   }
 }
-

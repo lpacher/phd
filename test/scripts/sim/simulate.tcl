@@ -32,15 +32,28 @@
 ###################################################################################################
 
 
-## variables
-set TCL_DIR  [pwd]/../../scripts ;   ## **IMPORTANT: assume to run the flow inside work/sim !
-set LOG_DIR  [pwd]/../../log
+proc simulate {} {
 
-## top-level RTL module (then tb_${RTL_TOP_MODULE}.(s)v is the testbench)
-set RTL_TOP_MODULE $::env(RTL_TOP_MODULE)
+   ## **IMPORTANT: assume to run the flow inside WORK_DIR/sim (the WORK_DIR environment variable is exported by Makefile)
+   cd ${::env(WORK_DIR)}/sim
 
-puts "\n**INFO: Invoking XSim standalone executable from [pwd]" ;
+   ## variables
+   set TCL_DIR  [pwd]/../../scripts
+   set LOG_DIR  [pwd]/../../log
 
-## launch the xsim executable from Tcl
-exec xsim -gui tb_${RTL_TOP_MODULE} -onerror stop -stats -tclbatch ${TCL_DIR}/sim/run.tcl -log ${LOG_DIR}/simulate.log &
+   ## top-level RTL module (then tb_${RTL_TOP_MODULE} is the testbench)
+   set RTL_TOP_MODULE ${::env(RTL_TOP_MODULE)}
 
+   ## launch the xsim executable from Tcl
+   exec xsim tb_${RTL_TOP_MODULE} -gui -onerror stop -stats -tclbatch ${TCL_DIR}/sim/run.tcl -log ${LOG_DIR}/simulate.log &
+}
+
+
+## optionally, run the Tcl procedure when the script is executed by tclsh from Makefile
+if { ${argc} > 0 } {
+   if { [lindex ${argv} 0] == "simulate" } {
+
+      puts "\n**INFO \[TCL\]: Running [file normalize  [info script]]\n"
+      simulate
+   }
+}

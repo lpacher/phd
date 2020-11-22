@@ -49,9 +49,11 @@ export RTL_TOP_MODULE=$(dut)
 ##   working area setup   ##
 ############################
 
-## main "scratch" working area used to run the flows (work/sim for simulations, work/impl for implementation)
+## main "scratch" working area used to run the flows (default: work/sim for simulations, work/impl for implementation)
 WORK_DIR := work
 
+## export the chosen working directory to all flows
+export WORK_DIR
 
 ## additional useful "clean" directories to store input design data
 RTL_DIR := rtl
@@ -131,29 +133,29 @@ area :
 
 ## parse and compile all RTL and simulation sources
 .PHONY : compile
-compile :
+compile : $(TCL_DIR)/sim/compile.tcl
 
 ifeq ($(wildcard $(WORK_DIR)/sim/.*),)
 	@$(error ERROR: Missing simulation working area ! Run 'make area' before running the flows.)
 else
-	@cd work/sim ; tclsh ../../scripts/sim/$@.tcl
+	@tclsh $(TCL_DIR)/sim/compile.tcl $@
 endif
 ##_______________________________________________________________________________________
 
 
 ## elaborate the design
 .PHONY : elaborate
-elaborate :
+elaborate : $(TCL_DIR)/sim/elaborate.tcl
 
-	@cd work/sim ; tclsh ../../scripts/sim/$@.tcl
+	@tclsh $(TCL_DIR)/sim/elaborate.tcl $@
 ##_______________________________________________________________________________________
 
 
 ## run simulation executable
 .PHONY : simulate
-simulate :
+simulate : $(TCL_DIR)/sim/simulate.tcl $(WORK_DIR)/sim/xsim.dir
 
-	@cd work/sim ; tclsh ../../scripts/sim/$@.tcl
+	@tclsh $(TCL_DIR)/sim/simulate.tcl $@
 ##_______________________________________________________________________________________
 
 ## one-step compilation, elaboration and simulation (same as make compile elaborate simulate)
@@ -179,7 +181,7 @@ restore :
 
 ## launch IP flow in GUI mode
 .PHONY : ip
-ip : cores $(TCL_DIR)/common/init.tcl $(TCL_DIR)/common/ip.tcl
+ip : $(IPS_DIR) $(TCL_DIR)/common/init.tcl $(TCL_DIR)/common/ip.tcl
 
 	@vivado -mode gui -source $(TCL_DIR)/common/init.tcl -source $(TCL_DIR)/common/$@.tcl -notrace -log $(LOG_DIR)/$@.log -nojournal
 ##_______________________________________________________________________________________
@@ -214,6 +216,12 @@ upload : $(TCL_DIR)/common/init.tcl $(TCL_DIR)/impl/upload.tcl
 	@vivado -mode $(mode) -source $(TCL_DIR)/common/init.tcl -source $(TCL_DIR)/impl/$@.tcl -notrace -log $(LOG_DIR)/$@.log -nojournal -tclargs $(dut)
 ##_______________________________________________________________________________________
 
+
+## alias, same as 'make upload'
+install : upload
+##_______________________________________________________________________________________
+
+
 ## program external Quad Flash memory
 .PHONY : flash
 flash : $(TCL_DIR)/common/init.tcl $(TCL_DIR)/impl/flash.tcl
@@ -228,8 +236,8 @@ clean :
 
 	@$(RM) *.log *.jou *.pb *.wdb $(LOG_DIR)/*
 	@$(RMDIR) xsim.dir .Xil
-	@$(RMDIR) work/sim/*
-	@$(RMDIR) work/impl/*
+	@$(RMDIR) $(WORK_DIR)/sim/*
+	@$(RMDIR) $(WORK_DIR)/impl/*
 ##_______________________________________________________________________________________
 
 
@@ -255,6 +263,7 @@ help :
 	@$(ECHO) " - make bit         Alias, same as make xflow"
 	@$(ECHO) " - make hm          Launch Vivado in GUI mode and open the Hardware Manager"
 	@$(ECHO) " - make upload      Upload bitsream to target FPGA using Hardware Manager"
+	@$(ECHO) " - make install     Alias, same as make upload"
 	@$(ECHO) " - make flash       Program external Quad Flash memory"
 	@$(ECHO) " - make clean       Delete all log files and temporary files\n"
 ##_______________________________________________________________________________________

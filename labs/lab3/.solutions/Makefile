@@ -49,9 +49,11 @@ export RTL_TOP_MODULE=$(dut)
 ##   working area setup   ##
 ############################
 
-## main "scratch" working area used to run the flows (work/sim for simulations, work/impl for implementation)
+## main "scratch" working area used to run the flows (default: work/sim for simulations, work/impl for implementation)
 WORK_DIR := work
 
+## export the chosen working directory to all flows
+export WORK_DIR
 
 ## additional useful "clean" directories to store input design data
 RTL_DIR := rtl
@@ -116,33 +118,33 @@ area :
 
 ## parse and compile all RTL and simulation sources
 .PHONY : compile
-compile : 
+compile : $(TCL_DIR)/sim/compile.tcl
 
 ifeq ($(wildcard $(WORK_DIR)/sim/.*),)
 	@$(error ERROR: Missing simulation working area ! Run 'make area' before running the flows.)
 else
-	@cd work/sim ; tclsh ../../scripts/sim/$@.tcl
+	@tclsh $(TCL_DIR)/sim/compile.tcl $@
 endif
 ##_______________________________________________________________________________________
 
 
 ## elaborate the design
 .PHONY : elaborate
-elaborate :
+elaborate : $(TCL_DIR)/sim/elaborate.tcl
 
-	@cd work/sim ; tclsh ../../scripts/sim/$@.tcl
+	@tclsh $(TCL_DIR)/sim/elaborate.tcl $@
 ##_______________________________________________________________________________________
 
 
 ## run simulation executable
 .PHONY : simulate
-simulate :
+simulate : $(TCL_DIR)/sim/simulate.tcl $(WORK_DIR)/sim/xsim.dir
 
-	@cd work/sim ; tclsh ../../scripts/sim/$@.tcl
+	@tclsh $(TCL_DIR)/sim/simulate.tcl $@
 ##_______________________________________________________________________________________
 
 
-## one-step compilation, elaboration and simulation (same as make compile elaborate simulate)
+## one-step compilation, elaboration and simulation (same as 'make compile elaborate simulate')
 .PHONY : sim
 sim : compile elaborate simulate
 ##_______________________________________________________________________________________
@@ -154,8 +156,8 @@ clean :
 
 	@$(RM) *.log *.jou *.pb *.wdb $(LOG_DIR)/*
 	@$(RMDIR) xsim.dir .Xil
-	@$(RMDIR) work/sim/*
-	@$(RMDIR) work/impl/*
+	@$(RMDIR) $(WORK_DIR)/sim/*
+	@$(RMDIR) $(WORK_DIR)/impl/*
 ##_______________________________________________________________________________________
 
 
@@ -176,4 +178,3 @@ help :
 	@$(ECHO) " - make sim         Alias, one step compilation, elaboration and simulation"
 	@$(ECHO) " - make clean       Delete all log files and temporary files\n"
 ##_______________________________________________________________________________________
-

@@ -32,74 +32,90 @@
 ###################################################################################################
 
 
-## variables
-set TCL_DIR  [pwd]/../../scripts ;   ## **IMPORTANT: assume to run the flow inside work/sim !
-set LOG_DIR  [pwd]/../../log
-set RTL_DIR  [pwd]/../../rtl
-set SIM_DIR  [pwd]/../../bench
-set IPS_DIR  [pwd]/../../cores
+proc compile {} {
+
+   ## **IMPORTANT: assume to run the flow inside WORK_DIR/sim (the WORK_DIR environment variable is exported by Makefile)
+   cd ${::env(WORK_DIR)}/sim
+
+   ## variables
+   set TCL_DIR  [pwd]/../../scripts
+   set LOG_DIR  [pwd]/../../log
+   set RTL_DIR  [pwd]/../../rtl
+   set SIM_DIR  [pwd]/../../bench
+   set IPS_DIR  [pwd]/../../cores
 
 
-## VHDL sources
-set RTL_SOURCES [glob -nocomplain ${RTL_DIR}/*.vhd]
+   ## VHDL sources
+   set RTL_SOURCES [glob -nocomplain ${RTL_DIR}/*.vhd]
 
 
-## simulation sources (assume to write also all testbench sources in VHDL)
-set SIM_SOURCES [glob -nocomplain ${SIM_DIR}/*.vhd]
+   ## simulation sources (assume to write also all testbench sources in VHDL)
+   set SIM_SOURCES [glob -nocomplain ${SIM_DIR}/*.vhd]
 
 
+   #####################################
+   ##   compile all sources (xvhdl)   ##
+   #####################################
 
-#####################################
-##   compile all sources (xvhdl)   ##
-#####################################
+   ## delete the previous log file if exists
+   if { [file exists ${LOG_DIR}/compile.log] } {
 
-## delete the previous log file if exists
-if { [file exists ${LOG_DIR}/compile.log] } {
+      file delete ${LOG_DIR}/compile.log
+   }
 
-   file delete ${LOG_DIR}/compile.log
+   #
+   # **NOTE
+   #
+   # By using the 'catch' Tcl command the compilation process will continue until the end despite SYNTAX ERRORS
+   # are present inside input sources. All syntax errors are then shown on the console using 'grep' on the log file.
+   #
+
+   puts "\n-- Parsing sources ...\n"
+
+   foreach src [concat ${RTL_SOURCES} ${SIM_SOURCES} ] {
+
+      puts "Compiling VHDL source file ${src} ..."
+
+      ## launch the xvhdl executable from Tcl
+      catch {exec xvhdl -relax -work work ${src} -nolog | tee -a ${LOG_DIR}/compile.log}
+   }
+
+
+   #################################
+   ##   check for syntax errors   ##
+   #################################
+
+   puts "\n-- Checking for syntax errors ...\n"
+
+   if { [catch {exec grep --color ERROR ${LOG_DIR}/compile.log >@stdout 2>@stdout }] } {
+
+      puts "\t============================"
+      puts "\t   NO SYNTAX ERRORS FOUND   "
+      puts "\t============================"
+      puts "\n"
+
+      return 0
+
+   } else {
+
+      puts "\n"
+      puts "\t=================================="
+      puts "\t   COMPILATION ERRORS DETECTED !  "
+      puts "\t=================================="
+      puts "\n"
+
+      puts "Please, fix all syntax errors and recompile sources.\n"
+
+      return 1 
+   }
 }
 
-#
-# **NOTE
-#
-# By using the 'catch' Tcl command the compilation process will continue until the end despite SYNTAX ERRORS
-# are present inside input sources. All syntax errors are then shown on the console using 'grep' on the log file.
-#
 
-puts "\n-- Parsing sources ...\n"
+## optionally, run the Tcl procedure when the script is executed by tclsh from Makefile
+if { ${argc} > 0 } {
+   if { [lindex ${argv} 0] == "compile" } {
 
-foreach src [concat ${RTL_SOURCES} ${SIM_SOURCES} ] {
-
-   puts "Compiling VHDL source file ${src} ..."
-
-   ## launch the xvhdl executable from Tcl
-   catch {exec xvhdl -relax -work work ${src} -nolog | tee -a ${LOG_DIR}/compile.log}
+      puts "\n**INFO \[TCL\]: Running [file normalize [info script]]\n"
+      compile
+   }
 }
-
-
-#################################
-##   check for syntax errors   ##
-#################################
-
-puts "\n-- Checking for syntax errors ...\n"
-
-if { [catch {exec grep --color ERROR ${LOG_DIR}/compile.log >@stdout 2>@stdout }] } {
-
-   puts "\t============================"
-   puts "\t   NO SYNTAX ERRORS FOUND   "
-   puts "\t============================"
-   puts "\n"
-
-} else {
-
-   puts "\n"
-   puts "\t=================================="
-   puts "\t   COMPILATION ERRORS DETECTED !  "
-   puts "\t=================================="
-   puts "\n"
-
-   puts "Please, fix all syntax errors and recompile sources.\n"
-
-   exit 1 
-}
-
