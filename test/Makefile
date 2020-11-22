@@ -77,6 +77,10 @@ TEMP_DIR := tmp
 TEST_DIR := test
 
 
+#########################
+##   other variables   ##
+#########################
+
 ## some useful UNIX aliases
 ECHO  := echo -e
 RM    := rm -f -v
@@ -138,7 +142,7 @@ compile : $(TCL_DIR)/sim/compile.tcl
 ifeq ($(wildcard $(WORK_DIR)/sim/.*),)
 	@$(error ERROR: Missing simulation working area ! Run 'make area' before running the flows.)
 else
-	@tclsh $(TCL_DIR)/sim/compile.tcl $@
+	@tclsh $(TCL_DIR)/scripts/sim/compile.tcl
 endif
 ##_______________________________________________________________________________________
 
@@ -147,15 +151,15 @@ endif
 .PHONY : elaborate
 elaborate : $(TCL_DIR)/sim/elaborate.tcl
 
-	@tclsh $(TCL_DIR)/sim/elaborate.tcl $@
+	@tclsh $(TCL_DIR)/scripts/sim/elaborate.tcl
 ##_______________________________________________________________________________________
 
 
 ## run simulation executable
 .PHONY : simulate
-simulate : $(TCL_DIR)/sim/simulate.tcl $(WORK_DIR)/sim/xsim.dir
+simulate : $(TCL_DIR)/sim/simulate.tcl
 
-	@tclsh $(TCL_DIR)/sim/simulate.tcl $@
+	@tclsh $(TCL_DIR)/scripts/sim/simulate.tcl
 ##_______________________________________________________________________________________
 
 ## one-step compilation, elaboration and simulation (same as make compile elaborate simulate)
@@ -168,14 +172,27 @@ sim : compile elaborate simulate
 .PHONY : project
 project : $(TCL_DIR)/common/init.tcl $(TCL_DIR)/common/project.tcl
 
-	@vivado -mode $(mode) -source $(TCL_DIR)/common/init.tcl -source $(TCL_DIR)/common/$@.tcl -log $(LOG_DIR)/$@.log -nojournal -verbose -notrace -tclargs $(dut)
+ifeq ($(mode),gui)
+	@echo "exec vivado -mode gui \
+	   -source $(TCL_DIR)/common/init.tcl -source $(TCL_DIR)/common/project.tcl \
+	   -log $(LOG_DIR)/$@.log -nojournal -verbose -notrace &" | tclsh
+else
+	@vivado -mode $(mode) \
+	   -source $(TCL_DIR)/common/init.tcl -source $(TCL_DIR)/common/project.tcl \
+	   -log $(LOG_DIR)/$@.log -nojournal -verbose -notrace
+endif
 ##_______________________________________________________________________________________
 
 
 ## restore Vivado project from XML project file (.xpr) or design checkpoint (.dcp)
 restore :
 
-	@vivado -mode $(mode) -source $(TCL_DIR)/common/init.tcl -log $(LOG_DIR)/$@.log -nojournal -verbose -notrace $(db)
+ifeq ($(mode),gui)
+	@echo "exec vivado -mode gui \
+	   -source $(TCL_DIR)/common/init.tcl -log $(LOG_DIR)/$@.log -nojournal -verbose -notrace $(db) &" | tclsh
+else
+	@	@vivado -mode gui -source $(TCL_DIR)/common/init.tcl -log $(LOG_DIR)/$@.log -nojournal -verbose -notrace $(db)
+endif
 ##_______________________________________________________________________________________
 
 
@@ -183,7 +200,9 @@ restore :
 .PHONY : ip
 ip : $(IPS_DIR) $(TCL_DIR)/common/init.tcl $(TCL_DIR)/common/ip.tcl
 
-	@vivado -mode gui -source $(TCL_DIR)/common/init.tcl -source $(TCL_DIR)/common/$@.tcl -notrace -log $(LOG_DIR)/$@.log -nojournal
+	@echo "exec vivado -mode gui \
+	   -source $(TCL_DIR)/common/init.tcl -source $(TCL_DIR)/common/ip.tcl \
+	   -notrace -log $(LOG_DIR)/$@.log -nojournal &" | tclsh
 ##_______________________________________________________________________________________
 
 
@@ -191,7 +210,15 @@ ip : $(IPS_DIR) $(TCL_DIR)/common/init.tcl $(TCL_DIR)/common/ip.tcl
 .PHONY : xflow
 xflow : $(WORK_DIR)/impl $(TCL_DIR)/common/init.tcl $(TCL_DIR)/impl/xflow.tcl
 
-	@vivado -mode $(mode) -source $(TCL_DIR)/common/init.tcl -source $(TCL_DIR)/impl/$@.tcl -log $(LOG_DIR)/$@.log -nojournal -verbose -notrace -tclargs $(dut)
+ifeq ($(mode),gui)
+	@echo "exec vivado -mode gui \
+	   -source $(TCL_DIR)/common/init.tcl -source $(TCL_DIR)/impl/xflow.tcl \
+	   -log $(LOG_DIR)/$@.log -nojournal -verbose -notrace &" | tclsh
+else
+	@vivado -mode $(mode) \
+	   -source $(TCL_DIR)/common/init.tcl -source $(TCL_DIR)/impl/xflow.tcl \
+	   -log $(LOG_DIR)/$@.log -nojournal -verbose -notrace
+endif
 ##_______________________________________________________________________________________
 
 
@@ -201,11 +228,19 @@ bit : xflow
 ##_______________________________________________________________________________________
 
 
+## alias, same as 'make xflow'
+.PHONY : build
+build : xflow
+##_______________________________________________________________________________________
+
+
 ## launch Vivado GUI and open the Hardware Manager
 .PHONY :
 hm : $(TCL_DIR)/common/init.tcl $(TCL_DIR)/common/hm.tcl
 
-	@vivado -mode gui -source $(TCL_DIR)/common/init.tcl -source $(TCL_DIR)/common/$@.tcl -notrace -log $(LOG_DIR)/$@.log -nojournal
+	@echo "exec vivado -mode gui \
+	   -source $(TCL_DIR)/common/init.tcl -source $(TCL_DIR)/common/hm.tcl \
+	   -notrace -log $(LOG_DIR)/$@.log -nojournal &" | tclsh
 ##_______________________________________________________________________________________
 
 
@@ -213,11 +248,20 @@ hm : $(TCL_DIR)/common/init.tcl $(TCL_DIR)/common/hm.tcl
 .PHONY : upload
 upload : $(TCL_DIR)/common/init.tcl $(TCL_DIR)/impl/upload.tcl
 
-	@vivado -mode $(mode) -source $(TCL_DIR)/common/init.tcl -source $(TCL_DIR)/impl/$@.tcl -notrace -log $(LOG_DIR)/$@.log -nojournal -tclargs $(dut)
+ifeq ($(mode),gui)
+	@echo "exec vivado -mode gui \
+	   -source $(TCL_DIR)/common/init.tcl -source $(TCL_DIR)/impl/upload.tcl \
+	   -notrace -log $(LOG_DIR)/$@.log -nojournal &" | tclsh
+else
+	@vivado -mode $(mode) \
+	   -source $(TCL_DIR)/common/init.tcl -source $(TCL_DIR)/impl/upload.tcl \
+	   -notrace -log $(LOG_DIR)/$@.log -nojournal
+endif
 ##_______________________________________________________________________________________
 
 
-## alias, same as 'make upload'
+## alias, same as make upload
+.PHONY : install
 install : upload
 ##_______________________________________________________________________________________
 
@@ -226,7 +270,15 @@ install : upload
 .PHONY : flash
 flash : $(TCL_DIR)/common/init.tcl $(TCL_DIR)/impl/flash.tcl
 
-	@vivado -mode $(mode) -source $(TCL_DIR)/common/init.tcl -source $(TCL_DIR)/impl/$@.tcl -notrace -log $(LOG_DIR)/$@.log -nojournal -tclargs $(dut)
+ifeq ($(mode),gui)
+	@echo "exec vivado -mode gui \
+	   -source $(TCL_DIR)/common/init.tcl -source $(TCL_DIR)/impl/flash.tcl \
+	   -notrace -log $(LOG_DIR)/$@.log -nojournal &" | tclsh
+else
+	@vivado -mode $(mode) \
+	   -source $(TCL_DIR)/common/init.tcl -source $(TCL_DIR)/impl/flash.tcl \
+	   -notrace -log $(LOG_DIR)/$@.log -nojournal
+endif
 ##_______________________________________________________________________________________
 
 
@@ -261,10 +313,10 @@ help :
 	@$(ECHO) " - make ip          Customize and compile IP cores for your design"
 	@$(ECHO) " - make xflow       Run Vivado FPGA implementation flow in non-project mode"
 	@$(ECHO) " - make bit         Alias, same as make xflow"
+	@$(ECHO) " - make build       Alias, same as make xflow"
 	@$(ECHO) " - make hm          Launch Vivado in GUI mode and open the Hardware Manager"
 	@$(ECHO) " - make upload      Upload bitsream to target FPGA using Hardware Manager"
 	@$(ECHO) " - make install     Alias, same as make upload"
 	@$(ECHO) " - make flash       Program external Quad Flash memory"
 	@$(ECHO) " - make clean       Delete all log files and temporary files\n"
 ##_______________________________________________________________________________________
-

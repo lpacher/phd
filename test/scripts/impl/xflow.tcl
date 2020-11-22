@@ -1,30 +1,21 @@
-#-----------------------------------------------------------------------------------------------------
-#                               University of Torino - Department of Physics
-#                                   via Giuria 1 10125, Torino, Italy
-#-----------------------------------------------------------------------------------------------------
-# [Filename]       xflow.tcl
-# [Project]        Introduction to FPGA programming using Xilinx Vivado and VHDL (PhD course)
-# [Author]         Luca Pacher - pacher@to.infn.it
-# [Language]       Tcl/Xilinx Vivado Tcl commands
-# [Created]        Fall 2020
-# [Modified]       -
-# [Description]    Tcl script to run the complete Xilinx Vivado implementation flow
-#                  in non-project mode.
 #
-# [Notes]          The script is executed by using
+# Example Tcl script to run the complete Xilinx Vivado
+# implementation flow in non-project mode.
 #
-#                     linux% make xflow [aliased to make bit]
+# The script is executed by using :
 #
-# [Version]        1.0
-#-----------------------------------------------------------------------------------------------------
-
+#    linux% make xflow [aliased to make bit or make build]
+#
+# Luca Pacher - pacher@to.infn.it
+# Spring 2020
+#
 
 ## profiling
 set tclStart [clock seconds]
 
 
-## **IMPORTANT: assume to run the flow inside work/impl
-cd [pwd]/work/impl
+## **IMPORTANT: assume to run the flow inside WORK_DIR/impl
+cd [pwd]/${::env(WORK_DIR)}/impl
 
 ## variables
 set RTL_DIR  [pwd]/../../rtl
@@ -52,24 +43,12 @@ file mkdir ${OUT_DIR}/netlist
 file mkdir ${OUT_DIR}/xdc
 
 
-###########################################################
-##   RTL sources setup  (project-dependent parameters)   ##
-###########################################################
+##########################################################
+##   RTL sources setup (project-dependent parameters)   ##
+##########################################################
 
-if { [lindex $argv 0] == {} } {
-
-   puts "\n **ERROR: The script requires a top-level module !"
-   puts "Please specify top-level module name and retry."
-
-   ## force an exit
-   exit 1
-
-} else {
-
-   ## top-level design module
-   set RTL_TOP_MODULE  [lindex $argv 0] ; puts "\n**INFO: Top-level RTL module is ${RTL_TOP_MODULE}\n"
-
-}
+## top-level design module
+set RTL_TOP_MODULE  ${::env(RTL_TOP_MODULE)} ; puts "\n**INFO: Top-level RTL module is ${RTL_TOP_MODULE}\n"
 
 ## VHDL sources
 set RTL_VHDL_SOURCES [glob -nocomplain ${RTL_DIR}/*.vhd]
@@ -242,9 +221,9 @@ puts "\n -- FPGA implementation flow completed !\n\n"
 
 ## report CPU time
 set tclStop [clock seconds]
-set seconds [expr $tclStop - $tclStart]
+set seconds [expr ${tclStop} - ${tclStart} ]
 
-puts "\nTotal elapsed-time for [info script]: [format "%.2f" [expr $seconds/60.]] minutes\n"
+puts "\nTotal elapsed-time for [file normalize [info script]]: [format "%.2f" [expr $seconds/60.]] minutes\n"
 
 
 ## optionally, upload the bitstream to target FPGA

@@ -5,7 +5,7 @@
 # Spring 2020
 #
 
-puts "\nSourcing init file [pwd]/init.tcl\n"
+puts "\nSourcing init file [file normalize [info script]]\n"
 
 
 ##############################

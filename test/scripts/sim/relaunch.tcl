@@ -35,8 +35,6 @@ proc relaunch {} {
 
    ## save current waveforms setup
 
-   set VARNAME "stocazzo"
-
    set fp [open "tmp.txt" "w"]
    puts $fp [current_wave_config] ; close $fp
 
@@ -46,29 +44,18 @@ proc relaunch {} {
    if { ${wcfgName} != "" } {
 
       save_wave_config -verbose ${wcfgName}
-
-      puts "A --------- $VARNAME $wcfgName "
    }
-
-   puts "B --------- $VARNAME $wcfgName "
-
 
    ## unload the current simulation snapshot without exiting XSim
    close_sim -force -quiet
 
-   puts "C --------- $VARNAME $wcfgName "
-
    ## ensure to start from scratch
    catch {exec rm -rf xsim.dir .Xil [glob -nocomplain *.pb] [glob -nocomplain *.wdb] }
 
-   puts "D --------- $VARNAME $wcfgName "
 
    ## load custom Tcl procedures for compilation/elaboration
    source -notrace -quiet [pwd]/../../scripts/sim/compile.tcl 
    source -notrace -quiet [pwd]/../../scripts/sim/elaborate.tcl
-
-   puts "E --------- $VARNAME $wcfgName "
-
 
    ## try to re-compile sources (compile returns 0 if OK)
    if { [compile] } {
@@ -90,9 +77,7 @@ proc relaunch {} {
          ## re-elaboratin OK, reload the simulation snapshot
          xsim tb_${::env(RTL_TOP_MODULE)}
 
-         ## restore previous WCFG if available
-
-
+         ## **TODO: restore previous WCFG if available
          if { ${wcfgName} != {} } {
 
             #open_wave_config ${wcfgName}.wcfg
@@ -104,5 +89,4 @@ proc relaunch {} {
       } ;   # if/else [elaborate]
    } ;   # if/else [compile]
 
-   puts "G --------- $wcfgName "
 } ;   # proc relaunch
