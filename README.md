@@ -290,7 +290,8 @@ Links to **video-recorded lectures** (in Italian) :
 * Lecture 4<br/>
 <https://unito.webex.com/recordingservice/sites/unito/recording/play/2cc39b0c515a4eeba597eacb46e41b4e>
 
-* Lecture 5 - TODO
+* Lecture 5<br/>
+<https://unito.webex.com/recordingservice/sites/unito/recording/play/31ebeba4272a460c899fdfbddf46f4f8>
 
-
+* Lecture 6 - TODO
 
