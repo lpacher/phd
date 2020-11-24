@@ -17,7 +17,8 @@ set tclStart [clock seconds]
 ## **IMPORTANT: assume to run the flow inside WORK_DIR/impl
 cd [pwd]/${::env(WORK_DIR)}/impl
 
-## variables
+
+## Tcl variables
 set RTL_DIR  [pwd]/../../rtl
 set LOG_DIR  [pwd]/../../logs
 set IPS_DIR  [pwd]/../../cores
@@ -48,7 +49,7 @@ file mkdir ${OUT_DIR}/xdc
 ##########################################################
 
 ## top-level design module
-set RTL_TOP_MODULE  ${::env(RTL_TOP_MODULE)} ; puts "\n**INFO: Top-level RTL module is ${RTL_TOP_MODULE}\n"
+set RTL_TOP_MODULE Gates ; puts "\n**INFO: Top-level RTL module is ${RTL_TOP_MODULE}\n"
 
 ## VHDL sources
 set RTL_VHDL_SOURCES [glob -nocomplain ${RTL_DIR}/*.vhd]
@@ -69,7 +70,7 @@ set XDC_SOURCES [glob -nocomplain ${XDC_DIR}/*.xdc]
 
 
 ## target FPGA (Digilent Arty7 development board)
-set targetFpga xc7a35ticsg324-1L
+set targetFpga ${::env(XILINX_DEVICE)}
 
 ## create in-memory project
 create_project -in_memory -part ${targetFpga}
@@ -233,4 +234,3 @@ puts "\nTotal elapsed-time for [file normalize [info script]]: [format "%.2f" [e
 ## optionally, start the GUI and debug synthesis/place-and-route schematic results
 #start_gui
 #stop_gui
-

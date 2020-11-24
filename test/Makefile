@@ -28,6 +28,16 @@ SHELL := bash
 .SHELLFLAGS := -e -u -o pipefail -c
 
 
+#####################
+##   target FPGA   ##
+#####################
+
+## default: Digilent Arty-7 development board
+part := xc7a35ticsg324-1L
+
+## export the ID of the target device to all flows
+export XILINX_DEVICE=$(part)
+
 
 ##############################
 ##   top-level RTL module   ##
@@ -94,6 +104,8 @@ MKDIR := mkdir -p -v
 
 ## by default, run Vivado/XSim in GUI mode
 mode ?= gui
+#mode ?= tcl
+#mode ?= batch
 
 
 ################################
@@ -302,7 +314,7 @@ clean :
 help :
 
 	@$(ECHO) ""
-	@$(ECHO) "\nUsage: make <target> [dut=ModuleName] [mode=gui|tcl|batch] [db=/path/to/project.xpr | db=/path/to/project.dcp]"
+	@$(ECHO) "\nUsage: make <target> [dut=ModuleName] [mode=gui|tcl|batch] [db=/path/to/project.xpr | db=/path/to/project.dcp] [part=device]"
 	@$(ECHO) ""
 	@$(ECHO) "Available targets:"
 	@$(ECHO) ""
