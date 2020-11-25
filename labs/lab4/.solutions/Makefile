@@ -150,7 +150,7 @@ area :
 compile : $(TCL_DIR)/sim/compile.tcl
 
 ifeq ($(wildcard $(WORK_DIR)/sim/.*),)
-	@$(error ERROR: Missing simulation working area ! Run 'make area' before running the flows.)
+	@$(error ERROR: Missing simulation working area $(WORK_DIR)/sim ! Run 'make area' before running the flows.)
 else
 	@tclsh $(TCL_DIR)/sim/compile.tcl $@
 endif
@@ -183,14 +183,18 @@ sim : compile elaborate simulate
 .PHONY : project
 project : $(TCL_DIR)/common/init.tcl $(TCL_DIR)/common/project.tcl
 
-ifeq ($(mode),gui)
+ifeq ($(wildcard $(WORK_DIR)/sim/.*),)
+	@$(error ERROR: Missing implementation working area $(WORK_DIR)/impl ! Run 'make area' before running the flows.)
+else
+   ifeq ($(mode),gui)
 	@echo "exec vivado -mode gui \
 	   -source $(TCL_DIR)/common/init.tcl -source $(TCL_DIR)/common/project.tcl \
 	   -log $(LOG_DIR)/$@.log -nojournal -verbose -notrace &" | tclsh
-else
+   else
 	@vivado -mode $(mode) \
 	   -source $(TCL_DIR)/common/init.tcl -source $(TCL_DIR)/common/project.tcl \
 	   -log $(LOG_DIR)/$@.log -nojournal -verbose -notrace
+   endif
 endif
 ##_______________________________________________________________________________________
 
@@ -211,16 +215,20 @@ endif
 
 ## run Vivado FPGA implementation flow in non-project mode
 .PHONY : xflow
-xflow : $(WORK_DIR)/impl $(TCL_DIR)/common/init.tcl $(TCL_DIR)/impl/xflow.tcl
-
-ifeq ($(mode),gui)
+xflow : $(TCL_DIR)/common/init.tcl $(TCL_DIR)/impl/xflow.tcl
+ 
+ifeq ($(wildcard $(WORK_DIR)/sim/.*),)
+	@$(error ERROR: Missing implementation working area $(WORK_DIR)/impl ! Run 'make area' before running the flows.)
+else
+   ifeq ($(mode),gui)
 	@echo "exec vivado -mode gui \
 	   -source $(TCL_DIR)/common/init.tcl -source $(TCL_DIR)/impl/xflow.tcl \
 	   -log $(LOG_DIR)/$@.log -nojournal -verbose -notrace &" | tclsh
-else
+   else
 	@vivado -mode $(mode) \
 	   -source $(TCL_DIR)/common/init.tcl -source $(TCL_DIR)/impl/xflow.tcl \
 	   -log $(LOG_DIR)/$@.log -nojournal -verbose -notrace
+   endif
 endif
 ##_______________________________________________________________________________________
 
@@ -253,7 +261,11 @@ clean :
 help :
 
 	@$(ECHO) ""
-	@$(ECHO) "\nUsage: make <target> [dut=ModuleName] [mode=gui|tcl|batch] [part=DeviceID]" 
+	@$(ECHO) "\nUsage: make <target> [dut=ModuleName] [part=device] [mode=gui|tcl|batch]"
+	@$(ECHO) ""
+	@$(ECHO) "Defaults :\n"
+	@$(ECHO) " - top-level RTL module :  $(dut)"
+	@$(ECHO) " - target device :         $(part)"
 	@$(ECHO) ""
 	@$(ECHO) "Available targets:"
 	@$(ECHO) ""
