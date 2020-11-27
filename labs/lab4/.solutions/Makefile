@@ -183,7 +183,7 @@ sim : compile elaborate simulate
 .PHONY : project
 project : $(TCL_DIR)/common/init.tcl $(TCL_DIR)/common/project.tcl
 
-ifeq ($(wildcard $(WORK_DIR)/sim/.*),)
+ifeq ($(wildcard $(WORK_DIR)/impl/.*),)
 	@$(error ERROR: Missing implementation working area $(WORK_DIR)/impl ! Run 'make area' before running the flows.)
 else
    ifeq ($(mode),gui)
@@ -213,11 +213,25 @@ endif
 ##_______________________________________________________________________________________
 
 
+## launch IP flow in GUI mode
+.PHONY : ip
+ip : $(TCL_DIR)/common/init.tcl $(TCL_DIR)/common/ip.tcl
+
+ifeq ($(wildcard $(IPS_DIR)/.*),)
+	@$(error ERROR: Missing IPs directory ! Run 'make area' before running the flows.)
+else
+	@echo "exec vivado -mode gui \
+	   -source $(TCL_DIR)/common/init.tcl -source $(TCL_DIR)/common/ip.tcl \
+	   -notrace -log $(LOG_DIR)/$@.log -nojournal &" | tclsh
+endif
+##_______________________________________________________________________________________
+
+
 ## run Vivado FPGA implementation flow in non-project mode
 .PHONY : xflow
 xflow : $(TCL_DIR)/common/init.tcl $(TCL_DIR)/impl/xflow.tcl
  
-ifeq ($(wildcard $(WORK_DIR)/sim/.*),)
+ifeq ($(wildcard $(WORK_DIR)/impl/.*),)
 	@$(error ERROR: Missing implementation working area $(WORK_DIR)/impl ! Run 'make area' before running the flows.)
 else
    ifeq ($(mode),gui)
@@ -261,7 +275,7 @@ clean :
 help :
 
 	@$(ECHO) ""
-	@$(ECHO) "\nUsage: make <target> [dut=ModuleName] [part=device] [mode=gui|tcl|batch]"
+	@$(ECHO) "\nUsage: make <target> [dut=ModuleName] [part=device] [mode=gui|tcl|batch] [db=/path/to/project.xpr | db=/path/to/project.dcp]"
 	@$(ECHO) ""
 	@$(ECHO) "Defaults :\n"
 	@$(ECHO) " - top-level RTL module :  $(dut)"
@@ -277,8 +291,10 @@ help :
 	@$(ECHO) " - make sim         Alias, one step compilation, elaboration and simulation"
 	@$(ECHO) " - make project     Creates new fresh project attached to Xilinx device (default: xc7a35ticsg324-1L)"
 	@$(ECHO) " - make restore     Restore Vivado project from XML project file (.xpr) or design checkpoint (.dcp)"
+	@$(ECHO) " - make ip          Customize and compile IP cores for your design"
 	@$(ECHO) " - make xflow       Run Vivado FPGA implementation flow in non-project mode"
 	@$(ECHO) " - make bit         Alias, same as make xflow"
 	@$(ECHO) " - make build       Alias, same as make xflow"
 	@$(ECHO) " - make clean       Delete all log files and temporary files\n"
 ##_______________________________________________________________________________________
+
