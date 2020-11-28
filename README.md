@@ -296,6 +296,9 @@ Links to **video-recorded lectures** (in Italian) :
 * Lecture 6<br />
 <https://unito.webex.com/recordingservice/sites/unito/recording/play/6376e528060f4cd39cbfdccaa8d85bb3>
 
-* Lecture 7 - **TODO**
+* Lecture 7<br />
+<https://unito.webex.com/recordingservice/sites/unito/recording/play/ec2e93422e2740c2871f8cb2a8fd1295>
+
+* Lecture 8 - **TODO**
 
 
