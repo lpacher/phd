@@ -1,4 +1,6 @@
 
+![](doc/etc/logo.png)
+
 # Introduction to FPGA Programming <br/> _Using Xilinx Vivado and VHDL_
 
 ## PhD Degree in Physics, University of Torino
@@ -215,7 +217,7 @@ Step-by-step instruction explaining how to run this test flow can be found [**he
 # Reference documentation
 [**[Contents]**](#contents)
 
-VHDL programming :<br/>
+#### VHDL programming
 
 * B. Mealy and F. Tappero, [_Free Range VHDL_](http://freerangefactory.org/pdf/df344hdh4h8kjfh3500ft2/free_range_vhdl.pdf) (open source)
 * C.H. Roth Jr, _Digital Systems Design Using VHDL_
@@ -224,12 +226,38 @@ VHDL programming :<br/>
 * P.P. Chu, _FPGA Prototyping By VHDL Examples_
 * M. Field, [_Introducing the Spartan 3E FPGA and VHDL_](https://github.com/hamsternz/IntroToSpartanFPGABook/blob/master/IntroToSpartanFPGABook.pdf) (open source)
 
-FPGA programming using Xilinx Vivado :<br/>
+#### FPGA programming using Xilinx Vivado
 
 * S. Churiwala (Editor), _Designing with Xilinx FPGAs Using Vivado_
 
+* Xilinx Vivado official documentation (open) :
+   * [_Vivado Design Suite User Guide: Release Notes, Installation, and Licensing (UG973)_](https://www.xilinx.com/support/documentation/sw_manuals/xilinx2019_2/ug973-vivado-release-notes-install-license.pdf)
+   * [_Vivado Design Suite User Guide: Getting Started (UG910)_](https://www.xilinx.com/support/documentation/sw_manuals/xilinx2019_2/ug910-vivado-getting-started.pdf)
+   * [_Vivado Design Suite User Guide: Design Flows Overview (UG892)_](https://www.xilinx.com/support/documentation/sw_manuals/xilinx2019_2/ug892-vivado-design-flows-overview.pdf)
+   * [_Vivado Design Suite User Guide: Using the Vivado IDE (UG893)_](https://www.xilinx.com/support/documentation/sw_manuals/xilinx2019_2/ug893-vivado-ide.pdf)
+   * [_Vivado Design Suite User Guide: Using Tcl Scripting (UG894)_](https://www.xilinx.com/support/documentation/sw_manuals/xilinx2019_2/ug894-vivado-tcl-scripting.pdf)
+   * [_Vivado Design Suite User Guide: System-Level Design Entry (UG895)_](https://www.xilinx.com/support/documentation/sw_manuals/xilinx2019_2/ug895-vivado-system-level-design-entry.pdf)
+   * [_Vivado Design Suite User Guide: Designing with IP (UG896)_](https://www.xilinx.com/support/documentation/sw_manuals/xilinx2019_2/ug896-vivado-ip.pdf)
+   * [_Vivado Design Suite User Guide: Model-Based DSP Design Using System Generator (UG897)_](https://www.xilinx.com/support/documentation/sw_manuals/xilinx2019_2/ug897-vivado-sysgen-user.pdf)
+   * [_Vivado Design Suite User Guide: Embedded Processor Hardware Design (UG898)_](https://www.xilinx.com/support/documentation/sw_manuals/xilinx2019_2/ug898-vivado-embedded-design.pdf)
+   * [_Vivado Design Suite User Guide: I/O and Clock Planning (UG899)_](https://www.xilinx.com/support/documentation/sw_manuals/xilinx2019_2/ug899-vivado-io-clock-planning.pdf)
+   * [_Vivado Design Suite User Guide: Logic Simulation (UG900)_](https://www.xilinx.com/support/documentation/sw_manuals/xilinx2019_2/ug900-vivado-logic-simulation.pdf)
+   * [_Vivado Design Suite User Guide: Synthesis (UG901)_](https://www.xilinx.com/support/documentation/sw_manuals/xilinx2019_2/ug901-vivado-synthesis.pdf)
+   * [_Vivado Design Suite User Guide: High-Level Synthesis (UG902)_](https://www.xilinx.com/support/documentation/sw_manuals/xilinx2019_2/ug902-vivado-high-level-synthesis.pdf)
+   * [_Vivado Design Suite User Guide: Using Constraints (UG903)_](https://www.xilinx.com/support/documentation/sw_manuals/xilinx2019_2/ug903-vivado-using-constraints.pdf)
+   * [_Vivado Design Suite User Guide: Implementation (UG904)_](https://www.xilinx.com/support/documentation/sw_manuals/xilinx2019_2/ug904-vivado-implementation.pdf)
+   * [_Vivado Design Suite User Guide: Hierarchical Design (UG905)_](https://www.xilinx.com/support/documentation/sw_manuals/xilinx2019_2/ug905-vivado-hierarchical-design.pdf)
+   * [_Vivado Design Suite User Guide: Design Analysis and Closure Techniques (UG906)_](https://www.xilinx.com/support/documentation/sw_manuals/xilinx2019_2/ug906-vivado-design-analysis.pdf)
+   * [_Vivado Design Suite User Guide: Power Analysis and Optimization (UG907)_](https://www.xilinx.com/support/documentation/sw_manuals/xilinx2019_2/ug907-vivado-power-analysis-optimization.pdf)
+   * [_Vivado Design Suite User Guide: Programming and Debugging (UG908)_](https://www.xilinx.com/support/documentation/sw_manuals/xilinx2019_2/ug908-vivado-programming-debugging.pdf)
+   * [_Vivado Design Suite User Guide: Partial Reconfiguration (UG909)_](https://www.xilinx.com/support/documentation/sw_manuals/xilinx2019_2/ug909-vivado-partial-reconfiguration.pdf)
+   * [_UltraFast Design Methodology Guide for the Vivado Design Suite (UG949)_](https://www.xilinx.com/support/documentation/sw_manuals/xilinx2019_2/ug949-vivado-design-methodology.pdf)
 
-Xilinx 7-series FPGAs official documentation (open) :<br/>
+* Xilinx Vivado official tutorials (open) :
+
+   * [_Vivado Design Suite Tutorial: Logic Simulation (UG973)_](https://www.xilinx.com/support/documentation/sw_manuals/xilinx2019_2/ug937-vivado-design-suite-simulation-tutorial.pdf)
+
+#### Xilinx 7-series FPGAs official documentation (open)
 
 * [_7 Series FPGAs Data Sheet: Overview (DS180)_](https://www.xilinx.com/support/documentation/data_sheets/ds180_7Series_Overview.pdf)
 * [_7 Series Product Selection Guide_](https://www.xilinx.com/support/documentation/selection-guides/7-series-product-selection-guide.pdf)
@@ -245,20 +273,27 @@ Xilinx 7-series FPGAs official documentation (open) :<br/>
 * [_7 Series FPGAs PCB Design Guide (UG483)_](https://www.xilinx.com/support/documentation/user_guides/ug483_7Series_PCB.pdf)
 
 
-Design constraints :<br/>
+#### Design constraints
 
 * S. Gangadaran and S. Churiwala, _Constraining Designs for Synthesis and Timing<br/>Analysis: A Practical Guide to Synopsys Design Constraints (SDC)_
 * [_Vivado Design Suite User Guide: Using Constraints (UG903)_](https://www.xilinx.com/support/documentation/sw_manuals/xilinx2019_2/ug903-vivado-using-constraints.pdf)
 * [_Vivado Design Suite Tutorial: Using Constraints (UG945)_](https://www.xilinx.com/support/documentation/sw_manuals/xilinx2019_2/ug903-vivado-using-constraints.pdf)
 
-Tcl programming :
 
-   * B.B. Welch, _Practical Programming in Tcl and Tk_
-   * J.K. Ousterhout, _Tcl and the Tk Toolkit_
-   * A.P. Nadkarni, _The Tcl Programming Language: A Comprehensive Guide_
+#### Tcl programming
+
+* B.B. Welch, _Practical Programming in Tcl and Tk_
+* J.K. Ousterhout, _Tcl and the Tk Toolkit_
+* A.P. Nadkarni, _The Tcl Programming Language: A Comprehensive Guide_
 
 
-<br/>
+#### Other online resources
+
+* _<https://www.nandland.com>_
+* _<https://en.wikibooks.org/wiki/Category:Book:VHDL_for_FPGA_Design>_
+
+
+#### List of acronyms and abbreviations
 
 A list of of common acronyms and abbreviations relevant to electronics engineering and FPGA programming<br/>
 can be found [**here**](doc/LOA.md).
@@ -273,6 +308,7 @@ All lectures will be also **video-recorded**.
 The virtual room to attend the lectures is accessible at the following link :
 
 **<https://unito.webex.com/meet/luca.pacher>**
+
 
 <br/>
 

@@ -167,6 +167,8 @@
 
 **EEPROM** - Electrically Erasable Programmable Read-Only Memory
 
+**EMC** - Electro-Magnetic Compliance
+
 **ERC** - Electrical Rule Check
 
 **ESD** - Electrostatic Discharge
@@ -400,13 +402,15 @@
 
 **RAM** - Random Access Memory
 
-**RISC** - Reduced Instruction-Set Computer
-
-**ROM** - Read Only Memory
-
 **RF** - Radio Frequency
 
+**RISC** - Reduced Instruction-Set Computer
+
 **RMS** - Root Mean Square
+
+**RNM** - Real-Number Model (or Modeling)
+
+**ROM** - Read Only Memory
 
 **RTL** - Register Transfer Level
 
@@ -524,6 +528,8 @@
 
 **VHSIC** - Very High Speed Integrated Circuits
 
+**VITAL** - VHDL Initiative Towards ASIC Libraries
+
 **VLSI** - Very Large Scale Integration
 
 **VTC** - Voltage Transfer Characteristic
@@ -546,6 +552,8 @@
 **XNOR** - eXclusive NOR (logic gate)
 
 **XPE** - Xilinx Power Estimator (part of Vivado design suite)
+
+**XUP** - Xilinx University Program
 
 ## Y
 
