@@ -11,6 +11,10 @@ use IEEE.std_logic_1164.all ;       -- include extended logic values (by default
 library std ;
 use std.env.all ;                   -- the VHDL2008 revision provides stop/finish functions similar to Verilog to end the simulation
 
+library work ;
+use work.all ;
+
+
 entity tb_CounterBCD is             -- empty entity declaration for a testbench
 end entity tb_CounterBCD ;
 
@@ -46,12 +50,24 @@ architecture testbench of tb_CounterBCD is
    -- on-board 100 MHz clock
    signal clk_board : std_logic ;
 
-   -- reset signal (mapped to push-button or slide-switch)
+   -- reset signal (e.g. mapped to a push-button or slide-switch)
    signal reset : std_logic ;
 
-   -- BCD count (mapped to LEDs)
+   -- BCD count (e.g. mapped to some LEDs)
    signal BCD : std_logic_vector(3 downto 0) ;
 
+
+   --------------------------------------------------------
+   --   component configuration (architecture binding)   --
+   --------------------------------------------------------
+
+   -- choose here which BCD counter architecture to simulate :
+
+   for DUT : CounterBCD
+      use entity work.CounterBCD(rtl_simple) ;
+      --use entity work.CounterBCD(rtl_bad) ;
+      --use entity work.CounterBCD(rtl_ticker) ;
+      --use entity work.CounterBCD(rtl_PLL) ;
 
 begin
 
@@ -59,14 +75,14 @@ begin
    --   100 MHz clock generator   --
    ---------------------------------
 
-   ClockGen_inst : ClockGen port map( clk => clk_board ) ;
+   ClockGen_inst : ClockGen port map(clk => clk_board) ;
 
 
    ---------------------------------
    --   device under test (DUT)   --
    ---------------------------------
 
-   DUT : CounterBCD port map (clk => clk_board, rst => reset, BCD => BCD ) ;
+   DUT : CounterBCD port map (clk => clk_board, rst => reset, BCD => BCD) ;
 
 
    -----------------------
@@ -85,7 +101,10 @@ begin
 
       finish ;   -- stop the simulation (this is a VHDL2008-only feature)
 
-      -- **IMPORTANT: the original VHDL93 standard does not provide a routine to easily stop the simulation ! You must use a failing "assertion" for this purpose
+      --
+      -- **IMPORTANT: VHDL87/VHDL93 standards does not provide a routine to easily stop the simulation !
+      --              You must use a failing "assertion" for this purpose :
+      --
       --assert FALSE report "Simulation Finished" severity FAILURE ;
 
    end process ;

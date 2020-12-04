@@ -29,6 +29,7 @@
 [[**Z**](#z)]
 
 ## A
+[**[Top]**](#list-of-acronyms)
 
 **A** - ampere (current unit)
 
@@ -37,6 +38,8 @@
 **ADC** - Analog-to-Digital Converter
 
 **AMBA** - Advanced Microcontroller Bus Architecture
+
+**AoT** - Analog on Top
 
 **ASB** - Advanced System Bus
 
@@ -54,6 +57,12 @@
 
 
 ## B
+[**[Top]**](#list-of-acronyms)
+
+
+**BC** - Best Case (_corner_)
+
+**BEL** - Basic Element (_any Xilinx FPGA primitive_)
 
 **BER** - Bit Error Rate
 
@@ -65,17 +74,19 @@
 
 **bit** - <b>bi</b>nary digi<b>t</b>
 
-**BEL** - Basic Element (any Xilinx FPGA primitive)
-
 **BOM** - Bill Of Material
 
 **BRAM** - Block RAM (Read-Only Memory)
+
+**BSP** - Board Support Package
 
 **BW** - Band-Width
 
 
 
 ## C
+[**[Top]**](#list-of-acronyms)
+
 
 **CAD** - Computer Aided Design
 
@@ -93,6 +104,8 @@
 
 **CK** - Clock
 
+**CLB** - Configurable Logic Block
+
 **CM** - Clock Management
 
 **CML** - Current-Mode Logic
@@ -103,7 +116,7 @@
 
 **CORDIC** - COordinate Rotation DIgital Computer (algorithm)
 
-**CP** - Charge Pump (PLL component)
+**CP** - Charge Pump (_PLL component_)
 
 **CPLD** - Complex Programmable Logic Device
 
@@ -117,6 +130,8 @@
 
 
 ## D
+[**[Top]**](#list-of-acronyms)
+
 
 **DAC** - Digital-to-Analog Converter
 
@@ -132,6 +147,8 @@
 
 **DCM** - Digital Clock Manager
 
+**DCP** Design Check Point (_Xilinx Vivado_)
+
 **DDR** - Double Data Rate
 
 **DDS** - Direct Digital Synthesis
@@ -146,11 +163,17 @@
 
 **DLL** - Delay-Locked Loop
 
+**DMA** - Direct Memory Access
+
 **DNL** - Differential Non-Linearity
+
+**DoT** - Digital on Top
 
 **DRAM** - Dynamic RAM (Random Access Memory)
 
 **DRC** - Design Rule Check
+
+**DRP** - Dynamic Reconfiguration Port (_Xilinx_)
 
 **DSM** - Deep Sub-Micron
 
@@ -169,12 +192,18 @@
 
 
 ## E
+[**[Top]**](#list-of-acronyms)
+
 
 **ECO** - Engineering Change Orders
 
-**ECL** - Emitter-coupled logic
+**ECL** - Emitter-Coupled Logic
 
 **EDA** - Electronic Design Automation
+
+**EDIF** - Electronic Data Interchange Format (_industry-standard netlist file_)
+
+**ELF** - Executable and Linkable Format
 
 **ENOB** - Effective Number Of Bits
 
@@ -194,6 +223,8 @@
 
 
 ## F
+[**[Top]**](#list-of-acronyms)
+
 
 **FET** - Field Effect Transistor
 
@@ -216,7 +247,11 @@
 **FSM** - Finite-State-Machine
 
 
+
+
 ## G
+[**[Top]**](#list-of-acronyms)
+
 
 **GBT** - GigaBit Transceiver
 
@@ -226,8 +261,14 @@
 
 **GUI** - Graphical User Interface
 
+**GMI** - Generic Medium Interface (_TCP/IP stack_)
+
+
 
 ## H
+[**[Top]**](#list-of-acronyms)
+
+**HD** - Hard Disk or Hard Drive
 
 **HDMI** - High-Definition Multimedia Interface
 
@@ -249,6 +290,9 @@
 
 
 ## I
+[**[Top]**](#list-of-acronyms)
+
+
 
 **I2C** - Inter-Integrated Circuit
 
@@ -256,7 +300,9 @@
 
 **IC** - Integrated Circuit
 
-**ICSP** -  In-Circuit Serial Programming (same as _ISP, In-System Programming_)
+**ICE** - In-Circuit Emulator or Integrated Circuit Emulator
+
+**ICSP** - In-Circuit Serial Programming (same as _ISP, In-System Programming_)
 
 **IDE** - Integrated Development Environment
 
@@ -272,6 +318,8 @@
 
 **I/O** - Input/Output
 
+**IOB** - Input/Output Block
+
 **IP** - Intellectual Property
 
 **ISE** - Integrated Software Environment (legacy Xilinx FPGA programming suite)
@@ -281,6 +329,9 @@
 
 
 ## J
+[**[Top]**](#list-of-acronyms)
+
+
 
 **JEDEC** - Joint Electronic Device Engineering Council
 
@@ -289,13 +340,18 @@
 
 
 ## K
+[**[Top]**](#list-of-acronyms)
+
 
 **KCL** - Kirchoff's Current Law
 
 **KVL** - Kirchoff's Voltage Law
 
 
+
 ## L
+[**[Top]**](#list-of-acronyms)
+
 
 **LCD** - Liquid Crystal Display
 
@@ -304,6 +360,8 @@
 **LEC** - Logic Equivalence Checking (Checker)
 
 **LED** - Light-Emitting Diode
+
+**LF** - Loop Filter
 
 **LIFO** - Last Input First Output
 
@@ -320,9 +378,14 @@
 **LSB** - Least Significant Bit
 
 
+
 ## M
+[**[Top]**](#list-of-acronyms)
+
 
 **MAC** - Media Access Controller (_Ethernet controller_)
+
+**MCU** - Micro-Controller Unit
 
 **MMCM** - Mixed-Mode Clock Manager
 
@@ -343,13 +406,21 @@
 **MVL** - Multi-Valued Logic
 
 
+
+
 ## N
+[**[Top]**](#list-of-acronyms)
+
 
 **N/A** - Not applicable (or not available)
+
+**NCD** - Native Circuit Description (_legacy Xilinx ISE, output from mapping process_)
 
 **NCO** - Numerically-controlled Oscillator
 
 **NDA** - Non-Disclosure Agreement
+
+**NGD** - Native Generic Database (_legacy Xilinx ISE, input netlist file for mapping_)
 
 **nibble** - 4 bits (also _nybble_)
 
@@ -360,7 +431,15 @@
 **NRE** - Non Recurring Engineering costs
 
 
+
+
 ## O
+[**[Top]**](#list-of-acronyms)
+
+
+**OCV** - On-Chip Variations
+
+**OOC** - Out Of Context (_Vivado IP Flow_)
 
 **OP-AMP** - Operational Amplifier
 
@@ -373,7 +452,12 @@
 **OTPROM** - One-Time Programmable Read-Only Memory
 
 
+
+
 ## P
+[**[Top]**](#list-of-acronyms)
+
+
 
 **PAR** - Place And Route
 
@@ -387,11 +471,19 @@
 
 **PD** - Phase Detector
 
+**PDIP** - Plastic Dual In-line Package
+
 **PDP** - Power-Delay Product
+
+**PFD** - Phase Frequency Detector (same as PD)
 
 **PIC** - Programmable Integrated Circuit (_microcontroller_)
 
-**PL** - Programmable Logic (_Xilinx Zynq terminaology_)
+**PISO** - Parallel In Serial Out
+
+**PIPO** - Parallel In Parallel Out
+
+**PL** - Programmable Logic (_Xilinx Zynq terminology_)
 
 **PLA** - Programmable Logic Array
 
@@ -411,9 +503,11 @@
 
 **PRPG** - Pseudo-Random Pattern Generation
 
-**PS** - ProceSsor (_Xilinx Zynq terminaology_)
+**PS** - ProceSsor or Processing System (_Xilinx Zynq terminology_)
 
 **PSD** - Power Spectrum Density
+
+**PSM** - Programmable Switch Matrix
 
 **PSRR** - Power Supply Rejection Ratio
 
@@ -427,6 +521,8 @@
 
 
 ## Q
+[**[Top]**](#list-of-acronyms)
+
 
 **QA** - Quality Assurance
 
@@ -435,6 +531,8 @@
 
 
 ## R
+[**[Top]**](#list-of-acronyms)
+
 
 **RAM** - Random Access Memory
 
@@ -450,18 +548,28 @@
 
 **ROM** - Read Only Memory
 
+**RTOS** - Real-Time Operating System
+
 **RTL** - Register Transfer Level
 
 
 
 
 ## S
+[**[Top]**](#list-of-acronyms)
+
 
 **SCL** - Source-Coupled Logic
 
 **SDC** - Synopsys Design Constraints
 
 **SDF** - Standard Delay Format
+
+**SDI** - Serial Data In
+
+**SDO** - Serial Data Out
+
+**SDK** - Software Development Kit
 
 **SDR** - Single Data Rate
 
@@ -478,6 +586,10 @@
 **SFDR** - Spurious Free Dynamic Range
 
 **SI** - Signal Integrity
+
+**SIPO** - Serial In Parallel Out
+
+**SISO** - Serial In Serial Out
 
 **SMA** - Sub-Miniature version A (_coaxial RF connector_)
 
@@ -503,12 +615,17 @@
 
 **SRAM** - Static Random Access Memory
 
+**SSD** - Solid State Drive
+
 **STA** - Static Timing Analysis
 
 **SW** - Software
 
 
+
 ## T
+[**[Top]**](#list-of-acronyms)
+
 
 **TC** - Temperature Coefficient
 
@@ -517,6 +634,8 @@
 **TCL** - Tool Command Language (scripting language)
 
 **TDC** - Time-to-Digital Converter
+
+**TNS** - Total Negative Slack
 
 **TOA** - Time Of Arrival
 
@@ -531,13 +650,16 @@
 
 
 ## U
+[**[Top]**](#list-of-acronyms)
+
 
 **UART** - Universal Asynchronous Receiver/Transmitter
-
 
 **UBT** - Universal Bus Transceiver
 
 **UCF** - User Constraints File (_legacy Xilinx ISE constraints_)
+
+**UDP** - User Datagram Protocol
 
 **UDSM** - Ultra-Deep-Sub-Micron technology
 
@@ -553,6 +675,8 @@
 
 
 ## V
+[**[Top]**](#list-of-acronyms)
+
 
 **V** - volt (voltage unit)
 
@@ -581,17 +705,32 @@
 
 
 ## W
+[**[Top]**](#list-of-acronyms)
+
 
 **W** - watt (power unit)
 
 **WB** - Wishbone Bus
 
+**WC** - Worst Case (_corner_)
+
+**WHS** - Worst Hold Slack
+
+**WNS** - Worst Negative Slack
+
 **WPE** - Well Proximity Effects
 
 
+
+
 ## X
+[**[Top]**](#list-of-acronyms)
+
+**XCI** - Xilinx Core Instance (_Vivado IP Flow_)
 
 **XDC** - Xilinx Design Constraints
+
+**XDEF** - Xilinx DEF (Design Exchange Format)
 
 **XOR** - eXclusive OR (logic gate)
 
@@ -599,14 +738,22 @@
 
 **XPE** - Xilinx Power Estimator (part of Vivado design suite)
 
+**XST** - Xilinx Synthesis Technology (legacy ISE synthesis engine)
+
 **XUP** - Xilinx University Program
 
 **XVC** - Xilinx Virtual Cable
 
 
+
+
 ## Y
+[**[Top]**](#list-of-acronyms)
+
 
 ## Z
+[**[Top]**](#list-of-acronyms)
+
 
 **Z** - symbol for "high impedance"
 

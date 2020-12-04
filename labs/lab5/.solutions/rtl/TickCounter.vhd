@@ -1,5 +1,5 @@
 --
--- Parameterized modulus-MAX 32-bit tick generator. Use the resulting "tick"
+-- Parameterized modulus-MAX "tick" generator. Use the resulting output "tick"
 -- single clock-pulse as "enable" for your synchronous logic if you need to
 -- decrease the speed of the data processing without the need of a dedicated
 -- extra clock signal.
@@ -26,13 +26,13 @@
 
 library IEEE ;
 use IEEE.std_logic_1164.all ;
-use IEEE.std_logic_unsigned.all ;   -- to use + operator between std_logic_vector data types
 use IEEE.numeric_std.all ;
+use IEEE.math_real.all ;        -- math functions e.g. log2() and ceil() 
 
 entity TickCounter is
 
    generic(
-      MAX : integer := 10414   -- default is ~9.6 kHz as for UART baud-rate
+      MAX : positive := 10414   -- default is ~9.6 kHz as for UART baud-rate
    ) ;
 
    port(
@@ -43,30 +43,34 @@ entity TickCounter is
 end entity TickCounter ;
 
 
-
-
 architecture rtl of TickCounter is
 
+   -- N-bits counter (automatically determine the actual size of the bus)
+   constant NBITS : natural := natural(ceil(log2(real(MAX)))) ;
+ 
+   signal count : unsigned(NBITS-1 downto 0) := (others => '0') ;
 
 begin
 
    process(clk)
 
-      variable count : integer ;
+      -- **NOTE: alternatively to an unsigned vector, declare the count as a true "software-like" variable
+      --variable count : unsigned(NBITS-1 downto 0) := (others => '0') ;
 
    begin
 
       if( rising_edge(clk) ) then
 
-         if( count = MAX-1) then
-            count := 0 ;                  -- force the roll-over
-            tick <= '1' ;                 -- assert a single-clock pulse each time the counter resets
+         if( to_integer(count) = MAX-1 ) then
+            --count := (others => '0') ;
+            count <= (others => '0') ;             -- force the roll-over
+            tick <= '1' ;                          -- assert a single-clock pulse each time the counter resets
          else
-            count := count + 1 ;          -- increment the counter otherwise
+            --count := count + 1 ;
+            count <= count + 1 ;                   -- increment the counter otherwise (note the usage of +1 and NOT +'1')
             tick <= '0' ;
          end if ;
       end if ;
    end process ;
 
 end architecture rtl ;
-

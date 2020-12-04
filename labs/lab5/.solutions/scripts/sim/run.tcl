@@ -31,7 +31,8 @@ if { [current_wave_config] eq "" } {
 
       ## or create new Wave window (default name is "Untitled 1") otherwise and probe all top-level signals to the Wave window
       create_wave_config "Untitled 1"
-      add_wave /*
+      #add_wave /*
+      add_wave /${TOP}/DUT/*
    }
 }
 

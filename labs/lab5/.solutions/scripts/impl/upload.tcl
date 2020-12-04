@@ -124,7 +124,7 @@ if { [catch {
 }] } {
 
    puts "\n\nERROR: \[TCL\] Cannot connect to any hardware target !"
-   puts "             Please connect a board to the computer of check your cables."
+   puts "             Please connect a board to the computer or check your cables."
    puts "             Force an exit now.\n\n"
 
    ## script failure
@@ -135,13 +135,13 @@ if { [catch {
 ## check if the XILINX_DEVICE environment variable has been exported from Makefile...
 if { [info exists env(XILINX_DEVICE)] } {
 
-   ## ... and try to match the device string from $XILINX_DEVICE 
-   foreach device [get_hw_devices] {
+   ## ... and try to match the device string with $XILINX_DEVICE 
+   foreach deviceName [get_hw_devices] {
 
-      if { [string match [string range ${::env(XILINX_DEVICE)} 0 5] ${device}] } {
+      if { [string match "[string range ${::env(XILINX_DEVICE)} 0 6]*" ${deviceName}] } {
 
-         current_hw_device ${device}
-         refresh_hw_device -update_hw_probes false ${device}
+         current_hw_device ${deviceName}
+         refresh_hw_device -update_hw_probes false ${deviceName}
 
       } else {
 

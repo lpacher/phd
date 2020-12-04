@@ -123,7 +123,7 @@ if { [llength ${XDC_SOURCES}] == 0 } {
    foreach src ${XDC_SOURCES} {
 
       puts "Parsing Xilinx Design Constraint (XDC) source file ${src} ..."
-      read_xdc ${src}
+      read_xdc -unmanaged ${src}
    }
 }
 
