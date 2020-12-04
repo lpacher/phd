@@ -289,7 +289,9 @@ Step-by-step instruction explaining how to run this test flow can be found [**he
 
 #### Other online resources
 
-* _<https://www.nandland.com>_
+* [_fpga4fun_](https://www.fpga4fun.com)
+* [_Nandland_](https://www.nandland.com)
+* [_VHDL Whiz_](https://vhdlwhiz.com/basic-vhdl-tutorials)
 * _<https://en.wikibooks.org/wiki/Category:Book:VHDL_for_FPGA_Design>_
 
 
@@ -335,6 +337,9 @@ Links to **video-recorded lectures** (in Italian) :
 * Lecture 7<br />
 <https://unito.webex.com/recordingservice/sites/unito/recording/play/ec2e93422e2740c2871f8cb2a8fd1295>
 
-* Lecture 8 - **TODO**
+* Lecture 8<br />
+<https://unito.webex.com/recordingservice/sites/unito/recording/play/d1bab391c0084214b1b29546ae1e010e>
+
+* Lecture 9 - **TODO**
 
 
