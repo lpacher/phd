@@ -36,6 +36,10 @@
 
 **ADC** - Analog-to-Digital Converter
 
+**AMBA** - Advanced Microcontroller Bus Architecture
+
+**ASB** - Advanced System Bus
+
 **ASCII** - American Standard Code for Information Interchange
 
 **ASIC** - Application Specific Integrated Circuit
@@ -46,9 +50,14 @@
 
 **ATPG** - Automatic Test-Pattern Generation
 
+**AXI** - Advanced eXtensible Interface
+
+
 ## B
 
 **BER** - Bit Error Rate
+
+**BFM** - Bus Functional Model
 
 **BGA** - Ball Grid Array (package)
 
@@ -76,13 +85,15 @@
 
 **CCVS** - Current-Controlled Voltage Source
 
+**CDC** - Clock-Domain Crossing
+
 **CE** - Clock Enable
 
 **CISC** - Complex Instruction-Set Computer
 
-**CM** - Clock Management
-
 **CK** - Clock
+
+**CM** - Clock Management
 
 **CML** - Current-Mode Logic
 
@@ -90,7 +101,9 @@
 
 **CMOS** - Complementary Metal Oxide Semiconductor
 
-**CP** - Charge Pump
+**CORDIC** - COordinate Rotation DIgital Computer (algorithm)
+
+**CP** - Charge Pump (PLL component)
 
 **CPLD** - Complex Programmable Logic Device
 
@@ -120,6 +133,8 @@
 **DCM** - Digital Clock Manager
 
 **DDR** - Double Data Rate
+
+**DDS** - Direct Digital Synthesis
 
 **DEF** - Design-Exchange Format
 
@@ -186,7 +201,7 @@
 
 **FFT** - Fast Fourier Transform (_DFT algorithm_)
 
-**FIFO** - First In First Out
+**FIFO** - First-In First-Out
 
 **FIR** - (digital filters) Finite Impulse Response
 
@@ -220,6 +235,8 @@
 
 **HLS** - High-Level Synthesis
 
+**HM** - Hardware Manager
+
 **HR** - High-Range (FPGA I/O pads)
 
 **HS** - High-Speed (FPGA I/O pads)
@@ -235,7 +252,11 @@
 
 **I2C** - Inter-Integrated Circuit
 
+**IBERT** - Integrated Bit-Error-Ratio Tester (_Xilinx_)
+
 **IC** - Integrated Circuit
+
+**ICSP** -  In-Circuit Serial Programming (same as _ISP, In-System Programming_)
 
 **IDE** - Integrated Development Environment
 
@@ -255,7 +276,7 @@
 
 **ISE** - Integrated Software Environment (legacy Xilinx FPGA programming suite)
 
-**ISP** - In-System Programming
+**ISP** - In-System Programming (same as _ICSP, In-Circuit Serial Programming_)
 
 
 
@@ -319,10 +340,14 @@
 
 **MVA** - Multivariate Analysis
 
+**MVL** - Multi-Valued Logic
+
 
 ## N
 
 **N/A** - Not applicable (or not available)
+
+**NCO** - Numerically-controlled Oscillator
 
 **NDA** - Non-Disclosure Agreement
 
@@ -350,6 +375,10 @@
 
 ## P
 
+**PAR** - Place And Route
+
+**PB** - Push Button
+
 **PCB** - Printed Circuit Board
 
 **PCI** - Peripheral Component Interconnect
@@ -359,6 +388,10 @@
 **PD** - Phase Detector
 
 **PDP** - Power-Delay Product
+
+**PIC** - Programmable Integrated Circuit (_microcontroller_)
+
+**PL** - Programmable Logic (_Xilinx Zynq terminaology_)
 
 **PLA** - Programmable Logic Array
 
@@ -378,6 +411,8 @@
 
 **PRPG** - Pseudo-Random Pattern Generation
 
+**PS** - ProceSsor (_Xilinx Zynq terminaology_)
+
 **PSD** - Power Spectrum Density
 
 **PSRR** - Power Supply Rejection Ratio
@@ -386,6 +421,7 @@
 
 **PVT** - Process, Voltage (supply) and Temperature variations
 
+**PWM** - Pulse Width Modulation
 
 
 
@@ -403,6 +439,8 @@
 **RAM** - Random Access Memory
 
 **RF** - Radio Frequency
+
+**RGB** - Red-Green-Blue (LED)
 
 **RISC** - Reduced Instruction-Set Computer
 
@@ -445,6 +483,8 @@
 
 **SMD** - Surface Mount Device (package)
 
+**SNDR** - Signal-to-Noise and Distorsion Ratio
+
 **SNR** - Signal-to-Noise Ratio
 
 **SNDR** - Signal-to-Noise and -Distortion Ratio
@@ -462,6 +502,8 @@
 **SRL** - Shift Register implemented with LUT (Look-Up Tables, Xilinx terminology)
 
 **SRAM** - Static Random Access Memory
+
+**STA** - Static Timing Analysis
 
 **SW** - Software
 
@@ -528,6 +570,8 @@
 
 **VHSIC** - Very High Speed Integrated Circuits
 
+**VIO** - Virtual I/O (_Xilinx_)
+
 **VITAL** - VHDL Initiative Towards ASIC Libraries
 
 **VLSI** - Very Large Scale Integration
@@ -539,6 +583,8 @@
 ## W
 
 **W** - watt (power unit)
+
+**WB** - Wishbone Bus
 
 **WPE** - Well Proximity Effects
 
@@ -554,6 +600,9 @@
 **XPE** - Xilinx Power Estimator (part of Vivado design suite)
 
 **XUP** - Xilinx University Program
+
+**XVC** - Xilinx Virtual Cable
+
 
 ## Y
 
