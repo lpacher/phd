@@ -5,23 +5,24 @@
 # Contents
 
 * [**Introduction**](#introduction)
-* [**Installing Xilinx Vivado**](#installing-xilinx-vivado)
 * [**Command line usage**](#command-line-usage)
 * [**Text editor**](#text-editor)
+* [**Install Xilinx Vivado**](#install-xilinx-vivado)
+* [**Install cable drivers**](#install-cable-drivers)
 * [**Additional installations and configurations for Windows users**](#additional-installations-and-configurations-for-windows-users)
-   * [**Improve the Windows Command Prompt appearance**](#improve-the-windows-command-prompt-appearance)
-   * [**Install a Linux-like TAB completion**](#install-a-linux-like-tab-completion)
-   * [**Enable file extensions visualization**](#enable-file-extensions-visualization)
-   * [**Add a login script for the Command Prompt**](#add-a-login-script-for-the-command-prompt)
-   * [**Add Notepad++ executable to search path**](#add-notepad-executable-to-search-path)
-   * [**Add Linux executables to search path**](#add-linux-executables-to-search-path)
+   * [Improve the Windows Command Prompt appearance](#improve-the-windows-command-prompt-appearance)
+   * [Install a Linux-like TAB completion](#install-a-linux-like-tab-completion)
+   * [Enable file extensions visualization](#enable-file-extensions-visualization)
+   * [Add a login script for the Command Prompt](#add-a-login-script-for-the-command-prompt)
+   * [Add Notepad++ executable to search path](#add-notepad-executable-to-search-path)
+   * [Add Linux executables to search path](#add-linux-executables-to-search-path)
 * [**Install Git**](#install-git)
 * [**Install Tcl**](#install-tcl)
 * [**Add Xilinx Vivado executables to search path**](#add-xilinx-vivado-executables-to-search-path)
 * [**Clone and update the Git repository for the course**](#clone-and-update-the-git-repository-for-the-course)
 * [**Sample Xilinx Vivado simulation and implementation flows**](#sample-xilinx-vivado-simulation-and-implementation-flows)
-   * [**Run a digital simulation using XSim**](#run-a-digital-simulation-using-xsim)
-   * [**Implement the design on a target FPGA**](#implement-the-design-on-a-target-fpga)
+   * [Run a digital simulation using XSim](#run-a-digital-simulation-using-xsim)
+   * [Implement the design on a target FPGA](#implement-the-design-on-a-target-fpga)
 
 <!--------------------------------------------------------------------->
 # Introduction
@@ -36,27 +37,88 @@ a supported operating system (Linux Ubuntu would be preferable)
 using a virtualization software (e.g. VirtualBox)
 or find another computer running a Linux distribution or Windows 7/10.
 
-In the course we will also work at the command-line assuming a **Linux-like development environment**.
-Familiarity with Linux basic shell commands, with the GNU Makefile and with a text editor
-is therefore assumed.
-Additional information regarding how to setup a suitable Linux-like development environment under Windows
-are provided to support Windows users.
-
-<hr>
-
-**IMPORTANT !**
-
+>
+> **IMPORTANT !**
+>
 > Most of screenshots included in this guide are mainly from a _Windows 7 Ultimate_ operating system. 
 > Small differences can arise from Windows 7 and Windows 10.
 > Additionally, screenshots referring Xilinx Vivado installation steps are from a **2019.2 installer**. The content of the wizard for
 > the latest version **2020.1** available for download on the Xilinx website can be slighty different.
-
-<hr>
-
+>
 
 
+# Command line usage
+[**[Contents]**](#contents)
 
-# Installing Xilinx Vivado
+The approach adopted in this introductory FPGA programming course will be **script-based** and **command-line based**.
+That is, we will create/edit source code and run Xilinx Vivado flows from the command-line.
+Moreover in order to ensure portable flows between Linux and Windows operating systems we will
+assume a **Linux-like development environment**. Additional information regarding how to setup a suitable
+Linux-like development environment under Windows are provided to support Windows users.
+
+All students are therefore **requested** to have some familiarity with **Linux basic shell commands** to work with files and
+directories (`cd`, `pwd`, `mv`, `mkdir`, `rm` etc.), with the **GNU Makefile** (`make`) and with a **text editor**.
+Additionally, as described later in the guide we will use Git to keep track of the code presented in this course.
+
+Students working with a Linux operating system must be therefore able to open a "shell" application.
+As an example, on Ubuntu distributions the so called _Terminal_ can be launched from
+_Applications > Accessories > Terminal_ .
+
+Students working on a Windows operating system will use the _Command Prompt_ application instead.
+On both Windows 7 and Windows 10 this application can be launched by typing "prompt" in the search function
+of the _Start_ menu, or from _Start > All Programs > Accessories > Command Prompt_ .
+
+Unfortunately the Windows command line requires several improvements and installations in order to be used as
+a profitable tool for FPGA programming. [**Detailed instructions**](#additional-installations-and-configurations-for-windows-users)
+are therefore part of this guide to help Windows users to install and configure all additional components required to run Xilinx
+Vivado flows from the command-line.
+
+
+
+
+# Text editor
+[**[Contents]**](#contents)
+
+During the course we will write and discuss a lot of source code in form of plain-text files
+(VHDL sources, XDC constraints, Tcl scripts, GNU Makefiles etc.).
+
+Familiarity with a good **text editor** is therefore assumed for the course.
+Despite the choice is completely up to students, for those that are not already familiar with
+programming it is recommended to use :
+
+* **Gedit** for Linux
+* **Notepad++** for Windows
+
+**Gedit** is the default text editor on many Linux distributions. You can check if it is already installed
+on your system by opening a terminal and typing :
+
+```
+% which gedit
+```
+
+Usually the output of the command is `/usr/bin/gedit`. To open a source file the syntax will be always in form of :
+
+```
+% gedit filename.txt &
+```
+
+Do not forget to add the ampersand `&` at the end of the command to launch the executable in background and
+leave the shell active.<br/>
+Many other good text editors exists under Linux, e.g. Emacs, Atom, `nano` or `vim`.
+Feel free to use your preferred application.
+
+For Windows users an excellent text editor is **Notepad++** instead. It can be freely downloaded and installed from :
+
+<https://notepad-plus-plus.org/downloads>
+
+
+Despite Windows natively provides **Notepad** in fact, **Notepad++** is foreseen for programming
+and offers additional features such as syntax highlighting, line numbering and automated code indentation.<br/>
+Later in the text we will see how to use it effectively **also from the Windows command-line**.
+
+
+
+# Install Xilinx Vivado
 [**[Contents]**](#contents)
 
 The software used in the course is called **Xilinx Vivado**. It is a professional and complete
@@ -168,71 +230,79 @@ At the end of the installation process you will be automatically redirected to t
 **obtain and install a free license**.
 
 
-# Command line usage
+# Install cable drivers
 [**[Contents]**](#contents)
 
-The approach adopted in this FPGA programming course will be **script-based** and **command-line based**
-assuming a **Linux-like development environment**. That is, we will run all Xilinx Vivado flows from the command-line.
-All students are therefore requested to have some familiarity with **Linux basic shell commands** to work with files and
-directories (`cd`, `pwd`, `mv`, `mkdir`, `rm` etc.), with the **GNU Makefile** (`make`) and with a **text editor**.
-Additionally, as described later in the guide we will use Git to keep track of the code presented in this course.
+<br/>
 
-Students working with a Linux operating system must be therefore able to open a "shell" application.
-As an example, on Ubuntu distributions the so called _Terminal_ can be launched from
-_Applications > Accessories > Terminal_ .
+>
+> **IMPORTANT**
+>
+> These instructions assume that you have some evaluation board connected to your host computer.<br/>
+> If you don't have a board equipped with a Xilinx FPGA to work with you can skip these details.
+>
 
-Students working on a Windows operating system will use the _Command Prompt_ application instead.
-On both Windows 7 and Windows 10 this application can be launched by typing "prompt" in the search function
-of the _Start_ menu, or from _Start > All Programs > Accessories > Command Prompt_ .
+<br/>
 
-Unfortunately the Windows command line requires several improvements and installations in order to be used as
-a profitable tool for FPGA programming. Detailed instructions are therefore part of this guide to help Windows users to
-install and configure all additional components required to run Xilinx Vivado flows from the command-line.
+Xilinx FPGAs are programmed using the **JTAG protocol**. In the past a dedicated (end expensive)
+**programming cable**, namely _Xilinx USB Platform Cable_, was required
+to program FPGA boards from a host computer. This dedicated cable (still in use for particular applications)
+**connects to a host computer USB port** (in the past to the "old style" serial port instead) and converts
+USB data into JTAG data.<br/>
+Please ref. to [_USB Cable Installation Guide (UG344)_](https://www.xilinx.com/support/documentation/user_guides/ug344.pdf)
+Xilinx official documentation for more details. Be aware that this PDF document is old (2016) and refers to
+legacy _Xilinx ISE Design Suite_.
+
+For easier programming, the majority of new modern FPGA boards equipped with a Xilinx device provides 
+an **on-board dedicated circuitry** (usually NOT documented in board schematics) that **converts USB to JTAG without the need
+of a dedicated cable**. That is, you can easily program your board by using a simple **USB Type A/Type B** or **USB Type A/micro USB**
+cable connected between the host computer and the board without the need of a dedicated programming cable.
+
+However, in order to make the board visible to the host computer the operating system has
+to **properly recognize the on-board USB/JTAG hardware** requiring a specific **driver**.
+The **Xilinx USB/Digilent driver** is responsible for this.
+
+By default the _Install Cable Drivers_ option is already selected in the installation wizard, thus
+at the end of the Vivado installation process cable drivers **should be automatically installed for you** on the system
+(this is the reason for which admin privileges are required to install the software).
+
+In case cable drivers are **NOT installed** on the machine you can always **manually install cable drivers** at any time
+without the need of a new scratch installation of the Vivado Design Suite.
 
 
+### Linux
 
+In order to [install cable drivers on Linux](https://www.xilinx.com/support/answers/59128.html)
+run as `root` or with `sudo` the following **Bash install script**
 
-# Text editor
-[**[Contents]**](#contents)
+`<install dir>/Vivado/<version>/data/xicom/cable_drivers/lin/install_script/install_drivers`
 
-During the course we will write and discuss a lot of source code in form of plain-text files
-(VHDL sources, XDC constraints, Tcl scripts, GNU Makefiles etc.).
-
-Familiarity with a good **text editor** is therefore assumed for the course.
-Despite the choice is completely up to students, for those that are not already familiar with
-programming it is recommended to use :
-
-* **Gedit** for Linux
-* **Notepad++** for Windows
-
-**Gedit** is the default text editor on many Linux distributions. You can check if it is already installed
-on your system by opening a terminal and typing :
+provided with the Vivado installation :
 
 ```
-% which gedit
+% cd <install dir>/Vivado/<version>/data/xicom/cable_drivers/lin/install_script/
+% sudo chmod +x install_drivers
+% sudo ./install_drivers
 ```
 
-Usually the output of the command is `/usr/bin/gedit`. To open a source file the syntax will be always in form of :
+Ref. also to [_Vivado Design Suite User Guide: Release Notes, Installation, and Licensing_](
+https://www.xilinx.com/support/documentation/sw_manuals/xilinx2019_2/ug973-vivado-release-notes-install-license.pdf) pp. 18-19.
+
+### Windows
+
+Similarly to Linux, a **Batch install script** is provided for the Windows _Command Prompt_ :
 
 ```
-% gedit filename.txt &
+<install dir>/Vivado/<version>/data/xicom/cable_drivers/nt64/install_drivers_wrapper.bat
 ```
 
-Do not forget to add the ampersand `&` at the end of the command to launch the executable in background and
-leave the shell active.<br/>
-Many other good text editors exists under Linux, e.g. Emacs, Atom, `nano` or `vim`.
-Feel free to use your preferred application.
+Simply run the script as administrator :
 
-For Windows users an excellent text editor is **Notepad++** instead. It can be freely downloaded and installed from :
-
-<https://notepad-plus-plus.org/downloads>
-
-
-Despite Windows natively provides **Notepad** in fact, **Notepad++** is foreseen for programming
-and offers additional features such as syntax highlighting, line numbering and automated code indentation.<br/>
-Later in the text we will see how to use it effectively **also from the Windows command-line**.
-
-
+```
+% cd <install dir>/Vivado/<version>/data/xicom/cable_drivers/nt64
+% install_drivers_wrapper.bat
+```
+<br/>
 
 
 # Additional installations and configurations for Windows users
@@ -240,7 +310,7 @@ Later in the text we will see how to use it effectively **also from the Windows 
 
 This section contains detailed instructions for **Windows users** to improve the _Command Prompt_
 environment for an effective usage. Students working with a Linux system can skip these details and move to
-[**Install Git*](#install-git) instead.<br/>
+[**Install Git**](#install-git) instead.<br/>
 
 
 ## Improve the Windows Command Prompt appearance
@@ -1196,7 +1266,7 @@ Synthesize and map the example RTL code
 targeting a [**Digilent Arty A7 development board**](https://store.digilentinc.com/arty-a7-artix-7-fpga-development-board-for-makers-and-hobbyists/) with :
 
 ```
-% make bit   (same as make bit mode=gui)
+% make build   (by default same as make build mode=gui)
 ```
 
 
@@ -1207,6 +1277,6 @@ By default the flow runs in **graphic mode**. You can also run the flow in **int
 `mode` variable when invoking `make` :
 
 ```
-% make bit [mode=gui|tcl|batch]
+% make build [mode=gui|tcl|batch]
 ```
 
