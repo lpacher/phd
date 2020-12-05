@@ -314,7 +314,7 @@ The virtual room to attend the lectures is accessible at the following link :
 
 <br/>
 
-Links to **video-recorded lectures** (in Italian) : 
+### Links to **video-recorded lectures** (in Italian)
 
 * Lecture 1<br/>
 <https://unito.webex.com/recordingservice/sites/unito/recording/play/efa1c2b298a84011859cc0b997c29cff>
@@ -337,9 +337,27 @@ Links to **video-recorded lectures** (in Italian) :
 * Lecture 7<br />
 <https://unito.webex.com/recordingservice/sites/unito/recording/play/ec2e93422e2740c2871f8cb2a8fd1295>
 
+<br/>
+
+### Deepening lectures (outside official 12-hours/3-credits computation)
+
 * Lecture 8<br />
 <https://unito.webex.com/recordingservice/sites/unito/recording/play/d1bab391c0084214b1b29546ae1e010e>
 
-* Lecture 9 - **TODO**
+* Lecture 9<br />
+<https://unito.webex.com/recordingservice/sites/unito/recording/play/0fda3ebd280843cd8579ce1e65a356b3>
 
+>
+>**ERRATA CORRIGE**
+>
+>The **hold-time constraint** written at 01:29:18/02:56:02 is correct,
+>the hold time has to be **lower** than the sum :
+>
+>   _hold time < clock-to-output propagation delay + combinational propagation delay_
+>
+> However the same formula rewritten at 01:32:50/02:56:02 is **WRONG**, as before
+> the hold time has to be lower (and **not larger** as written in the slide) than the sum.
+>
+
+* Lecture 10 - **TODO**
 
