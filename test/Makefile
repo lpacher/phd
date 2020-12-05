@@ -154,7 +154,7 @@ compile : $(TCL_DIR)/sim/compile.tcl
 ifeq ($(wildcard $(WORK_DIR)/sim/.*),)
 	@$(error ERROR: Missing simulation working area $(WORK_DIR)/sim ! Run 'make area' before running the flows.)
 else
-	@tclsh $(TCL_DIR)/scripts/sim/compile.tcl
+	@tclsh $(TCL_DIR)/sim/compile.tcl $@
 endif
 ##_______________________________________________________________________________________
 
@@ -163,7 +163,7 @@ endif
 .PHONY : elaborate
 elaborate : $(TCL_DIR)/sim/elaborate.tcl
 
-	@tclsh $(TCL_DIR)/scripts/sim/elaborate.tcl
+	@tclsh $(TCL_DIR)/sim/elaborate.tcl $@
 ##_______________________________________________________________________________________
 
 
@@ -171,7 +171,7 @@ elaborate : $(TCL_DIR)/sim/elaborate.tcl
 .PHONY : simulate
 simulate : $(TCL_DIR)/sim/simulate.tcl
 
-	@tclsh $(TCL_DIR)/scripts/sim/simulate.tcl
+	@tclsh $(TCL_DIR)/sim/simulate.tcl $@
 ##_______________________________________________________________________________________
 
 ## one-step compilation, elaboration and simulation (same as make compile elaborate simulate)
