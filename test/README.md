@@ -70,7 +70,7 @@ Synthesize and map the example RTL code
 targeting a [**Digilent Arty A7 development board**](https://store.digilentinc.com/arty-a7-artix-7-fpga-development-board-for-makers-and-hobbyists/) with :
 
 ```
-% make bit   (same as make bit mode=gui)
+% make build   (by default same as make build mode=gui)
 ```
 
 
@@ -78,6 +78,6 @@ By default the flow runs in **graphic mode**. You can also run the flow in **int
 `mode` variable when invoking `make` :
 
 ```
-% make bit [mode=gui|tcl|batch]
+% make build [mode=gui|tcl|batch]
 ```
 
