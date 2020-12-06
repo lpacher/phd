@@ -272,7 +272,7 @@ without the need of a new scratch installation of the Vivado Design Suite.
 
 ### Linux
 
-In order to [install cable drivers on Linux](https://www.xilinx.com/support/answers/59128.html)
+In order to [**install cable drivers on Linux**](https://www.xilinx.com/support/answers/59128.html)
 run as `root` or with `sudo` the following **Bash install script**
 
 `<install dir>/Vivado/<version>/data/xicom/cable_drivers/lin/install_script/install_drivers`
@@ -359,7 +359,7 @@ program called **Clink** :
 <https://mridgers.github.io/clink>
 
 For a **more efficient usage of the Windows command line** it is therefore **highly recommended**
-to download and install this tiny executable :
+to download and install this executable :
 
 <https://github.com/mridgers/clink/releases/download/0.4.9/clink\_0.4.9\_setup.exe>
 
@@ -454,7 +454,7 @@ such that they can be directly invoked from the command interpreter at any time.
 In order to add this feature to the Windows terminal we can either :
 
 * use the `AutoRun` variable in the Windows _Registry Editor_ or
-* modify the **shortcut** used to launch the _Command Prompt_
+* [modify the **shortcut** used to launch the _Command Prompt_](https://superuser.com/questions/144347/is-there-windows-equivalent-to-the-bashrc-file-in-linux)
 
 
 Creating/editing entries in the main _Registry Editor_ of a
