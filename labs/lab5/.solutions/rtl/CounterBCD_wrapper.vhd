@@ -44,9 +44,10 @@ use IEEE.std_logic_1164.all ;
 entity CounterBCD_wrapper is
 
    port (
-      clk : in  std_logic ;
-      rst : in  std_logic ;
-      BCD : out std_logic_vector(3 downto 0)
+      clk     : in  std_logic ;
+      clk_sel : in  std_logic ;   -- for PLL design: 0 = 100 MHz, 1 = 200 MHz
+      rst     : in  std_logic ;
+      BCD     : out std_logic_vector(3 downto 0)
    ) ;
 
 end entity CounterBCD_wrapper ;
@@ -60,9 +61,10 @@ architecture wrapper of CounterBCD_wrapper is
 
    component CounterBCD is
       port(
-         clk : in  std_logic ;
-         rst : in  std_logic ;
-         BCD : out std_logic_vector(3 downto 0)
+         clk     : in  std_logic ;
+         clk_sel : in  std_logic ;
+         rst     : in  std_logic ;
+         BCD     : out std_logic_vector(3 downto 0)
       ) ;
    end component ;
 
@@ -103,7 +105,7 @@ begin
    --   BCD counter implementation (RTL)   --
    ------------------------------------------
 
-   CounterBCD_inst : CounterBCD port map(clk => clk, rst => rst, BCD => BCD_int) ;
+   CounterBCD_inst : CounterBCD port map(clk => clk, clk_sel => clk_sel, rst => rst, BCD => BCD_int) ;
 
 
    --------------------------------------------------------

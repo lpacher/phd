@@ -516,6 +516,10 @@ adjustement, fine-delay adjustement etc.)
 
 Compile a new **Phase-Locked Loop (PLL)** core using the **Vivado IP flow** in order to **fine-tune**
 the clock fed to internal logic starting from the available **on-board 100 MHz clock**.
+Additionally, we use the PLL to **double the clock frequency** up to 200 MHz as an example
+of **frequency-synthesis** capabilities of the PLL. A simple multiplexer is then used
+to switch between 100 MHz and 200 MHz fed to the core logic.
+
 
 <span>&#8226;</span> As a first step copy from the `.solutions/` directory the following Tcl script :
 
@@ -537,10 +541,11 @@ Right click on **Clocking Wizard** and select **Customize IP...**.
 Create a new IP core named `PLL` with the following features :
 
 * 100 MHz input clock
-* 100 MHz output clock
+* primary 100 MHz output clock
+* additional 200 MHz output clock
 * no reset signal
 
-Change default port names in order to have `ClkIn`, `ClkOut` and `Locked`.
+Change default port names in order to have `CLK_IN`, `CLK_OUT_100`, `CLK_OUT_200` and `LOCKED`.
 
 <br/>
 
@@ -557,9 +562,9 @@ export_xsim_scripts
 Most important files for our purposes are :
 
 * the main **Xilinx Core Instance (XCI)** XML file `*.xci` containing the IP configuration
-* the Verilog instantiation template `*.veo`
+* the VHDL instantiation template `*.vho` (if the target language is Verilog a `.veo` would have been created instead)
 * the XDC constraints file for the IP core `*.xdc`
-* a self-contained gate-level Verilog netlist `*_netlist.v` for simulations
+* self-contained gate-level Verilog and VHDL netlists `*sim_netlist.v/*sim_netlist.vhd` for functional simulations
 
 <br/>
 
@@ -570,6 +575,27 @@ Most important files for our purposes are :
 > easily re-compile from scratch the IP core.
 >
 
+<br/>
+
+
+<span>&#8226;</span> Modify the `entity` declaration into `rtl/CounterBCD.vhd` in order to **add a new** `clk_sel` **input port** :
+
+```vhdl
+library UNISIM ;
+use UNISIM.vcomponents.all ;   -- external library required to simulate Xilinx FPGA primitives
+
+
+entity CounterBCD is
+
+   port (
+      clk     : in  std_logic ;
+      clk_sel : in  std_logic ;   -- for PLL design: 0 = 100 MHz, 1 = 200 MHz
+      rst     : in  std_logic ;
+      BCD     : out std_logic_vector(3 downto 0)
+   ) ;
+
+end entity CounterBCD ;
+```
 <br/>
 
 
@@ -586,11 +612,11 @@ architecture rtl_PLL of CounterBCD is
 
    component PLL is
      port (
-        ClkIn  : in  std_logic ;
-        ClkOut : out std_logic ;
-        Locked : out std_logic
+        CLK_IN      : in  std_logic ;
+        CLK_OUT_100 : out std_logic ;
+        CLK_OUT_200 : out std_logic ;
+        LOCKED      : out std_logic
      ) ;
-
    end component PLL ;
 
 
@@ -610,13 +636,14 @@ architecture rtl_PLL of CounterBCD is
    --------------------------------------
 
    -- PLL signals
-   signal pll_clk, pll_locked : std_logic ;
+   signal pll_clk_100, pll_clk_200, pll_clk, pll_locked : std_logic ;
 
    -- single clock-pulse from "ticker" used as count-enable for the BCD counter
    signal count_en : std_logic ;
 
    -- 4-bit "internal" BCD counter
    signal count : unsigned(3 downto 0) := (others => '0') ;
+
 
 begin
 
@@ -625,9 +652,12 @@ begin
    --   PLL IP core (Clock Wizard)   --
    ------------------------------------
 
-   -- in this case the PLL generates the clock signal "pll_clk" fed to the logic
+   -- the PLL generates two output clock signals, 100 MHz and 200 MHz frequency
+   PLL_inst : PLL port map(CLK_IN => clk, CLK_OUT_100 => pll_clk_100, CLK_OUT_200 => pll_clk_200, LOCKED => pll_locked) ;
 
-   PLL_inst : PLL port map(ClkIn => clk, ClkOut => pll_clk, Locked => pll_locked) ;
+
+   -- MUX to switch between 100 MHz and 200 MHz
+   pll_clk <= pll_clk_100 when clk_sel = '0' else pll_clk_200 ;
 
 
    ------------------------
@@ -646,8 +676,8 @@ begin
    -- MAX =  1000 => one "tick" asserted every  1000 x 10 ns =  10 us  => logic "running" at 100 kHz
    -- MAX = 10000 => one "tick" asserted every 10000 x 10 ns = 100 us  => logic "running" at  10 kHz etc.
 
-   --TickCounter_inst : TickCounter generic map(MAX => 20) port map(clk => pll_clk, tick => count_en) ;
-   TickCounter_inst : TickCounter generic map(MAX => 150000000) port map(clk => pll_clk, tick => count_en) ;  -- OK for LED mapping
+   TickCounter_inst : TickCounter generic map(MAX => 100) port map(clk => pll_clk, tick => count_en) ;          -- OK for simulations
+   --TickCounter_inst : TickCounter generic map(MAX => 150000000) port map(clk => pll_clk, tick => count_en) ;  -- OK for LED mapping
 
 
    ------------------------------------------------------
@@ -683,10 +713,44 @@ end architecture rtl_PLL ;
 ```
 <br/>
 
-<span>&#8226;</span> Modify the testbench `bench/tb_CounterBCD.vhd` in oder to **update the component configuration** in the architecture body
-that selects the architecture to be used for the simulation :
+<span>&#8226;</span> Modify the testbench `bench/tb_CounterBCD.vhd` in oder to **update** in the architecture preamble
+the **component declaration** for `CounterBCD` and the **component configuration** that selects the architecture to be used for the simulation :
 
 ```vhdl
+
+architecture testbench of tb_CounterBCD is
+
+   --------------------------------
+   --   components declaration   --
+   --------------------------------
+
+   ...
+   ...
+
+   component CounterBCD is
+      port (
+         clk     : in  std_logic ;
+         clk_sel : in  std_logic ;   -- for PLL design: 0 = 100 MHz, 1 = 200 MHz
+         rst     : in  std_logic ;
+         BCD     : out std_logic_vector(3 downto 0)
+      ) ;
+   end component ;
+
+
+   ---------------------------------------------------
+   --   testbench parameters and internal signals   --
+   ---------------------------------------------------
+
+   ...
+   ...
+
+   -- MUX control to switch between 100 MHz and 200 MHz PLL output clock
+   signal clk_sel : std_logic := '0' ;   -- default: 100 MHz
+
+   ...
+   ...
+
+
    --------------------------------------------------------
    --   component configuration (architecture binding)   --
    --------------------------------------------------------
@@ -699,8 +763,58 @@ that selects the architecture to be used for the simulation :
       --use entity work.CounterBCD(rtl_ticker) ;
       use entity work.CounterBCD(rtl_PLL) ;
 
+
+begin
+
+   ...
+   ...
+
+
+   ---------------------------------
+   --   device under test (DUT)   --
+   ---------------------------------
+
+   DUT : CounterBCD port map (clk => clk_board, clk_sel => clk_sel, rst => reset, BCD => BCD) ;
+
 ```
 <br/>
+
+
+<span>&#8226;</span> **Update also the main stimulus** in order to simulate the clock frequency selection between 100 MHz and 200 MHz :
+
+
+```vhdl
+   -----------------------
+   --   main stimulus   --
+   -----------------------
+
+   stimulus : process
+   begin
+
+      reset <= '0' ;
+
+      wait for  1502 ns ; reset <= '1' ;
+      wait for  1500 ns ; reset <= '0' ;
+
+      wait for 50 us ;
+
+      clk_sel <= '1' ;    -- switch to 200 MHz
+
+      wait for 20 us ;
+
+      finish ;   -- stop the simulation (this is a VHDL2008-only feature)
+
+      --
+      -- **IMPORTANT: VHDL87/VHDL93 standards does not provide a routine to easily stop the simulation !
+      --              You must use a failing "assertion" for this purpose :
+      --
+      --assert FALSE report "Simulation Finished" severity FAILURE ;
+
+   end process ;
+
+```
+<br/>
+
 
 <span>&#8226;</span> Simulate the design :
 

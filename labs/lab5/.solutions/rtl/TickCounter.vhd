@@ -1,5 +1,5 @@
 --
--- Parameterized modulus-MAX "tick" generator. Use the resulting output "tick"
+-- Parameterized modulus-MAX 32-bit tick generator. Use the resulting "tick"
 -- single clock-pulse as "enable" for your synchronous logic if you need to
 -- decrease the speed of the data processing without the need of a dedicated
 -- extra clock signal.

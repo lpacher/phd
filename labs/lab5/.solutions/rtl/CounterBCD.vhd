@@ -34,21 +34,15 @@ use IEEE.numeric_std.all ;
 --
 -- In order to perform + between "hardware signals", the "legacy" VHDL introduced
 -- new "vector" data types called "std_logic_signed" and "std_logic_usigned" that
--- are defined as part of IEEE.std_logic_signed and IEEE.std_logic_unsigned packages.
+-- are defined as part of IEEE.std_logic_unsigned and IEEE.std_logic_unsigned packages.
 --
--- By including these packages in the preable of the VHDL code with
---
---    library IEEE ;
---    use IEEE.std_logic_1164.all ; 
---    use IEEE.std_logic_unsigned.all ;
---
--- one can declare counters as std_logic_vector and the following syntax (note
--- the usage of single quotes) 
+-- By including these packages in the preable of the VHDL code one can declare counters
+-- as std_logic_vector and the following syntax (note the usage of single quotes)
 --
 --    count <= count + '1' ;
 --
 -- properly compiles. HOWEVER, in practice the usage of these packages has been
--- de facto **DEPRECATED** for the following reasons :
+-- de facto **DEPRACTED** for the following reasons :
 --
 --   1. despite the library name "IEEE" these packages are **NOT** provided
 --      by IEEE, but are Synopsys proprietary !
@@ -70,9 +64,10 @@ use UNISIM.vcomponents.all ;   -- external library required to simulate Xilinx F
 entity CounterBCD is
 
    port (
-      clk : in  std_logic ;
-      rst : in  std_logic ;
-      BCD : out std_logic_vector(3 downto 0)
+      clk     : in  std_logic ;
+      clk_sel : in  std_logic ;   -- for PLL design: 0 = 100 MHz, 1 = 200 MHz
+      rst     : in  std_logic ;
+      BCD     : out std_logic_vector(3 downto 0)
    ) ;
 
 end entity CounterBCD ;
@@ -90,6 +85,7 @@ architecture rtl_simple of CounterBCD is
 
    signal count : unsigned(3 downto 0) ;                -- uninitialized count value
    --signal count : unsigned(3 downto 0) := "0000" ;    -- initialized count value (you can also use (others => '0') which is smarter)
+
 
 begin
 
@@ -180,6 +176,7 @@ architecture rtl_bad of CounterBCD is
 
    -- divided clock e.g. 100 MHz => 50 MHz
    signal clk_div : std_logic := '0' ;
+
 
 begin
 
@@ -282,6 +279,7 @@ architecture rtl_ticker of CounterBCD is
    -- 4-bit "internal" BCD counter
    signal count : unsigned(3 downto 0) := (others => '0') ;
 
+
 begin
 
 
@@ -302,8 +300,8 @@ begin
    -- MAX = 10000 => one "tick" asserted every 10000 x 10 ns = 100 us  => logic "running" at  10 kHz etc.
    --
 
-   --TickCounter_inst : TickCounter generic map(MAX => 10) port map(clk => clk, tick => count_en) ;
-   TickCounter_inst : TickCounter generic map(MAX => 50000000) port map(clk => clk, tick => count_en) ;  -- OK for LED mapping
+   --TickCounter_inst : TickCounter generic map(MAX => 10) port map(clk => clk, tick => count_en) ;       -- OK for simulations
+   TickCounter_inst : TickCounter generic map(MAX => 50000000) port map(clk => clk, tick => count_en) ;   -- OK for LED mapping
 
 
    ------------------------------------------------------
@@ -373,11 +371,11 @@ architecture rtl_PLL of CounterBCD is
 
    component PLL is
      port (
-        ClkIn  : in  std_logic ;
-        ClkOut : out std_logic ;
-        Locked : out std_logic
+        CLK_IN      : in  std_logic ;
+        CLK_OUT_100 : out std_logic ;
+        CLK_OUT_200 : out std_logic ;
+        LOCKED      : out std_logic
      ) ;
-
    end component PLL ;
 
 
@@ -397,13 +395,14 @@ architecture rtl_PLL of CounterBCD is
    --------------------------------------
 
    -- PLL signals
-   signal pll_clk, pll_locked : std_logic ;
+   signal pll_clk_100, pll_clk_200, pll_clk, pll_locked : std_logic ;
 
    -- single clock-pulse from "ticker" used as count-enable for the BCD counter
    signal count_en : std_logic ;
 
    -- 4-bit "internal" BCD counter
    signal count : unsigned(3 downto 0) := (others => '0') ;
+
 
 begin
 
@@ -412,9 +411,12 @@ begin
    --   PLL IP core (Clock Wizard)   --
    ------------------------------------
 
-   -- in this case the PLL generates the clock signal "pll_clk" fed to the logic
+   -- the PLL generates two output clock signals, 100 MHz and 200 MHz frequency
+   PLL_inst : PLL port map(CLK_IN => clk, CLK_OUT_100 => pll_clk_100, CLK_OUT_200 => pll_clk_200, LOCKED => pll_locked) ;
 
-   PLL_inst : PLL port map(ClkIn => clk, ClkOut => pll_clk, Locked => pll_locked) ;
+
+   -- MUX to switch between 100 MHz and 200 MHz
+   pll_clk <= pll_clk_100 when clk_sel = '0' else pll_clk_200 ;
 
 
    ------------------------
@@ -433,8 +435,8 @@ begin
    -- MAX =  1000 => one "tick" asserted every  1000 x 10 ns =  10 us  => logic "running" at 100 kHz
    -- MAX = 10000 => one "tick" asserted every 10000 x 10 ns = 100 us  => logic "running" at  10 kHz etc.
 
-   --TickCounter_inst : TickCounter generic map(MAX => 20) port map(clk => pll_clk, tick => count_en) ;
-   TickCounter_inst : TickCounter generic map(MAX => 150000000) port map(clk => pll_clk, tick => count_en) ;  -- OK for LED mapping
+   TickCounter_inst : TickCounter generic map(MAX => 100) port map(clk => pll_clk, tick => count_en) ;          -- OK for simulations
+   --TickCounter_inst : TickCounter generic map(MAX => 150000000) port map(clk => pll_clk, tick => count_en) ;  -- OK for LED mapping
 
 
    ------------------------------------------------------

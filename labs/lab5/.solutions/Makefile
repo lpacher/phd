@@ -215,21 +215,27 @@ endif
 
 
 ## launch IP flow in GUI mode
+
+#
+# empty variable to store Xilinx Core Instance (.xci) configuration file
+#
+xci :=
+
 .PHONY : ip
 ip : $(TCL_DIR)/common/init.tcl $(TCL_DIR)/common/ip.tcl
 
 ifeq ($(wildcard $(IPS_DIR)/.*),)
 	@$(error ERROR: Missing IPs directory ! Run 'make area' before running the flows.)
 else
-  ifneq ($(xci),)
+ifeq ($(mode),gui)
 	@echo "exec vivado -mode gui \
 	   -source $(TCL_DIR)/common/init.tcl -source $(TCL_DIR)/common/ip.tcl \
 	   -notrace -log $(LOG_DIR)/$@.log -nojournal -tclargs $(xci) &" | tclsh
-  else
-	@echo "exec vivado -mode gui \
+else
+	@vivado -mode $(mode) \
 	   -source $(TCL_DIR)/common/init.tcl -source $(TCL_DIR)/common/ip.tcl \
-	   -notrace -log $(LOG_DIR)/$@.log -nojournal &" | tclsh
-  endif
+	   -notrace -log $(LOG_DIR)/$@.log -nojournal -tclargs $(xci)
+endif
 endif
 ##_______________________________________________________________________________________
 

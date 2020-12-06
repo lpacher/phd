@@ -1,10 +1,10 @@
 #
-# Implementation constraints for the CounterBCD_wrapper.vhd design example.
-# All pin positions and electrical properties refer to the Digilent Arty-A7
-# development board.
+# Implementation constraints for the Gates.vhd VHDL example.
+# All pin positions and electrical properties refer to the
+# Digilent Arty-A7 development board.
 #
-# The complete .xdc for the board can be downloaded from the official
-# Digilent GitHub repository at :
+# The complete .xdc for the board can be downloaded from the
+# official Digilent GitHub repository at :
 # 
 #    https://github.com/Digilent/Arty/blob/master/Resources/XDC/Arty_Master.xdc
 #
@@ -17,18 +17,22 @@
 # Fall 2020
 #
 
-set MAP_BCD_TO_LEDS 1
-#set MAP_BCD_TO_LEDS 0
+#set MAP_TO_LEDS 1
+set MAP_TO_LEDS 0
 
 #############################################
 ##   physical constraints (port mapping)   ##
 #############################################
 
 ## on-board 100 MHz clock signal
-set_property -dict {PACKAGE_PIN E3 IOSTANDARD LVCMOS33} [get_ports clk]
+set_property -dict { PACKAGE_PIN E3 IOSTANDARD LVCMOS33 } [get_ports clk]
 
 ## map the reset to a push-button
 set_property -dict { PACKAGE_PIN D9  IOSTANDARD LVCMOS33 } [get_ports rst] ;   ## BTN0
+
+## map the MUX selector between 100 MHz/200 MHz PLL clock 
+set_property -dict { PACKAGE_PIN A8  IOSTANDARD LVCMOS33 } [get_ports clk_sel] ; ## SW0
+
 
 ## play here with either LEDs or oscilloscope probes
 
@@ -50,7 +54,7 @@ set_property -dict { PACKAGE_PIN D9  IOSTANDARD LVCMOS33 } [get_ports rst] ;   #
 #   https://www.xilinx.com/support/documentation/sw_manuals/xilinx2019_2/ug903-vivado-using-constraints.pdf
 #
 
-if { $MAP_BCD_TO_LEDS } {
+if { $MAP_TO_LEDS } {
 
    set_property -dict { PACKAGE_PIN T10 IOSTANDARD LVCMOS33 } [get_ports { BCD[3] }] ; ## LD7
    set_property -dict { PACKAGE_PIN T9  IOSTANDARD LVCMOS33 } [get_ports { BCD[2] }] ; ## LD6
