@@ -363,19 +363,21 @@
 
 **LF** - Loop Filter
 
+**LFSR** - Linear Feedback Shift Register
+
 **LIFO** - Last Input First Output
 
 **LNA** - Low-Noise Amplifier
 
 **LP** - Low-Power
 
-**LUT** - Look-Up Table
+**LSB** - Least Significant Bit
 
-**LVDS** - Low-Voltage Differential Signaling
+**LUT** - Look-Up Table
 
 **LV** - Low Voltage
 
-**LSB** - Least Significant Bit
+**LVDS** - Low-Voltage Differential Signaling
 
 
 
