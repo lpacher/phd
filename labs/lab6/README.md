@@ -86,21 +86,6 @@ containing the PLL configuration :
 ```
 <br/>
 
-
->
-> **WARNING**
->
-> Be aware that on **Windows operating systems** the default path separator `\` is interpreted by Tcl as the **escape character** !<br/>
-> Please, use Linux-like **forward slashes** `/` in the path !
->
-> If you use the TAB completion on Windows the following command **will not work** :
->
->    ```
->    % make ip xci=cores\PLL\PLL.xci mode=batch
->    ```
-
-<br/>
-
 <span>&#8226;</span> At the end of the compilation process verify that all required **output products** generated
 by the Vivado IP flow are in place :
 

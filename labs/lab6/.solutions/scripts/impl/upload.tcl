@@ -21,7 +21,7 @@ puts "\nINFO: \[TCL\] Running [file normalize [info script]]\n"
 set tclStart [clock seconds]
 
 ## variables
-set WORK_DIR       ${::env(WORK_DIR)}
+set WORK_DIR  ${::env(WORK_DIR)}
 
 
 variable programFile
@@ -38,13 +38,13 @@ if { [llength ${argv}] > 0 } {
    if { [llength ${argv}] < 2 } {
 
       ## only program file (.bit) specified
-      set programFile [lindex ${argv} 0] 
+      set programFile [file normalize [lindex ${argv} 0]] ;  ## **IMPORTANT: use [file normalize $filename] to automatically map \ into /
 
    } else {
 
       ## both program file (.bit) and ILA probes file (.ltx) specified
-      set programFile [lindex ${argv} 0]
-      set probeFile   [lindex ${argv} 1]
+      set programFile [file normalize [lindex ${argv} 0]]
+      set probeFile   [file normalize [lindex ${argv} 1]]
 
    }
 
@@ -154,8 +154,8 @@ if { [info exists env(XILINX_DEVICE)] } {
 ## XILINX_DEVICE environment variable not set, guess the connected device 
 } else {
 
-   current_hw_device [lindex [get_hw_devices] 0]
-   refresh_hw_device -update_hw_probes false [lindex [get_hw_devices] 0] 
+      current_hw_device [lindex [get_hw_devices] 0]
+      refresh_hw_device -update_hw_probes false [lindex [get_hw_devices] 0] 
 }
 
 

@@ -61,15 +61,15 @@ if { [file exists ${projectFile}] } {
 ## optionally, synthesize IP from .xci XML configuration file passed as Makefile argument
 if { [llength ${argv}] > 0 } {
 
-   set xciFile [lindex ${argv} 0]
+   set xciFile [file normalize [lindex ${argv} 0]] ;  ## **IMPORTANT: use [file normalize $filename] to automatically map \ into /
 
-   if { [file exists ${xciFile} ]} {
+   if { [file exists ${xciFile}]} {
 
       ## read IP customization (XML file)
       puts "\n\nINFO \[TCL\] Loading IP customization file [file normalize ${xciFile}]\n\n"
 
       ## check if IP is already part of the project
-      if { [llength [get_files */${xciFile}]] == 1 } {
+      if { [llength [get_files ${xciFile}]] == 1 } {
 
          puts -nonewline "WARNING: IP already in the repository ! Do you want to re-compile it from scratch ? (y/n): "
 
@@ -80,17 +80,17 @@ if { [llength ${argv}] > 0 } {
             puts "\n\n\IP will be recompiled...\n"
 
             ## reset output products
-            reset_target all -verbose [get_files */${xciFile}]  
-            remove_files -verbose [get_files */${xciFile}]
+            reset_target all -verbose [get_files ${xciFile}]  
+            remove_files -verbose [get_files ${xciFile}]
 
             ## re-load IP customization
             read_ip -verbose  [file normalize ${xciFile}]
 
             ## re-generate output products
-            generate_target all -force -verbose [get_files */${xciFile}]
+            generate_target all -force -verbose [get_files ${xciFile}]
 
             ## synthesize the IP to generate Out-Of Context (OOC) design checkpoint (.dcp)
-            synth_ip [get_files */${xciFile}] ; puts "\n\nDone !\n\n"
+            synth_ip [get_files ${xciFile}] ; puts "\n\nDone !\n\n"
 
          } elseif { ![string compare -nocase ${answer} "n"] } {
 
@@ -107,13 +107,13 @@ if { [llength ${argv}] > 0 } {
       } else {
 
          ## IP not yet part of the repository, compile it from .xci
-         read_ip -verbose [file normalize ${xciFile}]
+         read_ip -verbose ${xciFile}
 
          ## generate output products
-         generate_target all -force -verbose [get_files */${xciFile}] ; puts "\n\nDone !\n\n"
+         generate_target all -force -verbose [get_files ${xciFile}] ; puts "\n\nDone !\n\n"
 
          ## synthesize the IP to generate Out-Of Context (OOC) design checkpoint (.dcp)
-         synth_ip [get_files */${xciFile}]
+         synth_ip [get_files ${xciFile}]
       }
 
    } else {
