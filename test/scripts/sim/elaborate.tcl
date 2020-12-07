@@ -74,6 +74,8 @@ proc elaborate {} {
    # All elaboration errors are then shown on the console using 'grep' on the log file.
    #
 
+   puts "\n**INFO: Top-level RTL module: ${::env(RTL_TOP_MODULE)}\n\n"
+
    puts "\n-- Elaborating the design ...\n"
 
    catch {exec xelab -relax -mt 2 \
@@ -114,10 +116,21 @@ proc elaborate {} {
 
 
 ## optionally, run the Tcl procedure when the script is executed by tclsh from Makefile
-if { ${argc} > 0 } {
+if { [info exists argv] } {
    if { [lindex ${argv} 0] == "elaborate" } {
 
-      puts "\n**INFO \[TCL\]: Running [file normalize  [info script]]\n"
-      elaborate
+      puts "\n**INFO \[TCL\]: Running [file normalize [info script]]\n"
+
+      if { [elaborate] } {
+
+         ## elaboration contains errors, exit with non-zero error code
+         puts "Elaboration **FAILED**"
+         exit 1
+
+      } else {
+
+         ## elaboration OK
+         exit 0
+      }
    }
 }

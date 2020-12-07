@@ -1,5 +1,5 @@
 #
-# Sample Makefile to test tools installation and setup.
+# Extended Makefile to automate simulation and implementation flows using Xilinx Vivado.
 #
 # Luca Pacher - pacher@to.infn.it
 # Fall 2020
@@ -49,7 +49,8 @@ export XILINX_DEVICE=$(part)
 # By default all rtl/*.vhd and bench/*.vhd sources are parsed and compiled using xvhdl,
 # then tb_$(dut) is considered as testbench module when xelab is invoked for elaboration.
 #
-dut := Counter
+dut := LFSR
+
 
 ## export the name of the top-level module as an environment variable to be used from tclsh
 export RTL_TOP_MODULE=$(dut)
@@ -78,7 +79,6 @@ BIN_DIR := bin
 ## flows-specific directories
 IPS_DIR := cores
 XDC_DIR := xdc
-SDF_DIR := sdf
 
 ## extra directories
 TEMP_DIR := tmp
@@ -125,17 +125,16 @@ area :
 
 	@$(MKDIR) $(RTL_DIR)
 	@$(MKDIR) $(SIM_DIR)
-
 	@$(MKDIR) $(TCL_DIR)/common
 	@$(MKDIR) $(TCL_DIR)/sim
 	@$(MKDIR) $(TCL_DIR)/impl
+
 	@$(MKDIR) $(BIN_DIR)
-	@$(MKDIR) $(DOC_DIR)
 
 	@$(MKDIR) $(LOG_DIR)
+	@$(MKDIR) $(DOC_DIR)
 	@$(MKDIR) $(IPS_DIR)
 	@$(MKDIR) $(XDC_DIR)
-	@$(MKDIR) $(SDF_DIR)
 
 	@$(MKDIR) $(WORK_DIR)/sim
 	@$(MKDIR) $(WORK_DIR)/impl
@@ -169,18 +168,19 @@ elaborate : $(TCL_DIR)/sim/elaborate.tcl
 
 ## run simulation executable
 .PHONY : simulate
-simulate : $(TCL_DIR)/sim/simulate.tcl
+simulate : $(TCL_DIR)/sim/simulate.tcl $(WORK_DIR)/sim/xsim.dir
 
-	@tclsh $(TCL_DIR)/sim/simulate.tcl $@
+	@tclsh $(TCL_DIR)/sim/simulate.tcl $@ $(mode)
 ##_______________________________________________________________________________________
 
-## one-step compilation, elaboration and simulation (same as make compile elaborate simulate)
+
+## one-step compilation, elaboration and simulation (same as 'make compile elaborate simulate')
 .PHONY : sim
 sim : compile elaborate simulate
 ##_______________________________________________________________________________________
 
 
-## create fresh Vivado project attached to $(part)
+## create fresh Vivado project attached to Arty7 device
 .PHONY : project
 project : $(TCL_DIR)/common/init.tcl $(TCL_DIR)/common/project.tcl
 
@@ -208,21 +208,34 @@ ifeq ($(mode),gui)
 	@echo "exec vivado -mode gui \
 	   -source $(TCL_DIR)/common/init.tcl -log $(LOG_DIR)/$@.log -nojournal -verbose -notrace $(db) &" | tclsh
 else
-	@vivado -mode gui -source $(TCL_DIR)/common/init.tcl -log $(LOG_DIR)/$@.log -nojournal -verbose -notrace $(db)
+	@vivado -mode $(mode) \
+	   -source $(TCL_DIR)/common/init.tcl -log $(LOG_DIR)/$@.log -nojournal -verbose -notrace $(db)
 endif
 ##_______________________________________________________________________________________
 
 
 ## launch IP flow in GUI mode
+
+#
+# empty variable to store Xilinx Core Instance (.xci) configuration file
+#
+xci :=
+
 .PHONY : ip
 ip : $(TCL_DIR)/common/init.tcl $(TCL_DIR)/common/ip.tcl
 
 ifeq ($(wildcard $(IPS_DIR)/.*),)
 	@$(error ERROR: Missing IPs directory ! Run 'make area' before running the flows.)
 else
+ifeq ($(mode),gui)
 	@echo "exec vivado -mode gui \
 	   -source $(TCL_DIR)/common/init.tcl -source $(TCL_DIR)/common/ip.tcl \
-	   -notrace -log $(LOG_DIR)/$@.log -nojournal &" | tclsh
+	   -notrace -log $(LOG_DIR)/$@.log -nojournal -tclargs $(xci) &" | tclsh
+else
+	@vivado -mode $(mode) \
+	   -source $(TCL_DIR)/common/init.tcl -source $(TCL_DIR)/common/ip.tcl \
+	   -notrace -log $(LOG_DIR)/$@.log -nojournal -tclargs $(xci)
+endif
 endif
 ##_______________________________________________________________________________________
 
@@ -230,7 +243,7 @@ endif
 ## run Vivado FPGA implementation flow in non-project mode
 .PHONY : xflow
 xflow : $(TCL_DIR)/common/init.tcl $(TCL_DIR)/impl/xflow.tcl
-
+ 
 ifeq ($(wildcard $(WORK_DIR)/impl/.*),)
 	@$(error ERROR: Missing implementation working area $(WORK_DIR)/impl ! Run 'make area' before running the flows.)
 else
@@ -244,12 +257,6 @@ else
 	   -log $(LOG_DIR)/$@.log -nojournal -verbose -notrace
    endif
 endif
-##_______________________________________________________________________________________
-
-
-## alias, same as 'make xflow'
-.PHONY : bit
-bit : xflow
 ##_______________________________________________________________________________________
 
 
@@ -270,17 +277,25 @@ hm : $(TCL_DIR)/common/init.tcl $(TCL_DIR)/common/hm.tcl
 
 
 ## upload bitstream to target FPGA using Hardware Manager
+
+#
+# empty variables to store program file (.bit) and optionally ILA probes file (.ltx)
+#
+bit :=
+ltx :=
+
 .PHONY : upload
 upload : $(TCL_DIR)/common/init.tcl $(TCL_DIR)/impl/upload.tcl
 
 ifeq ($(mode),gui)
+
 	@echo "exec vivado -mode gui \
 	   -source $(TCL_DIR)/common/init.tcl -source $(TCL_DIR)/impl/upload.tcl \
-	   -notrace -log $(LOG_DIR)/$@.log -nojournal &" | tclsh
+	   -notrace -log $(LOG_DIR)/$@.log -nojournal -tclargs $(bit) $(ltx) &" | tclsh
 else
 	@vivado -mode $(mode) \
 	   -source $(TCL_DIR)/common/init.tcl -source $(TCL_DIR)/impl/upload.tcl \
-	   -notrace -log $(LOG_DIR)/$@.log -nojournal
+	   -notrace -log $(LOG_DIR)/$@.log -nojournal -tclargs $(bit) $(ltx)
 endif
 ##_______________________________________________________________________________________
 
@@ -291,30 +306,31 @@ install : upload
 ##_______________________________________________________________________________________
 
 
-## program external Quad Flash memory
-.PHONY : flash
-flash : $(TCL_DIR)/common/init.tcl $(TCL_DIR)/impl/flash.tcl
-
-ifeq ($(mode),gui)
-	@echo "exec vivado -mode gui \
-	   -source $(TCL_DIR)/common/init.tcl -source $(TCL_DIR)/impl/flash.tcl \
-	   -notrace -log $(LOG_DIR)/$@.log -nojournal &" | tclsh
-else
-	@vivado -mode $(mode) \
-	   -source $(TCL_DIR)/common/init.tcl -source $(TCL_DIR)/impl/flash.tcl \
-	   -notrace -log $(LOG_DIR)/$@.log -nojournal
-endif
-##_______________________________________________________________________________________
-
-
 ## delete all log files and temporary files
-.PHONY : clean
-clean :
+.PHONY : clean/log clean/sim clean/impl clean
 
-	@$(RM) *.log *.jou *.pb *.wdb $(LOG_DIR)/*
-	@$(RMDIR) xsim.dir .Xil
+clean/log :
+
+	@$(RM) *.log *.jou $(LOG_DIR)/*
+
+clean/sim :
+
+	@$(RM) *.pb *.wdb
+	@$(RMDIR) xsim.dir
+	@$(RMDIR) $(WORK_DIR)/sim/*	
+
+clean/impl :
+
+	@$(RMDIR) $(WORK_DIR)/impl/*	
+
+clean/all : clean/log clean/sim clean/impl
+
+	@$(RM) *.log *.jou $(LOG_DIR)/*
+	@$(RMDIR) .Xil
 	@$(RMDIR) $(WORK_DIR)/sim/*
 	@$(RMDIR) $(WORK_DIR)/impl/*
+
+clean : clean/all
 ##_______________________________________________________________________________________
 
 
@@ -322,13 +338,12 @@ clean :
 .PHONY : help
 help :
 
-	@$(ECHO) ""
-	@$(ECHO) "\nUsage: make <target> [dut=ModuleName] [part=device] [mode=gui|tcl|batch] [db=/path/to/project.xpr | db=/path/to/project.dcp] [fw=/path/to/bitfile]"
+	@$(ECHO) "\n\nUsage: make <target> [dut=ModuleName] [part=device] [mode=gui|tcl|batch] [db=/path/to/project.xpr | db=/path/to/project.dcp]"
 	@$(ECHO) ""
 	@$(ECHO) "Defaults :\n"
 	@$(ECHO) " - top-level RTL module :  $(dut)"
-	@$(ECHO) " - target device :         $(part)"
-	@$(ECHO) ""
+	@$(ECHO) " - target device :         $(part)\n\n"
+
 	@$(ECHO) "Available targets:"
 	@$(ECHO) ""
 	@$(ECHO) " - make help        Command-line help"
@@ -337,16 +352,20 @@ help :
 	@$(ECHO) " - make elaborate   Elaborate design"
 	@$(ECHO) " - make simulate    Run simulation executable"
 	@$(ECHO) " - make sim         Alias, one step compilation, elaboration and simulation"
-	@$(ECHO) " - make project     Creates new fresh project attached to Arty7 device"
+	@$(ECHO) " - make project     Creates new fresh project attached to Xilinx device (default: xc7a35ticsg324-1L)"
 	@$(ECHO) " - make restore     Restore Vivado project from XML project file (.xpr) or design checkpoint (.dcp)"
 	@$(ECHO) " - make ip          Customize and compile IP cores for your design"
 	@$(ECHO) " - make xflow       Run Vivado FPGA implementation flow in non-project mode"
-	@$(ECHO) " - make bit         Alias, same as make xflow"
 	@$(ECHO) " - make build       Alias, same as make xflow"
 	@$(ECHO) " - make hm          Launch Vivado in GUI mode and open the Hardware Manager"
 	@$(ECHO) " - make upload      Upload bitsream to target FPGA using Hardware Manager"
-	@$(ECHO) " - make install     Alias, same as make upload"
-	@$(ECHO) " - make flash       Program external Quad Flash memory"
-	@$(ECHO) " - make clean       Delete all log files and temporary files\n"
-##_______________________________________________________________________________________
+	@$(ECHO) " - make install     Alias, same as make upload\n\n"
 
+	@$(ECHO) "Cleanup targets:"
+	@$(ECHO) ""
+	@$(ECHO) " - make clean/log   Delete all log and journal files"
+	@$(ECHO) " - make clean/sim   Delete everything from $(WORK_DIR)/sim"
+	@$(ECHO) " - make clean/impl  Delete everything from $(WORK_DIR)/impl"
+	@$(ECHO) " - make clean/all   Delete all log files and temporary files"
+	@$(ECHO) " - make clean       Alias, same as make clean/all\n"
+##_______________________________________________________________________________________

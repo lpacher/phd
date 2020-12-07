@@ -2,9 +2,9 @@
 # Example Tcl script to run the complete Xilinx Vivado
 # implementation flow in non-project mode.
 #
-# The script is executed at the command-line by using :
+# The script is executed by using :
 #
-#    % make xflow [aliased to make bit or make build]
+#    linux% make xflow [aliased to make build]
 #
 # Luca Pacher - pacher@to.infn.it
 # Fall 2020
@@ -49,7 +49,7 @@ file mkdir ${OUT_DIR}/xdc
 ##########################################################
 
 ## top-level design module
-set RTL_TOP_MODULE ${::env(RTL_TOP_MODULE)} ; puts "\n**INFO: Top-level RTL module is ${RTL_TOP_MODULE}\n"
+set RTL_TOP_MODULE Gates ; puts "\n**INFO: Top-level RTL module is ${RTL_TOP_MODULE}\n"
 
 ## VHDL sources
 set RTL_VHDL_SOURCES [glob -nocomplain ${RTL_DIR}/*.vhd]

@@ -81,7 +81,7 @@ proc compile {} {
       puts "Compiling VHDL source file ${src} ..."
 
       ## launch the xvhdl executable from Tcl
-      catch {exec xvhdl -relax -work work ${src} -nolog -verbose 1 | tee -a ${LOG_DIR}/compile.log}
+      catch {exec xvhdl -2008 -relax -work work ${src} -nolog -verbose 1 | tee -a ${LOG_DIR}/compile.log}
    }
 
    #################################

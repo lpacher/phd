@@ -169,7 +169,7 @@ elaborate : $(TCL_DIR)/sim/elaborate.tcl
 .PHONY : simulate
 simulate : $(TCL_DIR)/sim/simulate.tcl $(WORK_DIR)/sim/xsim.dir
 
-	@tclsh $(TCL_DIR)/sim/simulate.tcl $@
+	@tclsh $(TCL_DIR)/sim/simulate.tcl $@ $(mode)
 ##_______________________________________________________________________________________
 
 

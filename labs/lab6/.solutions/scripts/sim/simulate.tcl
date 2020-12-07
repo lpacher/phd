@@ -32,7 +32,7 @@
 ###################################################################################################
 
 
-proc simulate {} {
+proc simulate { {mode "gui"} } {
 
    ## **IMPORTANT: assume to run the flow inside WORK_DIR/sim (the WORK_DIR environment variable is exported by Makefile)
    cd ${::env(WORK_DIR)}/sim
@@ -45,7 +45,36 @@ proc simulate {} {
    set RTL_TOP_MODULE ${::env(RTL_TOP_MODULE)}
 
    ## launch the xsim executable from Tcl
-   exec xsim tb_${RTL_TOP_MODULE} -gui -onerror stop -stats -tclbatch ${TCL_DIR}/sim/run.tcl -log ${LOG_DIR}/simulate.log &
+
+   if { ${mode} == "gui" } {
+
+      puts "**INFO: \[TCL\] Running simulation in GUI mode\n\n"
+
+      exec xsim tb_${RTL_TOP_MODULE} -gui \
+         -onerror stop -stats -tclbatch ${TCL_DIR}/sim/run.tcl -log ${LOG_DIR}/simulate.log &
+
+   } elseif { ${mode} == "tcl" } {
+
+      puts "**INFO: \[TCL\] Running simulation in TCL mode\n\n"
+
+      exec xsim tb_${RTL_TOP_MODULE} \
+         -onerror stop -stats -tclbatch ${TCL_DIR}/sim/run.tcl -log ${LOG_DIR}/simulate.log >@stdout 2>@stdout
+
+   } elseif { ${mode} == "batch" } {
+
+      puts "**INFO: \[TCL\] Running simulation in BATCH mode\n\n"
+
+      exec xsim tb_${RTL_TOP_MODULE} -onfinish quit \
+         -onerror stop -stats -tclbatch ${TCL_DIR}/sim/run.tcl -log ${LOG_DIR}/simulate.log >@stdout 2>@stdout
+
+   } else {
+
+      puts "\n\n**ERROR: \[TCL\] Invalid option ${mode}. Please use mode=gui|tcl|batch when invoking make simulate."
+      puts "               Force an exit.\n\n"
+
+      ## script failure
+      exit 1
+   }
 }
 
 
@@ -53,7 +82,17 @@ proc simulate {} {
 if { ${argc} > 0 } {
    if { [lindex ${argv} 0] == "simulate" } {
 
-      puts "\n**INFO \[TCL\]: Running [file normalize  [info script]]\n"
-      simulate
+      puts "\n**INFO: \[TCL\] Running [file normalize [info script]]"
+
+      if { [llength ${argv}] == 2 } {
+
+         set mode [lindex ${argv} 1]
+         simulate ${mode}
+
+      } else { 
+
+         ## run in GUI mode otherwise
+         simulate
+      }
    }
 }

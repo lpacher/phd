@@ -44,18 +44,21 @@ proc compile {} {
    set SIM_DIR  [pwd]/../../bench
    set IPS_DIR  [pwd]/../../cores
 
+   puts "\n**INFO: Top-level RTL module: ${::env(RTL_TOP_MODULE)}\n\n"
 
    ## VHDL sources
    set RTL_SOURCES [glob -nocomplain ${RTL_DIR}/*.vhd]
 
+   ## IP sources (assume to already use VHDL gate-level netlists)
+   set IPS_SOURCES [glob -nocomplain ${IPS_DIR}/*/*netlist.vhdl]
 
    ## simulation sources (assume to write also all testbench sources in VHDL)
    set SIM_SOURCES [glob -nocomplain ${SIM_DIR}/*.vhd]
 
 
-   #####################################
-   ##   compile all sources (xvhdl)   ##
-   #####################################
+   ###########################################
+   ##   compile all sources (xvhdl/xvlog)   ##
+   ###########################################
 
    ## delete the previous log file if exists
    if { [file exists ${LOG_DIR}/compile.log] } {
@@ -72,14 +75,14 @@ proc compile {} {
 
    puts "\n-- Parsing sources ...\n"
 
-   foreach src [concat ${RTL_SOURCES} ${SIM_SOURCES} ] {
+
+   foreach src [concat ${RTL_SOURCES} ${IPS_SOURCES} ${SIM_SOURCES} ] {
 
       puts "Compiling VHDL source file ${src} ..."
 
       ## launch the xvhdl executable from Tcl
-      catch {exec xvhdl -relax -work work ${src} -nolog | tee -a ${LOG_DIR}/compile.log}
+      catch {exec xvhdl -2008 -relax -work work ${src} -nolog -verbose 1 | tee -a ${LOG_DIR}/compile.log}
    }
-
 
    #################################
    ##   check for syntax errors   ##
@@ -112,10 +115,21 @@ proc compile {} {
 
 
 ## optionally, run the Tcl procedure when the script is executed by tclsh from Makefile
-if { ${argc} > 0 } {
+if { [info exists argv] } {
    if { [lindex ${argv} 0] == "compile" } {
 
       puts "\n**INFO \[TCL\]: Running [file normalize [info script]]\n"
-      compile
+
+      if { [compile] } {
+
+         ## compilation contains errors, exit with non-zero error code
+         puts "Compilation **FAILED**"
+         exit 1
+
+      } else {
+
+         ## compilation OK
+         exit 0
+      }
    }
 }
