@@ -154,8 +154,8 @@ if { [info exists env(XILINX_DEVICE)] } {
 ## XILINX_DEVICE environment variable not set, guess the connected device 
 } else {
 
-      current_hw_device [lindex [get_hw_devices] 0]
-      refresh_hw_device -update_hw_probes false [lindex [get_hw_devices] 0] 
+   current_hw_device [lindex [get_hw_devices] 0]
+   refresh_hw_device -update_hw_probes false [lindex [get_hw_devices] 0] 
 }
 
 
