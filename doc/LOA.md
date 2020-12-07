@@ -611,6 +611,8 @@
 
 **SPICE** - Simulation Program with Integrated Circuits Emphasis
 
+**SPWM** - Sinusoidal Pulse-Width Modulation
+
 **SR** - Shift Register _or_ Set/Reset
 
 **SRL** - Shift Register implemented with LUT (Look-Up Tables, Xilinx terminology)
