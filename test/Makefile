@@ -49,7 +49,7 @@ export XILINX_DEVICE=$(part)
 # By default all rtl/*.vhd and bench/*.vhd sources are parsed and compiled using xvhdl,
 # then tb_$(dut) is considered as testbench module when xelab is invoked for elaboration.
 #
-dut := LFSR
+dut := Counter
 
 
 ## export the name of the top-level module as an environment variable to be used from tclsh

@@ -1225,7 +1225,15 @@ Create a new fresh working area with :
 [**[Contents]**](#contents)
 
 
-Compile and elaborate the example RTL design and run the simulation with :
+A Phase-Locked Loop (PLL) clock-management IP block is used in RTL to filter the input clock. Compile the IP
+to generate all related simulation and implementation sources as follows :
+
+```
+% make ip xci=cores/PLL/PLL.xci mode=batch
+```
+<br/>
+
+Then compile and elaborate the example RTL design and run the simulation with :
 
 ```
 % make compile

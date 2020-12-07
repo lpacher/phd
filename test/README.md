@@ -32,6 +32,15 @@ Create a new fresh working area with :
 ```
 
 
+## Compile a Phase-Locked Loop (PLL) core using the Vivado IP flow
+
+A PLL clock-management IP block is used in RTL to filter the input clock. Compile the IP
+to generate all related simulation and implementation sources as follows :
+
+```
+% make ip xci=cores/PLL/PLL.xci mode=batch
+```
+
 ## Run a digital simulation using XSim
 
 Compile and elaborate the example RTL design and run the simulation with :

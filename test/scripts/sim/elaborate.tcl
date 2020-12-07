@@ -119,7 +119,7 @@ proc elaborate {} {
 if { [info exists argv] } {
    if { [lindex ${argv} 0] == "elaborate" } {
 
-      puts "\n**INFO \[TCL\]: Running [file normalize [info script]]\n"
+      puts "\n**INFO \[TCL\]: Running [file normalize  [info script]]\n"
 
       if { [elaborate] } {
 

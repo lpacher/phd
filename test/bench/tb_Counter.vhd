@@ -50,15 +50,14 @@ architecture testbench of tb_Counter is
 
    signal count : std_logic_vector(4 downto 0) ;
 
-begin
 
+begin
 
    -------------------------
    --   clock generator   --
    -------------------------
 
    ClockGen_inst : ClockGen port map ( clk => clock ) ;
-
 
 
    ---------------------------------
@@ -68,7 +67,6 @@ begin
    DUT : Counter port map ( clk => clock, rst => reset, count => count ) ;
 
 
-
    -----------------------
    --   main stimulus   --
    -----------------------
@@ -76,10 +74,12 @@ begin
    stimulus : process
    begin
 
+      wait for 4us ;                     -- wait for PLL to lock and run
+
       wait for 502 ns ; reset <= '1' ;   -- assert the reset (active-high)
       wait for 360 ns ; reset <= '0' ;   -- release the reset
 
-      wait for 3000 ns ;            -- run the counter for 3us
+      wait for 3us ;                     -- run the counter for 3us
 
       --assert FALSE report "Simulation Finished" severity FAILURE ;   -- finish the simulation
 
@@ -88,4 +88,3 @@ begin
    end process stimulus ;
 
 end architecture testbench ;
-
