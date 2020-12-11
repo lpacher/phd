@@ -331,20 +331,20 @@ The virtual room to attend the lectures is accessible at the following link :
 * Lecture 5<br/>
 <https://unito.webex.com/recordingservice/sites/unito/recording/play/31ebeba4272a460c899fdfbddf46f4f8>
 
-* Lecture 6<br />
+* Lecture 6<br/>
 <https://unito.webex.com/recordingservice/sites/unito/recording/play/6376e528060f4cd39cbfdccaa8d85bb3>
 
-* Lecture 7<br />
+* Lecture 7<br/>
 <https://unito.webex.com/recordingservice/sites/unito/recording/play/ec2e93422e2740c2871f8cb2a8fd1295>
 
 <br/>
 
 ### Deepening lectures (outside official 12-hours/3-credits computation)
 
-* Lecture 8<br />
+* Lecture 8<br/>
 <https://unito.webex.com/recordingservice/sites/unito/recording/play/d1bab391c0084214b1b29546ae1e010e>
 
-* Lecture 9<br />
+* Lecture 9<br/>
 <https://unito.webex.com/recordingservice/sites/unito/recording/play/0fda3ebd280843cd8579ce1e65a356b3>
 
 >
@@ -359,5 +359,20 @@ The virtual room to attend the lectures is accessible at the following link :
 > the hold time has to be lower (and **not larger** as written in the slide) than the sum.
 >
 
-* Lecture 10 - **TODO**
+* Lecture 10 <br/>
+<https://unito.webex.com/recordingservice/sites/unito/recording/play/c0358c849b344258a4b137c511eca9ac>
+
+>
+> **WARNING**
+>
+> Unfortunately for this lecture the second part of the video is not available. The discussion
+> of the `lab6` can be found in the `README.md` file of the lab.
+>
+
+
+* Lecture 11<br/>
+
+
+* Lecture 12<br/>
+
 
