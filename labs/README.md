@@ -33,7 +33,8 @@ https://github.com/lpacher/fphd/tree/master/labs/lab5)
 https://github.com/lpacher/fphd/tree/master/labs/lab6)
 
 * **Lab 7**<br/>
-[Implementation of Read-Only Memory (ROM) in VHDL. Synthesis pragmas. Example sine-wave generator](
+[Implementation of Read-Only Memory (ROM) in VHDL. Synthesis pragmas.<br/>
+Example sine-wave generator using Pulse-Width Modulation (PWM)](
 https://github.com/lpacher/fphd/tree/master/labs/lab7)
 
 * **Lab 8**<br/>

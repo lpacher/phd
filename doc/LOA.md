@@ -92,6 +92,8 @@
 
 **CAE** - Computer-Aided Engineering
 
+**CAM** - Computer Aided Manufacturing
+
 **CCCS** - Current-Controlled Current Source
 
 **CCVS** - Current-Controlled Voltage Source
@@ -195,6 +197,8 @@
 [**[Top]**](#list-of-acronyms)
 
 
+**ECAD** - Electronic Computer Aided Design
+
 **ECO** - Engineering Change Orders
 
 **ECL** - Emitter-Coupled Logic
@@ -202,6 +206,8 @@
 **EDA** - Electronic Design Automation
 
 **EDIF** - Electronic Data Interchange Format (_industry-standard netlist file_)
+
+**EDK** - Embedded Development Kit (_legacy Xilinx ISE EDK_)
 
 **ELF** - Executable and Linkable Format
 
@@ -597,6 +603,8 @@
 
 **SMD** - Surface Mount Device (package)
 
+**SMT** - Surface Mount Technology
+
 **SNDR** - Signal-to-Noise and Distorsion Ratio
 
 **SNR** - Signal-to-Noise Ratio
@@ -638,6 +646,12 @@
 **TCL** - Tool Command Language (scripting language)
 
 **TDC** - Time-to-Digital Converter
+
+**TH** - Through-Hole
+
+**THD** - Total Harmonic Distortion
+
+**THT** - Through-Hole Technology
 
 **TNS** - Total Negative Slack
 

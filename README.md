@@ -229,31 +229,34 @@ Step-by-step instruction explaining how to run this test flow can be found [**he
 #### FPGA programming using Xilinx Vivado
 
 * S. Churiwala (Editor), _Designing with Xilinx FPGAs Using Vivado_
+* C. Unsalan and B. Tar, _Digital System Design with FPGA: Implementation Using Verilog and VHDL_
 
-* Xilinx Vivado official documentation (open) :
-   * [_Vivado Design Suite User Guide: Release Notes, Installation, and Licensing (UG973)_](https://www.xilinx.com/support/documentation/sw_manuals/xilinx2019_2/ug973-vivado-release-notes-install-license.pdf)
-   * [_Vivado Design Suite User Guide: Getting Started (UG910)_](https://www.xilinx.com/support/documentation/sw_manuals/xilinx2019_2/ug910-vivado-getting-started.pdf)
-   * [_Vivado Design Suite User Guide: Design Flows Overview (UG892)_](https://www.xilinx.com/support/documentation/sw_manuals/xilinx2019_2/ug892-vivado-design-flows-overview.pdf)
-   * [_Vivado Design Suite User Guide: Using the Vivado IDE (UG893)_](https://www.xilinx.com/support/documentation/sw_manuals/xilinx2019_2/ug893-vivado-ide.pdf)
-   * [_Vivado Design Suite User Guide: Using Tcl Scripting (UG894)_](https://www.xilinx.com/support/documentation/sw_manuals/xilinx2019_2/ug894-vivado-tcl-scripting.pdf)
-   * [_Vivado Design Suite User Guide: System-Level Design Entry (UG895)_](https://www.xilinx.com/support/documentation/sw_manuals/xilinx2019_2/ug895-vivado-system-level-design-entry.pdf)
-   * [_Vivado Design Suite User Guide: Designing with IP (UG896)_](https://www.xilinx.com/support/documentation/sw_manuals/xilinx2019_2/ug896-vivado-ip.pdf)
-   * [_Vivado Design Suite User Guide: Model-Based DSP Design Using System Generator (UG897)_](https://www.xilinx.com/support/documentation/sw_manuals/xilinx2019_2/ug897-vivado-sysgen-user.pdf)
-   * [_Vivado Design Suite User Guide: Embedded Processor Hardware Design (UG898)_](https://www.xilinx.com/support/documentation/sw_manuals/xilinx2019_2/ug898-vivado-embedded-design.pdf)
-   * [_Vivado Design Suite User Guide: I/O and Clock Planning (UG899)_](https://www.xilinx.com/support/documentation/sw_manuals/xilinx2019_2/ug899-vivado-io-clock-planning.pdf)
-   * [_Vivado Design Suite User Guide: Logic Simulation (UG900)_](https://www.xilinx.com/support/documentation/sw_manuals/xilinx2019_2/ug900-vivado-logic-simulation.pdf)
-   * [_Vivado Design Suite User Guide: Synthesis (UG901)_](https://www.xilinx.com/support/documentation/sw_manuals/xilinx2019_2/ug901-vivado-synthesis.pdf)
-   * [_Vivado Design Suite User Guide: High-Level Synthesis (UG902)_](https://www.xilinx.com/support/documentation/sw_manuals/xilinx2019_2/ug902-vivado-high-level-synthesis.pdf)
-   * [_Vivado Design Suite User Guide: Using Constraints (UG903)_](https://www.xilinx.com/support/documentation/sw_manuals/xilinx2019_2/ug903-vivado-using-constraints.pdf)
-   * [_Vivado Design Suite User Guide: Implementation (UG904)_](https://www.xilinx.com/support/documentation/sw_manuals/xilinx2019_2/ug904-vivado-implementation.pdf)
-   * [_Vivado Design Suite User Guide: Hierarchical Design (UG905)_](https://www.xilinx.com/support/documentation/sw_manuals/xilinx2019_2/ug905-vivado-hierarchical-design.pdf)
-   * [_Vivado Design Suite User Guide: Design Analysis and Closure Techniques (UG906)_](https://www.xilinx.com/support/documentation/sw_manuals/xilinx2019_2/ug906-vivado-design-analysis.pdf)
-   * [_Vivado Design Suite User Guide: Power Analysis and Optimization (UG907)_](https://www.xilinx.com/support/documentation/sw_manuals/xilinx2019_2/ug907-vivado-power-analysis-optimization.pdf)
-   * [_Vivado Design Suite User Guide: Programming and Debugging (UG908)_](https://www.xilinx.com/support/documentation/sw_manuals/xilinx2019_2/ug908-vivado-programming-debugging.pdf)
-   * [_Vivado Design Suite User Guide: Partial Reconfiguration (UG909)_](https://www.xilinx.com/support/documentation/sw_manuals/xilinx2019_2/ug909-vivado-partial-reconfiguration.pdf)
-   * [_UltraFast Design Methodology Guide for the Vivado Design Suite (UG949)_](https://www.xilinx.com/support/documentation/sw_manuals/xilinx2019_2/ug949-vivado-design-methodology.pdf)
 
-* Xilinx Vivado official tutorials (open) :
+#### Xilinx Vivado official documentation (open)
+
+* [_Vivado Design Suite User Guide: Release Notes, Installation, and Licensing (UG973)_](https://www.xilinx.com/support/documentation/sw_manuals/xilinx2019_2/ug973-vivado-release-notes-install-license.pdf)
+* [_Vivado Design Suite User Guide: Getting Started (UG910)_](https://www.xilinx.com/support/documentation/sw_manuals/xilinx2019_2/ug910-vivado-getting-started.pdf)
+* [_Vivado Design Suite User Guide: Design Flows Overview (UG892)_](https://www.xilinx.com/support/documentation/sw_manuals/xilinx2019_2/ug892-vivado-design-flows-overview.pdf)
+* [_Vivado Design Suite User Guide: Using the Vivado IDE (UG893)_](https://www.xilinx.com/support/documentation/sw_manuals/xilinx2019_2/ug893-vivado-ide.pdf)
+* [_Vivado Design Suite User Guide: Using Tcl Scripting (UG894)_](https://www.xilinx.com/support/documentation/sw_manuals/xilinx2019_2/ug894-vivado-tcl-scripting.pdf)
+* [_Vivado Design Suite User Guide: System-Level Design Entry (UG895)_](https://www.xilinx.com/support/documentation/sw_manuals/xilinx2019_2/ug895-vivado-system-level-design-entry.pdf)
+* [_Vivado Design Suite User Guide: Designing with IP (UG896)_](https://www.xilinx.com/support/documentation/sw_manuals/xilinx2019_2/ug896-vivado-ip.pdf)
+* [_Vivado Design Suite User Guide: Model-Based DSP Design Using System Generator (UG897)_](https://www.xilinx.com/support/documentation/sw_manuals/xilinx2019_2/ug897-vivado-sysgen-user.pdf)
+* [_Vivado Design Suite User Guide: Embedded Processor Hardware Design (UG898)_](https://www.xilinx.com/support/documentation/sw_manuals/xilinx2019_2/ug898-vivado-embedded-design.pdf)
+* [_Vivado Design Suite User Guide: I/O and Clock Planning (UG899)_](https://www.xilinx.com/support/documentation/sw_manuals/xilinx2019_2/ug899-vivado-io-clock-planning.pdf)
+* [_Vivado Design Suite User Guide: Logic Simulation (UG900)_](https://www.xilinx.com/support/documentation/sw_manuals/xilinx2019_2/ug900-vivado-logic-simulation.pdf)
+* [_Vivado Design Suite User Guide: Synthesis (UG901)_](https://www.xilinx.com/support/documentation/sw_manuals/xilinx2019_2/ug901-vivado-synthesis.pdf)
+* [_Vivado Design Suite User Guide: High-Level Synthesis (UG902)_](https://www.xilinx.com/support/documentation/sw_manuals/xilinx2019_2/ug902-vivado-high-level-synthesis.pdf)
+* [_Vivado Design Suite User Guide: Using Constraints (UG903)_](https://www.xilinx.com/support/documentation/sw_manuals/xilinx2019_2/ug903-vivado-using-constraints.pdf)
+* [_Vivado Design Suite User Guide: Implementation (UG904)_](https://www.xilinx.com/support/documentation/sw_manuals/xilinx2019_2/ug904-vivado-implementation.pdf)
+* [_Vivado Design Suite User Guide: Hierarchical Design (UG905)_](https://www.xilinx.com/support/documentation/sw_manuals/xilinx2019_2/ug905-vivado-hierarchical-design.pdf)
+* [_Vivado Design Suite User Guide: Design Analysis and Closure Techniques (UG906)_](https://www.xilinx.com/support/documentation/sw_manuals/xilinx2019_2/ug906-vivado-design-analysis.pdf)
+* [_Vivado Design Suite User Guide: Power Analysis and Optimization (UG907)_](https://www.xilinx.com/support/documentation/sw_manuals/xilinx2019_2/ug907-vivado-power-analysis-optimization.pdf)
+* [_Vivado Design Suite User Guide: Programming and Debugging (UG908)_](https://www.xilinx.com/support/documentation/sw_manuals/xilinx2019_2/ug908-vivado-programming-debugging.pdf)
+* [_Vivado Design Suite User Guide: Partial Reconfiguration (UG909)_](https://www.xilinx.com/support/documentation/sw_manuals/xilinx2019_2/ug909-vivado-partial-reconfiguration.pdf)
+* [_UltraFast Design Methodology Guide for the Vivado Design Suite (UG949)_](https://www.xilinx.com/support/documentation/sw_manuals/xilinx2019_2/ug949-vivado-design-methodology.pdf)
+
+#### Xilinx Vivado official tutorials (open)
 
    * [_Vivado Design Suite Tutorial: Logic Simulation (UG973)_](https://www.xilinx.com/support/documentation/sw_manuals/xilinx2019_2/ug937-vivado-design-suite-simulation-tutorial.pdf)
 
@@ -293,6 +296,8 @@ Step-by-step instruction explaining how to run this test flow can be found [**he
 * [_Nandland_](https://www.nandland.com)
 * [_VHDL Whiz_](https://vhdlwhiz.com/basic-vhdl-tutorials)
 * _<https://en.wikibooks.org/wiki/Category:Book:VHDL_for_FPGA_Design>_
+* _<https://surf-vhdl.com/>_
+
 
 
 #### List of acronyms and abbreviations
@@ -371,8 +376,7 @@ The virtual room to attend the lectures is accessible at the following link :
 
 
 * Lecture 11<br/>
-
+<https://unito.webex.com/recordingservice/sites/unito/recording/play/c973372c682e4eeb91be8661a82bd295>
 
 * Lecture 12<br/>
-
 
