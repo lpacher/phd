@@ -47,7 +47,7 @@ Links to **recorded video lectures** are listed in the [**Webex lectures**](#web
 # Contacts
 [**[Contents]**](#contents)
 
-**Dott. Luca Pacher**
+[<h3>Dott. Luca Pacher</h3>](https://fisica.campusnet.unito.it/do/docenti.pl/Show?_id=lpacher#tab-profilo)
 
 University of Torino, Physics Department<br/>
 via Pietro Giuria 1, 10125, Torino, Italy<br/>
@@ -217,7 +217,10 @@ Step-by-step instruction explaining how to run this test flow can be found [**he
 # Reference documentation
 [**[Contents]**](#contents)
 
-#### VHDL programming
+<details>
+<summary><b>VHDL programming</b></summary>
+
+<p>
 
 * B. Mealy and F. Tappero, [_Free Range VHDL_](http://freerangefactory.org/pdf/df344hdh4h8kjfh3500ft2/free_range_vhdl.pdf) (open source)
 * C.H. Roth Jr, _Digital Systems Design Using VHDL_
@@ -225,14 +228,30 @@ Step-by-step instruction explaining how to run this test flow can be found [**he
 * R.E. Haskell and D.M. Hanna, _Introduction to Digital Design Using Digilent FPGA Boards_
 * P.P. Chu, _FPGA Prototyping By VHDL Examples_
 * M. Field, [_Introducing the Spartan 3E FPGA and VHDL_](https://github.com/hamsternz/IntroToSpartanFPGABook/blob/master/IntroToSpartanFPGABook.pdf) (open source)
+* P. Ashenden, _The Designer's Guide to VHDL_
 
-#### FPGA programming using Xilinx Vivado
+</p>
+<br/>
+</details>
+
+
+<details>
+<summary><b>FPGA programming using Xilinx Vivado</b></summary>
+
+<p>
 
 * S. Churiwala (Editor), _Designing with Xilinx FPGAs Using Vivado_
 * C. Unsalan and B. Tar, _Digital System Design with FPGA: Implementation Using Verilog and VHDL_
 
+</p>
+<br/>
+</details>
 
-#### Xilinx Vivado official documentation (open)
+
+<details>
+<summary><b>Xilinx Vivado official documentation (open)</b></summary>
+
+<p>
 
 * [_Vivado Design Suite User Guide: Release Notes, Installation, and Licensing (UG973)_](https://www.xilinx.com/support/documentation/sw_manuals/xilinx2019_2/ug973-vivado-release-notes-install-license.pdf)
 * [_Vivado Design Suite User Guide: Getting Started (UG910)_](https://www.xilinx.com/support/documentation/sw_manuals/xilinx2019_2/ug910-vivado-getting-started.pdf)
@@ -256,11 +275,27 @@ Step-by-step instruction explaining how to run this test flow can be found [**he
 * [_Vivado Design Suite User Guide: Partial Reconfiguration (UG909)_](https://www.xilinx.com/support/documentation/sw_manuals/xilinx2019_2/ug909-vivado-partial-reconfiguration.pdf)
 * [_UltraFast Design Methodology Guide for the Vivado Design Suite (UG949)_](https://www.xilinx.com/support/documentation/sw_manuals/xilinx2019_2/ug949-vivado-design-methodology.pdf)
 
-#### Xilinx Vivado official tutorials (open)
+</p>
+<br/>
+</details>
+
+
+<details>
+<summary><b>Xilinx Vivado official tutorials (open)</b></summary>
+
+<p>
 
    * [_Vivado Design Suite Tutorial: Logic Simulation (UG973)_](https://www.xilinx.com/support/documentation/sw_manuals/xilinx2019_2/ug937-vivado-design-suite-simulation-tutorial.pdf)
 
-#### Xilinx 7-series FPGAs official documentation (open)
+</p>
+<br/>
+</details>
+
+
+<details>
+<summary><b>Xilinx 7-series FPGAs official documentation (open)</b></summary>
+
+<p>
 
 * [_7 Series FPGAs Data Sheet: Overview (DS180)_](https://www.xilinx.com/support/documentation/data_sheets/ds180_7Series_Overview.pdf)
 * [_7 Series Product Selection Guide_](https://www.xilinx.com/support/documentation/selection-guides/7-series-product-selection-guide.pdf)
@@ -275,19 +310,38 @@ Step-by-step instruction explaining how to run this test flow can be found [**he
 * [_7 Series FPGAs and Zynq-7000 SoC XADC Dual 12-Bit 1 MSPS Analog-to-Digital Converter<br/>User Guide (UG480)_](https://www.xilinx.com/support/documentation/user_guides/ug480_7Series_XADC.pdf)
 * [_7 Series FPGAs PCB Design Guide (UG483)_](https://www.xilinx.com/support/documentation/user_guides/ug483_7Series_PCB.pdf)
 
+</p>
+<br/>
+</details>
 
-#### Design constraints
+
+<details>
+<summary><b>Design constraints</b></summary>
+
+<p>
 
 * S. Gangadaran and S. Churiwala, _Constraining Designs for Synthesis and Timing<br/>Analysis: A Practical Guide to Synopsys Design Constraints (SDC)_
 * [_Vivado Design Suite User Guide: Using Constraints (UG903)_](https://www.xilinx.com/support/documentation/sw_manuals/xilinx2019_2/ug903-vivado-using-constraints.pdf)
 * [_Vivado Design Suite Tutorial: Using Constraints (UG945)_](https://www.xilinx.com/support/documentation/sw_manuals/xilinx2019_2/ug903-vivado-using-constraints.pdf)
 
+</p>
+<br/>
+</details>
 
-#### Tcl programming
+
+
+<details>
+<summary><b>Tcl programming</b></summary>
+
+<p>
 
 * B.B. Welch, _Practical Programming in Tcl and Tk_
 * J.K. Ousterhout, _Tcl and the Tk Toolkit_
 * A.P. Nadkarni, _The Tcl Programming Language: A Comprehensive Guide_
+
+</p>
+<br/>
+</details>
 
 
 #### Other online resources
@@ -377,6 +431,4 @@ The virtual room to attend the lectures is accessible at the following link :
 
 * Lecture 11<br/>
 <https://unito.webex.com/recordingservice/sites/unito/recording/play/c973372c682e4eeb91be8661a82bd295>
-
-* Lecture 12<br/>
 

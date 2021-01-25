@@ -484,7 +484,7 @@ Examples:
 <br/>
 
 
-<span>&#8226;</span> After elaboration a **simulation executable** is created and can be run using the `xsim
+<span>&#8226;</span> After elaboration a **simulation executable** is created and can be run using the `xsim`
 simulator as follows :
 
 ```

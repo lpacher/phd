@@ -309,6 +309,7 @@ end architecture rtl ;
 from the `.solutions/` directory as follows :
 
 ```
+% cp .solutions/rtl/lab7_package.vhd     rtl/
 % cp .solutions/rtl/TickCounter.vhd      rtl/
 % cp .solutions/rtl/SineGen.vhd          rtl/
 % cp .solutions/rtl/ROM_8x1024.hex       rtl/

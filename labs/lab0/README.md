@@ -226,9 +226,33 @@ if available (e.g. `D:\Xilinx`) without cluttering the system partition `C:\` wi
 
 ![](./pictures/installation/wizard4.png)
 
+
+Ref. also to [_Vivado Design Suite User Guide: Release Notes, Installation, and Licensing_](
+https://www.xilinx.com/support/documentation/sw_manuals/xilinx2019_2/ug973-vivado-release-notes-install-license.pdf).
+
+
+
+# Licensing
+
 At the end of the installation process you will be automatically redirected to the Xilinx website to 
 **obtain and install a free license**.
 
+
+In any case a license is no more required to run Vivado 
+
+
+Alternatively use the `XILINXD_LICENSE_FILE` environment variable to locate the licence file :
+
+```
+export XILINXD_LICENSE_FILE=/path/to/Xilinx.lic
+```
+
+```
+set XILINXD_LICENSE_FILE=\path\to\Xilinx.lic
+```
+
+Ref. also to [_Vivado Design Suite User Guide: Release Notes, Installation, and Licensing_](
+https://www.xilinx.com/support/documentation/sw_manuals/xilinx2019_2/ug973-vivado-release-notes-install-license.pdf).
 
 # Install cable drivers
 [**[Contents]**](#contents)
@@ -538,12 +562,12 @@ start using this tool more efficiently. Additional customization or
 extension for the command line environment can be added to the `login.bat`
 initialization script automatically executed when the _Command Prompt_ is launched.
 
-As a first example we can add the Notepad++ executable to the Windows
-search path such that it can be invoked from the command line.
+As a first example we can **add the Notepad++ executable to the Windows
+search path** such that it can be invoked from the command line.
 
 In order to do this we have to **extend the system search path**,
 that is the list of directories in which executables and scripts
-Are searched when invoked at the command line.<br/>
+are searched when invoked at the command line.<br/>
 
 As on Linux systems, also Windows uses the `PATH` environment variable
 for this purpose. We can use Notepad to edit the `login.bat` script
@@ -704,7 +728,7 @@ Please **add the following statements** to your `login.bat` script :
 ```
 :: force the Command Prompt to search built-in executables in PATH
 doskey mkdir="mkdir.exe" $*
-doskey mkdir="rmdir.exe" $*
+doskey rmdir="rmdir.exe" $*
 doskey echo="echo.exe" $*
 doskey more="more.exe" $*
 ```
@@ -1180,7 +1204,7 @@ You can now list all branches on your local machine with :
 Please, be sure that the asterisk now points to your own development branch `student`
 and not to the `master` branch.
 
-Each time you will need to **update you local copy of the repository**, simply perform a **pull from the remote repository** using :
+Each time you will need to **update your local copy of the repository**, simply perform a **pull from the remote repository** using :
 
 ```
 % git pull origin master

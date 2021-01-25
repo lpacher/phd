@@ -263,11 +263,14 @@
 
 **GBW** - Gain-Bandwidth product
 
+**GL** - Gate Level
+
+**GMI** - Generic Medium Interface (_TCP/IP stack_)
+
 **GSR** - Global Set/Reset
 
 **GUI** - Graphical User Interface
 
-**GMI** - Generic Medium Interface (_TCP/IP stack_)
 
 
 
@@ -283,6 +286,8 @@
 **HLS** - High-Level Synthesis
 
 **HM** - Hardware Manager
+
+**HPC** - High Pin Count
 
 **HR** - High-Range (FPGA I/O pads)
 
@@ -318,7 +323,7 @@
 
 **IIR** - Infinite Impulse Response (digital filter)
 
-**ILA** - Integrated Logic Analyzer (Xilinx FPGA debug feature)
+**ILA** - Integrated Logic Analyzer (_Xilinx FPGA debug feature_)
 
 **INL** - Integrated Non-Linearity
 
@@ -328,7 +333,7 @@
 
 **IP** - Intellectual Property
 
-**ISE** - Integrated Software Environment (legacy Xilinx FPGA programming suite)
+**ISE** - Integrated Software Environment (_legacy Xilinx FPGA programming suite_)
 
 **ISP** - In-System Programming (same as _ICSP, In-Circuit Serial Programming_)
 
@@ -376,6 +381,10 @@
 **LNA** - Low-Noise Amplifier
 
 **LP** - Low-Power
+
+**LPC** - Low Pin Count
+
+**LRM** - Language Reference Manual
 
 **LSB** - Least Significant Bit
 
@@ -438,6 +447,7 @@
 
 **NRE** - Non Recurring Engineering costs
 
+**NRZ** - Non Return to Zero
 
 
 
@@ -466,6 +476,7 @@
 [**[Top]**](#list-of-acronyms)
 
 
+**PAM** - Pulse Amplitude Modulation
 
 **PAR** - Place And Route
 
@@ -533,6 +544,8 @@
 
 
 **QA** - Quality Assurance
+
+**QAM** - Quadrature Amplitude Modulation
 
 **QoR** - Quality of Results
 
@@ -646,6 +659,8 @@
 **TCL** - Tool Command Language (scripting language)
 
 **TDC** - Time-to-Digital Converter
+
+**TE** - Test Equipment
 
 **TH** - Through-Hole
 
