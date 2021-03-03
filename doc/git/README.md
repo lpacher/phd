@@ -21,6 +21,7 @@ A small collection of most frequently used `git` commands for your day-to-day wo
 * [**Fetching**](#fetching)
 * [**Stage and commit**](#stage-and-commit)
 * [**Undo a git add (remove files staged for a git commit)**](#undo-a-git-add-remove-files-staged-for-a-git-commit)
+* [**Undo the last git commit**](#undo-the-last-git-commit)
 * [**Discard changes to a file in working directory**](#discard-changes-to-a-file-in-working-directory)
 * [**Edit the commit message**](#edit-the-commit-message)
 * [**Adding more changes to your last commit**](#adding-more-changes-to-your-last-commit)
@@ -43,7 +44,7 @@ A small collection of most frequently used `git` commands for your day-to-day wo
 **remote** => a branch on the GitHub remote server 
 
 **origin** => misleading term, it's just the default **alias** for the address of the 
-              remote repository, i.e. `https://github.com/lpacher/lae.git`. This URL is returned by `git config --get remote.origin.url`
+              remote repository, i.e. `https://github.com/lpacher/fphd.git`. This URL is returned by `git config --get remote.origin.url`
 
 
 ### General usage
@@ -225,6 +226,21 @@ To undo `git add .` use instead
 ```
 
 without the dot.
+
+
+### Undo the last git commit
+
+```tcsh
+% git reset --soft HEAD~1
+```
+
+If you don't want to keep files changes, simply use the `--hard` flag:
+
+```tcsh
+% git reset --hard HEAD~1
+```
+
+Be sure to only do this when you are sure that you don't need these changes anymore.
 
 
 ### Discard changes to a file in working directory
